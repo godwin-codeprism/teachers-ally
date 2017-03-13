@@ -1,0 +1,28 @@
+{
+  "name": "teachers-ally",
+  "version": "1.0.0",
+  "description": "Teacher's Ally is a tool developed for teacher to help with their daily calculations",
+  "main": "godwin.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^2.2.4",
+    "style-loader": "^0.13.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.22.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.15.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Godwin Vinny Carole",
+  "license": "ISC"
+}
