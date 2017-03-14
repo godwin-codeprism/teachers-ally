@@ -1,9 +1,9 @@
 var path = require('path');
 
 module.exports = {
-    entry: "./scripts/index.js",
+    entry: "./scripts/imports.js",
     output: {
-        path: "./scripts",
+        path: "./",
         filename: "godwin.js"
     },
     module: {
