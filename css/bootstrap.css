@@ -1102,12 +1102,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #18bc9c;
+      color: #1D62F0;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #18bc9c;
+      color: #1D62F0;
   text-decoration: underline;
 }
 a:focus {
@@ -1277,7 +1277,7 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 26px;
+  font-size: 1.4em;
 }
 h4,
 .h4 {
@@ -2549,7 +2549,7 @@ output {
   padding-top: 11px;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #1D62F0;
+  color: #333;
 }
 .form-control {
   display: block;
@@ -2558,7 +2558,7 @@ output {
   padding: 10px 15px;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #1D62F0;
+  color: #333;
   background-color: #ffffff;
   background-image: none;
   border: 1px solid #dce4ec;
@@ -4660,7 +4660,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #1D62F0;
+    color: #333;
     background-color: transparent;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
@@ -4680,14 +4680,14 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ffffff;
 }
 .navbar-inverse .navbar-link:hover {
-  color: #1D62F0;
+  color: #222;
 }
 .navbar-inverse .btn-link {
   color: #ffffff;
 }
 .navbar-inverse .btn-link:hover,
 .navbar-inverse .btn-link:focus {
-  color: #1D62F0;
+  color: #333;
 }
 .navbar-inverse .btn-link[disabled]:hover,
 fieldset[disabled] .navbar-inverse .btn-link:hover,

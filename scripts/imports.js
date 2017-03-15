@@ -8,5 +8,8 @@ require('../node_modules/angular-sanitize');
 require('../node_modules/angular-ui-router');
 
 // godwin's scripts
+require('../css/login.css');
 require('./config');
 require('./app.controller');
+require('./signup.controller');
+require('./login.controller');
