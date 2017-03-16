@@ -54,9 +54,9 @@
 	__webpack_require__(46);
 
 	// godwin's scripts
-	__webpack_require__(118);
 	__webpack_require__(116);
-	__webpack_require__(117);
+	__webpack_require__(118);
+	__webpack_require__(119);
 	__webpack_require__(120);
 	__webpack_require__(121);
 
@@ -44547,45 +44547,12 @@
 
 /***/ },
 /* 116 */
-/***/ function(module, exports) {
-
-	angular.module('teachersAlly', ["ngSanitize", "ui.router"])
-	    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-	        $stateProvider.state('app', {
-	            url: "",
-	            templateUrl: './views/login.html',
-	            controller: "appController"
-	        });
-	    }])
-
-/***/ },
-/* 117 */
-/***/ function(module, exports) {
-
-	angular.module('teachersAlly')
-	    .controller('appController', ['$scope', function ($scope) {
-	        var dup = $('.wrapper:eq(0)').clone();
-	        $('.content:eq(0)').append(dup);
-	        $(document).on('scroll', function () {
-	            var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-	            dup.css({
-	                '-webkit-transform': translation,
-	                '-moz-transform': translation,
-	                '-ms-transform': translation,
-	                'transform': translation
-	            });
-	        });
-	        
-	    }])
-
-/***/ },
-/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(119);
+	var content = __webpack_require__(117);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(42)(content, {});
@@ -44605,7 +44572,7 @@
 	}
 
 /***/ },
-/* 119 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -44619,12 +44586,103 @@
 
 
 /***/ },
+/* 118 */
+/***/ function(module, exports) {
+
+	angular.module('teachersAlly', ["ngSanitize", "ui.router"])
+	    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+	        $stateProvider.state('app', {
+	            url: "",
+	            templateUrl: './views/login.html',
+	            controller: "appController"
+	        });
+	    }])
+
+/***/ },
+/* 119 */
+/***/ function(module, exports) {
+
+	angular.module('teachersAlly')
+	    .controller('appController', ['$scope', function ($scope) {
+	        var dup = $('.wrapper:eq(0)').clone();
+	        $('.content:eq(0)').append(dup);
+	        $(document).on('scroll', function () {
+	            var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
+	            dup.css({
+	                '-webkit-transform': translation,
+	                '-moz-transform': translation,
+	                '-ms-transform': translation,
+	                'transform': translation
+	            });
+	        });
+	        
+	    }])
+
+/***/ },
 /* 120 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
 	    .controller('signupController', ['$scope', '$http', function ($scope, $http) {
-	        
+	        var signupData = null;
+	        $scope.isUnique = undefined;
+	        $scope.validEmail = undefined;
+	        $scope.validPassword = undefined;
+	        $scope.signup = function () {
+	            signupData = {
+	                'firstname': $scope.firstName,
+	                'lastname': $scope.lastName,
+	                'username': $scope.username,
+	                'email': $scope.email,
+	                'school': $scope.school,
+	                'password': $scope.password
+	            };
+	            $http.post('./endpoints/signup.php', signupData).then(function (response) {
+	                localStorage.setItem('godwin_ta',response.data);
+	            }).catch(function (err) {
+	                console.error(err);
+	            });
+	        }
+	        $scope.validateUsername = function () {
+	            $http.post('./endpoints/username-avalibility.php', $scope.username).then(function (response) {
+	                $scope.isUnique = response.data;
+	            }).catch(function (err) {
+	                console.error(err);
+	            });
+	        }
+	        $scope.validateEmail = function () {
+	            if ($scope.email != undefined) {
+	                if ($scope.email.indexOf('@') < 0 || $scope.email.indexOf('.') < 0) {
+	                    $scope.validEmail = false;
+	                } else {
+	                    $scope.validEmail = true;
+	                }
+	            } else {
+	                $scope.validEmail = false;
+	            }
+	        }
+	        $scope.validatePassword = function () {
+	            var srt = $scope.password;
+	            if (srt != undefined) {
+	                if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) == null && srt.length >= 7) {
+	                    $scope.validPassword = 1; // if doesnt have numbers but length more than 7
+	                } else if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) == null && srt.length < 7) {
+	                    $scope.validPassword = 1; // if doesnt have numbers and length less than 7
+	                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) != null && srt.length >= 7) {
+	                    $scope.validPassword = 2; // if doesnt have letter but length more than 7
+	                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) != null && srt.length < 7) {
+	                    $scope.validPassword = 2; // if doesnt have letter and length less than 7
+	                } else if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) != null && srt.length < 7) {
+	                    $scope.validPassword = 3; // if not long enough
+	                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) == null && srt.length < 7) {
+	                    $scope.validPassword = 4; // if all above three fail
+	                } else {
+	                    $scope.validPassword = 5; // if all satisfied
+	                }
+	            } else {
+	                $scope.validPassword = 4;
+	            }
+	        }
 	    }]);
 
 /***/ },
@@ -44632,8 +44690,26 @@
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
-	    .controller('loginController',['$scope','$http',function($scope,$http){
-	        
+	    .controller('loginController', ['$scope', '$http', function ($scope, $http) {
+	        $scope.goodLogin = null;
+	        var loginData = {};
+	        $scope.login = function () {
+	            loginData = {
+	                "username": $scope.username,
+	                "password": $scope.password
+	            }
+	            $http.post('./endpoints/login.php', loginData)
+	                .then(function (response) {
+	                    if (response.data != 'ERROR') {
+	                        localStorage.setItem('godwin_ta', response.data);
+	                    } else {
+	                        $scope.goodLogin = response.data;
+	                    }
+	                })
+	                .catch(function (err) {
+	                    console.error(err);
+	                });
+	        }
 	    }]);
 
 /***/ }

@@ -1,4 +1,22 @@
 angular.module('teachersAlly')
-    .controller('loginController',['$scope','$http',function($scope,$http){
-        
+    .controller('loginController', ['$scope', '$http', function ($scope, $http) {
+        $scope.goodLogin = null;
+        var loginData = {};
+        $scope.login = function () {
+            loginData = {
+                "username": $scope.username,
+                "password": $scope.password
+            }
+            $http.post('./endpoints/login.php', loginData)
+                .then(function (response) {
+                    if (response.data != 'ERROR') {
+                        localStorage.setItem('godwin_ta', response.data);
+                    } else {
+                        $scope.goodLogin = response.data;
+                    }
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+        }
     }]);

@@ -1,4 +1,62 @@
 angular.module('teachersAlly')
     .controller('signupController', ['$scope', '$http', function ($scope, $http) {
-        
+        var signupData = null;
+        $scope.isUnique = undefined;
+        $scope.validEmail = undefined;
+        $scope.validPassword = undefined;
+        $scope.signup = function () {
+            signupData = {
+                'firstname': $scope.firstName,
+                'lastname': $scope.lastName,
+                'username': $scope.username,
+                'email': $scope.email,
+                'school': $scope.school,
+                'password': $scope.password
+            };
+            $http.post('./endpoints/signup.php', signupData).then(function (response) {
+                localStorage.setItem('godwin_ta',response.data);
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+        $scope.validateUsername = function () {
+            $http.post('./endpoints/username-avalibility.php', $scope.username).then(function (response) {
+                $scope.isUnique = response.data;
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+        $scope.validateEmail = function () {
+            if ($scope.email != undefined) {
+                if ($scope.email.indexOf('@') < 0 || $scope.email.indexOf('.') < 0) {
+                    $scope.validEmail = false;
+                } else {
+                    $scope.validEmail = true;
+                }
+            } else {
+                $scope.validEmail = false;
+            }
+        }
+        $scope.validatePassword = function () {
+            var srt = $scope.password;
+            if (srt != undefined) {
+                if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) == null && srt.length >= 7) {
+                    $scope.validPassword = 1; // if doesnt have numbers but length more than 7
+                } else if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) == null && srt.length < 7) {
+                    $scope.validPassword = 1; // if doesnt have numbers and length less than 7
+                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) != null && srt.length >= 7) {
+                    $scope.validPassword = 2; // if doesnt have letter but length more than 7
+                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) != null && srt.length < 7) {
+                    $scope.validPassword = 2; // if doesnt have letter and length less than 7
+                } else if (srt.match(/^[a-zA-z]+$/) != null && srt.match(/^[0-9]+$/) != null && srt.length < 7) {
+                    $scope.validPassword = 3; // if not long enough
+                } else if (srt.match(/^[a-zA-z]+$/) == null && srt.match(/^[0-9]+$/) == null && srt.length < 7) {
+                    $scope.validPassword = 4; // if all above three fail
+                } else {
+                    $scope.validPassword = 5; // if all satisfied
+                }
+            } else {
+                $scope.validPassword = 4;
+            }
+        }
     }]);

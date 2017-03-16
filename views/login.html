@@ -12,14 +12,15 @@
             </div>
         </div>
         <div class="col-sm-7 pull-right login-panel" ng-controller="loginController">
-            <div class="col-sm-5">
-                <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="off">
+            <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
+            <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                <input type="text" name="username" placeholder="Username" class="form-control" ng-model="username">
             </div>
-            <div class="col-sm-5">
-                <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="">
+            <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                <input type="password" name="password" placeholder="Password" class="form-control" ng-model="password">
                 <a href="" class="link"><small>Forgotten password?</small></a>
             </div>
-            <div class="col-sm-2"><button class="btn btn-primary btn-block btn-sm">Login</button></div>
+            <div class="col-sm-2"><button class="btn btn-primary btn-block btn-sm" ng-click="login()">Login</button></div>
         </div>
     </div>
 </nav>
@@ -47,40 +48,53 @@
                         <div class="col-sm-12 text-center">
                             <h3>SIGN UP FOR FREE</h3>
                             <hr>
-                            <form action="" class="form-horizontal">
+                            <form method="POST" name="signupform" ng-submit="signup(signupform)" class="form-horizontal">
+                                <div class="form-group text-left" ng-class="{'has-error': signupform.firstName.$dirty && signupform.firstName.$invalid}">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control" name="firstName" placeholder="First Name" required ng-model="firstName">
+                                        <span ng-show="signupform.firstName.$dirty && signupform.firstName.$invalid"><small class="text-danger">&nbsp; Please provide your First Name</small></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left" ng-class="{'has-error': signupform.lastName.$dirty && signupform.lastName.$invalid}">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control" name="lastName" placeholder="Last Name" required ng-model="lastName">
+                                        <span ng-show="signupform.lastName.$dirty && signupform.lastName.$invalid"><small class="text-danger">&nbsp; Please provide your Last Name</small></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left" ng-class="{'has-error': signupform.username.$dirty && signupform.username.$invalid || isUnique == 1}">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control" name="username" placeholder="Pick a username" ng-model="username" ng-change="validateUsername()"
+                                            min-length="3" required>
+                                        <span ng-show="signupform.username.$dirty && signupform.username.$invalid"><small class="text-danger">&nbsp; Please pick a username</small></span>
+                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try someting else</small></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left" ng-class="{'has-error':validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)}">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control" name="email" placeholder="Email" ng-model="email" ng-blur="validateEmail()">
+                                        <span ng-show="validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)"><small class="text-danger">&nbsp; Please provide a valid email</small></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-left" ng-class="{'has-error':signupform.school.$invalid && signupform.school.$dirty}">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control" name="school" placeholder="School Name" required ng-model="school">
+                                        <span ng-show="signupform.school.$invalid && signupform.school.$dirty"><small class="text-danger">&nbsp; Please provide the school name you work at</small></span>
+
+                                    </div>
+                                </div>
+                                <div class="form-group text-left" ng-class="{'has-error': signupform.password.$invalid && signupform.password.$dirty || (validPassword > 0 && validPassword < 5)}">
+                                    <div class="col-lg-12">
+                                        <input type="password" class="form-control" name="password" placeholder="Create Password" required ng-model="password" ng-change="validatePassword()">
+                                        <small ng-class="{'text-danger': validPassword == 4}" ng-hide="validPassword < 4 && validPassword > 0">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
+                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain atleast one number</small></span>
+                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain atleast one alphabet</small></span>
+                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain atleast 7 letters and numbers combined</small></span>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="First Name" placeholder="First Name" required>
+                                        <button class="btn btn-primary btn-block" type="submit" ng-disabled="(signupform.firstName.$dirty && signupform.firstName.$invalid) || (signupform.lastName.$dirty && signupform.lastName.$invalid) || (signupform.username.$dirty && signupform.username.$invalid || isUnique == 1) || (validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)) || (signupform.school.$invalid && signupform.school.$dirty) || (signupform.school.$invalid && signupform.school.$dirty || (validPassword > 0 && validPassword < 5))">Sign Up</button>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="Last Name" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="Pick a username" placeholder="Pick a username" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="email" placeholder="Email" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="" placeholder="School Name" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12 text-left">
-                                        <input type="password" class="form-control" name="Create Password" placeholder="Create Password" required>
-                                        <small style="color:#999">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12"><button class="btn btn-primary btn-block">Sign Up</button></div>
                                 </div>
                             </form>
                         </div>
