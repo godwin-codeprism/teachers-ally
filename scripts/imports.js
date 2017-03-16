@@ -9,7 +9,9 @@ require('../node_modules/angular-ui-router');
 
 // godwin's scripts
 require('../css/login.css');
+require('./app.controller.js');
 require('./config');
-require('./app.controller');
-require('./signup.controller');
 require('./login.controller');
+require('./signup.controller');
+require('./classroom.controller');
+require('./auth.service');

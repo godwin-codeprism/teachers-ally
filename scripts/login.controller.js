@@ -1,5 +1,5 @@
 angular.module('teachersAlly')
-    .controller('loginController', ['$scope', '$http', function ($scope, $http) {
+    .controller('loginController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
         $scope.goodLogin = null;
         var loginData = {};
         $scope.login = function () {
@@ -11,6 +11,7 @@ angular.module('teachersAlly')
                 .then(function (response) {
                     if (response.data != 'ERROR') {
                         localStorage.setItem('godwin_ta', response.data);
+                        $state.go('classroom',{user: $scope.username});
                     } else {
                         $scope.goodLogin = response.data;
                     }

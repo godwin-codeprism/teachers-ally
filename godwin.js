@@ -57,8 +57,10 @@
 	__webpack_require__(116);
 	__webpack_require__(118);
 	__webpack_require__(119);
-	__webpack_require__(120);
 	__webpack_require__(121);
+	__webpack_require__(120);
+	__webpack_require__(122);
+	__webpack_require__(123);
 
 /***/ },
 /* 1 */
@@ -44590,19 +44592,6 @@
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly', ["ngSanitize", "ui.router"])
-	    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-	        $stateProvider.state('app', {
-	            url: "",
-	            templateUrl: './views/login.html',
-	            controller: "appController"
-	        });
-	    }])
-
-/***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-	angular.module('teachersAlly')
 	    .controller('appController', ['$scope', function ($scope) {
 	        var dup = $('.wrapper:eq(0)').clone();
 	        $('.content:eq(0)').append(dup);
@@ -44615,15 +44604,51 @@
 	                'transform': translation
 	            });
 	        });
-	        
-	    }])
+
+	    }]);
+
+/***/ },
+/* 119 */
+/***/ function(module, exports) {
+
+	var runFunction = function ($transitions, authService, $state) {
+	    $transitions.onBefore({}, function (trans) {
+	        if (trans.$to().name == 'classroom') {
+	            if (localStorage.getItem('godwin_ta') != null) {
+	                authService.checkToken(trans.params().user, localStorage.getItem('godwin_ta')).then(function (res) {
+	                    if (res != 'good') {
+	                        console.log('Token mismatch');
+	                        $state.go('app');
+	                    }
+	                })
+	            } else {
+	                console.log('Token missing');
+	                $state.go('app');
+	            }
+	        }
+	    })
+	};
+	runFunction.$inject = ['$transitions', 'authService', '$state'];
+	angular.module('teachersAlly')
+	    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+	        $stateProvider.state('app', {
+	            url: "",
+	            templateUrl: './views/login.html',
+	            controller: "appController"
+	        });
+	        $stateProvider.state('classroom', {
+	            url: "/:user",
+	            templateUrl: './views/classroom.html',
+	            controller: "classroomController"
+	        });
+	    }]).run(runFunction);
 
 /***/ },
 /* 120 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
-	    .controller('signupController', ['$scope', '$http', function ($scope, $http) {
+	    .controller('signupController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 	        var signupData = null;
 	        $scope.isUnique = undefined;
 	        $scope.validEmail = undefined;
@@ -44638,7 +44663,10 @@
 	                'password': $scope.password
 	            };
 	            $http.post('./endpoints/signup.php', signupData).then(function (response) {
-	                localStorage.setItem('godwin_ta',response.data);
+	                localStorage.setItem('godwin_ta', response.data);
+	                $state.go('classroom', {
+	                    user: $scope.username
+	                });
 	            }).catch(function (err) {
 	                console.error(err);
 	            });
@@ -44690,7 +44718,7 @@
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
-	    .controller('loginController', ['$scope', '$http', function ($scope, $http) {
+	    .controller('loginController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 	        $scope.goodLogin = null;
 	        var loginData = {};
 	        $scope.login = function () {
@@ -44702,6 +44730,7 @@
 	                .then(function (response) {
 	                    if (response.data != 'ERROR') {
 	                        localStorage.setItem('godwin_ta', response.data);
+	                        $state.go('classroom',{user: $scope.username});
 	                    } else {
 	                        $scope.goodLogin = response.data;
 	                    }
@@ -44709,6 +44738,35 @@
 	                .catch(function (err) {
 	                    console.error(err);
 	                });
+	        }
+	    }]);
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+	angular.module('teachersAlly')
+	    .controller('classroomController', ['$scope', '$http', '$stateParams', '$rootScope', function ($scope, $http, $stateParams) {
+	        
+	    }])
+
+/***/ },
+/* 123 */
+/***/ function(module, exports) {
+
+	angular.module('teachersAlly')
+	    .service('authService', ['$http', function ($http) {
+	        this.checkToken = function (username, token) {
+	            var data = {
+	                username: username,
+	                token: token
+	            };
+	            return $http.post('./endpoints/check-token.php', data)
+	                .then(function (response) {
+	                    return response.data;
+	                }).catch(function (err) {
+	                    console.error(err);
+	                })
 	        }
 	    }]);
 

@@ -1,4 +1,4 @@
-angular.module('teachersAlly')
+angular.module('teachersAlly', ["ngSanitize", "ui.router"])
     .controller('appController', ['$scope', function ($scope) {
         var dup = $('.wrapper:eq(0)').clone();
         $('.content:eq(0)').append(dup);
@@ -11,5 +11,5 @@ angular.module('teachersAlly')
                 'transform': translation
             });
         });
-        
-    }])
+
+    }]);

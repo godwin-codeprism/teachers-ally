@@ -1,5 +1,5 @@
 angular.module('teachersAlly')
-    .controller('signupController', ['$scope', '$http', function ($scope, $http) {
+    .controller('signupController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
         var signupData = null;
         $scope.isUnique = undefined;
         $scope.validEmail = undefined;
@@ -14,7 +14,10 @@ angular.module('teachersAlly')
                 'password': $scope.password
             };
             $http.post('./endpoints/signup.php', signupData).then(function (response) {
-                localStorage.setItem('godwin_ta',response.data);
+                localStorage.setItem('godwin_ta', response.data);
+                $state.go('classroom', {
+                    user: $scope.username
+                });
             }).catch(function (err) {
                 console.error(err);
             });
