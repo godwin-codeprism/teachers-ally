@@ -1,11 +1,4 @@
-var template = `<div class="list-group compile">
-  <a class="list-group-item" ng-click="goToAccount()">
-    <i class="fa fa-user" aria-hidden="true"></i> Account
-  </a>
-  <a class="list-group-item" ng-click="logout()">
-    <i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
-  </a>
-</div>`;
+var template = '<div class="list-group compile"><a class="list-group-item" ng-click="goToAccount()"><i class="fa fa-user" aria-hidden="true"></i> Account</a><a class="list-group-item" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a></div>';
 angular.module('teachersAlly')
     .directive('gwShortname', ['$compile', function ($compile) {
         return {

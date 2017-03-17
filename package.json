@@ -2,6 +2,9 @@
   "name": "teachers-ally",
   "version": "1.0.0",
   "description": "Teacher's Ally is a tool developed for teacher to help with their daily calculations",
+  "repository": {
+    "url": "https://github.com/godwinvc/teachers-ally"
+  },
   "main": "godwin.js",
   "dependencies": {
     "angular": "^1.5.8",

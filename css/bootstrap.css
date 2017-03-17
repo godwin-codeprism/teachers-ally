@@ -3029,6 +3029,15 @@ select[multiple].input-lg {
   -moz-transition: all .25s ease;
   transition: all .25s ease;
 }
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
+}
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
