@@ -2,6 +2,7 @@ angular.module('teachersAlly')
     .controller('signupController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
         var signupData = null;
         $scope.isUnique = undefined;
+        $scope.validUsername = undefined;
         $scope.validEmail = undefined;
         $scope.validPassword = undefined;
         $scope.signup = function () {
@@ -28,6 +29,11 @@ angular.module('teachersAlly')
             }).catch(function (err) {
                 console.error(err);
             });
+            if(!/^[a-zA-Z0-9-]*$/.test($scope.username)){
+                $scope.validUsername = false;
+            }else{
+                $scope.validUsername = true;
+            }
         }
         $scope.validateEmail = function () {
             if ($scope.email != undefined) {

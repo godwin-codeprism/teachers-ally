@@ -13,5 +13,6 @@
         ":password" => sha1($signup_data -> password),
         ":token" => $token
     ));
+    mkdir("../database/".$signup_data -> username);
     echo $token;
 ?>

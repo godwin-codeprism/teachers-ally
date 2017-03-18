@@ -1,4 +1,5 @@
 var runFunction = function ($transitions, authService, $state) {
+    g_blurnav.blurInit();
     $transitions.onBefore({}, function (trans) {
         if (trans.$to().name == 'classroom') {
             if (localStorage.getItem('godwin_ta') != null) {
@@ -42,5 +43,10 @@ angular.module('teachersAlly')
             url: "/:user",
             templateUrl: './views/classroom.html',
             controller: "classroomController"
+        });
+        $stateProvider.state('classroom.classes',{
+            url:"",
+            templateUrl:'./views/classes.html',
+            controller:"classesController"
         });
     }]).run(runFunction);
