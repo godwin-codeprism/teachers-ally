@@ -1,7 +1,7 @@
 .navbar-ios {
     color: #333;
     overflow: hidden;
-    background: white;
+    background: #eee;
     z-index: 2;
     box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1);
 }
@@ -40,12 +40,33 @@
     z-index: 0;
 }
 
-#cf {
+.fakebody-1 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+}
+
+.fakebody-2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #e2d8b5;
+    animation-name: cf3FadeInOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 2.5s;
+    animation-direction: alternate;
+}
+
+#cf,
+#cf_nav {
     position: relative;
     margin: 0 auto;
 }
 
-#cf img {
+#cf img,
+#cf_nav img {
     position: absolute;
     left: 0;
     -webkit-transition: opacity 1s ease-in-out;
@@ -69,7 +90,8 @@
     }
 }
 
-#cf img.top {
+#cf img.top,
+#cf_nav img.top {
     animation-name: cf3FadeInOut;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
@@ -82,17 +104,22 @@
     top: 0;
     left: 0;
     right: 0;
-    filter: blur(15px);
-    opacity: 0.25;
+    filter: blur(10px);
+    opacity: 0.4;
 }
 
 .content-blurred .content {
     backface-visibility: hidden;
 }
 
-.logo img {
+.logo {
     border-right: 1.5px solid #ddd;
+}
+
+.logo img {
     margin: 5px 0px;
+    padding-right: 10px;
+    max-height: 40px;
 }
 
 .login-panel {
@@ -126,9 +153,9 @@
 }
 
 .home-text {
-    margin-left: 15%;
-    margin-top: 23%;
-    width: 65%;
+    margin-top: 25%;
+    /*margin-left: 15%;
+    width: 65%;*/
     font-size: 20px;
 }
 
@@ -137,4 +164,42 @@
     margin-left: 0px;
     border-width: thick;
     border-color: #333;
+}
+
+.mobile-login-container {
+    background-color: #fff;
+    border: 1px solid #dbe2e8;
+    box-shadow: 2px 2px 3px 0 hsla(205, 5%, 48%, .12);
+    padding: 0px;
+}
+
+.mobile-login-ul>li>a {
+    border-radius: 0px !important;
+    cursor: pointer;
+    background: #fafbfc !important;
+    border-bottom: 1px solid #dbe2e8 !important;
+    color: #7d97ad !important;
+}
+
+.mobile-login-ul .active a {
+    background: #fff !important;
+    border: none !important;
+    color: #1D62F0 !important;
+}
+
+#login-pane-btn.active a {
+    border-right: 1px solid #dbe2e8 !important;
+}
+
+#signup-pane-btn.active a {
+    border-left: 1px solid #dbe2e8 !important;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .mobile-login-ul {
+        display: table !important;
+    }
+    .mobile-login-ul>li {
+        display: table-cell !important;
+    }
 }

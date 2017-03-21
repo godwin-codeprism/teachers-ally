@@ -3,20 +3,39 @@
         <div class="content"></div>
     </div>
     <div class="container-fluid">
-        <div class="col-sm-3 logo">
-            <div class="col-sm-4">
-                <img src="./img/logo.svg" alt="Godwin Vinny Carole" class="img-responsive"></div>
-            <div class="col-sm-8">
-                <h3 style="margin-bottom:2px;">Tracher’s Ally</h3>
-                <p>Work Smart</p>
+        <div class="row">
+            <div class="col-xs-8 col-sm-4 col-md-5 col-lg-4" style="margin-top:0.5%;">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-2 logo">
+                        <img src="./img/logo.png" alt="Godwin Vinny Carole">
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <h3 style="margin:2px auto;"> Tracher’s Ally</h3>
+                        <p> Work Smart</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-5 pull-right nav-buttons">
-            <div class="col-sm-4"><button class="btn btn-default"> <i class="fa fa-commenting icon" aria-hidden="true"></i></i> Feature Request</button></div>
-            <div class="col-sm-4"><button class="btn btn-default"><i class="fa fa-exclamation-circle icon" aria-hidden="true"></i></i> Report Issue</button></div>
-            <div class="col-sm-4"><button class="btn btn-circle btn-user text-uppercase" data-toggle="popover" gw-shortName>{{shortName}}</button>
+            <div class="col-xs-3 col-sm-7 col-md-7 col-lg-5 pull-right nav-buttons text-center">
+                <div class="col-md-4 hidden-xs">
+                    <button class="btn btn-default"> <i class="fa fa-commenting icon" aria-hidden="true"></i> Feature Request</button>
+                </div>
+                <div class="col-md-4 hidden-xs">
+                    <button class="btn btn-default"><i class="fa fa-exclamation-circle icon" aria-hidden="true"></i> Report Issue</button>
+                </div>
+                <div class="col-md-4 hidden-xs">
+                    <button class="btn btn-circle btn-user text-uppercase" data-toggle="popover" gw-shortName>{{shortName}}</button>
+                </div>
+                <div class="col-md-4 col-xs-12 visible-xs-block text-right" style="margin-top:5%">
+                    <button class="btn btn-default" ng-click="toggleMobileMenu()"><i class="fa fa-bars icon" aria-hidden="true"></i></button>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 <ui-view></ui-view>
+<div class="sidemenu-overlay" ng-show="mobileMenu">
+    <div class="content-blurred">
+        <div class="content"></div>
+    </div>
+    <div class="overlay"></div>
+</div>

@@ -5,6 +5,7 @@ angular.module('teachersAlly')
         $scope.validUsername = undefined;
         $scope.validEmail = undefined;
         $scope.validPassword = undefined;
+        $scope.emailBlured = false;
         $scope.signup = function () {
             signupData = {
                 'firstname': $scope.firstName,
@@ -45,6 +46,8 @@ angular.module('teachersAlly')
             } else {
                 $scope.validEmail = false;
             }
+            $scope.emailBlured = true;
+            console.log($scope.emailBlured);
         }
         $scope.validatePassword = function () {
             var srt = $scope.password;

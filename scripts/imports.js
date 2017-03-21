@@ -5,7 +5,7 @@ window.$ = jQuery;
 window.g_blurnav = require('./blurnav.js');
 require('../css/bootstrap.css');
 require('../css/font-awesome.css');
-require('../node_modules/bootstrap/dist/js/bootstrap.min.js');
+require('../node_modules/bootstrap/dist/js/bootstrap');
 require('../node_modules/angular-sanitize');
 require('../node_modules/angular-ui-router');
 
@@ -20,4 +20,5 @@ require('./signup.controller');
 require('./classroom.controller');
 require('./classes.controller');
 require('./auth.service');
+require('./app.directive');
 require('./shortname.directive');

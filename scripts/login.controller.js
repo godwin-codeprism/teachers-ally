@@ -11,7 +11,9 @@ angular.module('teachersAlly')
                 .then(function (response) {
                     if (response.data != 'ERROR') {
                         localStorage.setItem('godwin_ta', response.data);
-                        $state.go('classroom',{user: $scope.username});
+                        $state.go('classroom', {
+                            user: $scope.username
+                        });
                     } else {
                         $scope.goodLogin = response.data;
                     }

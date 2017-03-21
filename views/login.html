@@ -1,28 +1,38 @@
+<div class="fakebody-1"></div>
+<div class="fakebody-2"></div>
 <nav class="navbar navbar-ios navbar-fixed-top">
     <div class="content-blurred">
         <div class="content"></div>
     </div>
     <div class="container-fluid">
-        <div class="col-sm-3 logo">
-            <div class="col-sm-4">
-                <img src="./img/logo.svg" alt="Godwin Vinny Carole" class="img-responsive"></div>
-            <div class="col-sm-8">
-                <h3 style="margin-bottom:2px;">Tracher’s Ally</h3>
-                <p>Work Smart</p>
+        <div class="row">
+            <div class="col-md-5" style="margin-top:0.5%;">
+                <div class="row">
+                    <div class="col-md-1 col-sm-2 col-xs-2 logo">
+                        <img src="./img/logo.png" alt="Godwin Vinny Carole">
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <h3 style="margin:2px auto;">&nbsp; Tracher’s Ally</h3>
+                        <p>&nbsp; Work Smart</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-7 pull-right login-panel" ng-controller="loginController">
-            <form ng-submit="login()">
-            <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
-            <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
-                <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="username" ng-model="username" required>
+            <!-- login from in navbar for Large Devices -->
+            <div class="col-md-7 login-panel hidden-sm hidden-xs" ng-controller="loginController">
+                <form ng-submit="login()">
+                    <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
+                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                        <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="username" ng-model="username"
+                            required>
+                    </div>
+                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                        <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="current-password" ng-model="password"
+                            required>
+                        <a href="" class="link" tabindex="-1"><small aria-hidden="true">Forgotten password?</small></a>
+                    </div>
+                    <div class="col-sm-2"><button type="submit" class="btn btn-primary btn-block btn-sm">Login</button></div>
+                </form>
             </div>
-            <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
-                <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="current-password" ng-model="password" required>
-                <a href="" class="link" tabindex="-1"><small aria-hidden="true">Forgotten password?</small></a>
-            </div>
-            <div class="col-sm-2"><button type="submit" class="btn btn-primary btn-block btn-sm">Login</button></div>
-            </form>
         </div>
     </div>
 </nav>
@@ -36,30 +46,141 @@
     <div class="home-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-7">
-                    <div class="container-fluid home-text">
+                <div class="col-lg-1"></div>
+                <div class="col-sm-12 col-md-6 col-lg-5">
+                    <div class="home-text">
                         <h1>Built for teachers</h1>
                         <hr>
-                        <p>Teacher’s Ally is a tool developled for teachers in an attempt to make their lifes easier by, calcutalting
+                        <p>Teacher’s Ally is a tool developed for teachers in an attempt to make their lifes easier by, calcutalting
                             thounsand of students marks and save all of their hard work at one place, making it available
                             anytime any where.</p>
                     </div>
                 </div>
-                <div class="col-sm-5" style="padding-right: 5%;">
-                    <div class="container-fluid signup-panel" ng-controller="signupController">
+                <div class="col-sm-12 col-md-6 col-lg-5">
+                    <!-- Tabs for Mobile devices for login and sign up -->
+                    <div class="container-fluid hidden-md hidden-lg">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"></div>
+                            <div class="col-sm-8 col-xs-12 mobile-login-container">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs nav-justified mobile-login-ul" role="tablist">
+                                    <li role="presentation" class="active" id="login-pane-btn"><a data-target="#login_pane" data-toggle="tab">LOGIN</a></li>
+                                    <li role="presentation" id="signup-pane-btn"><a data-target="#signup_pane" data-toggle="tab">SIGN UP</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- Mobile Login Tab -->
+                                    <div role="tabpanel" class="tab-pane active" id="login_pane" ng-controller="loginController">
+                                        <div class="col-sm-12 text-center">
+                                            <h3 class="text-uppercase">Teacher’s Ally</h3>
+                                            <hr>
+                                            <form class="form-horizontal" ng-submit="login()">
+                                                <div class="form-group" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="username" ng-model="username"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                                                    <div class="col-sm-12">
+                                                        <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="current-password" ng-model="password"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <button type="submit" class="btn btn-primary btn-block btn-sm">Login</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="signup_pane" ng-controller="signupController">
+                                        <!-- Mobile Signup Tab-->
+                                        <div class="col-sm-12 text-center">
+                                            <h3>SIGN UP FOR FREE</h3>
+                                            <hr>
+                                            <form autocomplete="off" method="POST" name="signupform" ng-submit="signup(signupform)" class="form-horizontal">
+                                                <div class="form-group text-left" ng-class="{'has-error': signupform.firstName.$dirty && signupform.firstName.$invalid}">
+                                                    <div class="col-lg-12">
+                                                        <input type="text" class="form-control" name="firstName" placeholder="First Name" autocomplete="given-name" ng-model="firstName"
+                                                            required>
+                                                        <span ng-show="signupform.firstName.$dirty && signupform.firstName.$invalid"><small class="text-danger">&nbsp; Please provide your First Name</small></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-left" ng-class="{'has-error': signupform.lastName.$dirty && signupform.lastName.$invalid}">
+                                                    <div class="col-lg-12">
+                                                        <input type="text" class="form-control" name="lastName" placeholder="Last Name" autocomplete="family-name" ng-model="lastName"
+                                                            required>
+                                                        <span ng-show="signupform.lastName.$dirty && signupform.lastName.$invalid"><small class="text-danger">&nbsp; Please provide your Last Name</small></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-left" ng-class="{'has-error': signupform.username.$dirty && signupform.username.$invalid || isUnique == 1 || validUsername == false}">
+                                                    <div class="col-lg-12">
+                                                        <input type="text" class="form-control" name="username" placeholder="Pick a username" ng-model="username" ng-change="validateUsername()"
+                                                            min-length="3" value="" autocomplete="username" required>
+                                                        <span ng-show="signupform.username.$dirty && signupform.username.$invalid"><small class="text-danger">&nbsp; Please pick a username</small></span>
+                                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try someting else</small></span>
+                                                        <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special Charecters in username</small></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-left" ng-class="{'has-error':emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))}">
+                                                    <div class="col-lg-12">
+                                                        <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="email" ng-model="email" ng-blur="validateEmail()"
+                                                            required>
+                                                        <span ng-show="(emailBlured == true) && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))"><small class="text-danger">&nbsp; Please provide a valid email</small></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-left" ng-class="{'has-error':signupform.school.$invalid && signupform.school.$dirty}">
+                                                    <div class="col-lg-12">
+                                                        <input type="text" class="form-control" name="school" placeholder="School Name" ng-model="school" autocomplete="organization"
+                                                            required>
+                                                        <span ng-show="signupform.school.$invalid && signupform.school.$dirty"><small class="text-danger">&nbsp; Please provide the school name you work at</small></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-left" ng-class="{'has-error': signupform.password.$invalid && signupform.password.$dirty || (validPassword > 0 && validPassword < 5)}">
+                                                    <div class="col-lg-12">
+                                                        <input type="password" class="form-control" name="pwd" placeholder="Create Password" autocomplete="new-password" ng-model="password"
+                                                            ng-change="validatePassword()" required>
+                                                        <small ng-class="{'text-danger': validPassword == 4}" ng-hide="validPassword < 4 && validPassword > 0">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
+                                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain atleast one number</small></span>
+                                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain atleast one alphabet</small></span>
+                                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain atleast 7 letters and numbers combined</small></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <button class="btn btn-primary btn-block" type="submit" ng-disabled="(signupform.firstName.$dirty && signupform.firstName.$invalid) || (signupform.lastName.$dirty && signupform.lastName.$invalid) || (signupform.username.$dirty && signupform.username.$invalid || isUnique == 1 || validUsername == false) || emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty)) || (signupform.school.$invalid && signupform.school.$dirty) || (signupform.school.$invalid && signupform.school.$dirty || (validPassword > 0 && validPassword < 5))">Sign Up</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 hidden-xs"></div>
+                        </div>
+                    </div>
+                    <!-- Sign up from for Large Devices -->
+                    <div class="container-fluid signup-panel hidden-sm hidden-xs" ng-controller="signupController">
                         <div class="col-sm-12 text-center">
                             <h3>SIGN UP FOR FREE</h3>
                             <hr>
                             <form autocomplete="off" method="POST" name="signupform" ng-submit="signup(signupform)" class="form-horizontal">
                                 <div class="form-group text-left" ng-class="{'has-error': signupform.firstName.$dirty && signupform.firstName.$invalid}">
                                     <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="firstName" placeholder="First Name" autocomplete="given-name" ng-model="firstName" required>
+                                        <input type="text" class="form-control" name="firstName" placeholder="First Name" autocomplete="given-name" ng-model="firstName"
+                                            required>
                                         <span ng-show="signupform.firstName.$dirty && signupform.firstName.$invalid"><small class="text-danger">&nbsp; Please provide your First Name</small></span>
                                     </div>
                                 </div>
                                 <div class="form-group text-left" ng-class="{'has-error': signupform.lastName.$dirty && signupform.lastName.$invalid}">
                                     <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="lastName" placeholder="Last Name" autocomplete="family-name" ng-model="lastName" required>
+                                        <input type="text" class="form-control" name="lastName" placeholder="Last Name" autocomplete="family-name" ng-model="lastName"
+                                            required>
                                         <span ng-show="signupform.lastName.$dirty && signupform.lastName.$invalid"><small class="text-danger">&nbsp; Please provide your Last Name</small></span>
                                     </div>
                                 </div>
@@ -72,22 +193,25 @@
                                         <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special Charecters in username</small></span>
                                     </div>
                                 </div>
-                                <div class="form-group text-left" ng-class="{'has-error':validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)}">
+                                <div class="form-group text-left" ng-class="{'has-error':emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))}">
                                     <div class="col-lg-12">
-                                        <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="email" ng-model="email" ng-blur="validateEmail()" required>
-                                        <span ng-show="validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)"><small class="text-danger">&nbsp; Please provide a valid email</small></span>
+                                        <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="email" ng-model="email" ng-blur="validateEmail()"
+                                            required>
+                                        <span ng-show="(emailBlured == true) && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))"><small class="text-danger">&nbsp; Please provide a valid email</small></span>
                                     </div>
                                 </div>
                                 <div class="form-group text-left" ng-class="{'has-error':signupform.school.$invalid && signupform.school.$dirty}">
                                     <div class="col-lg-12">
-                                        <input type="text" class="form-control" name="school" placeholder="School Name" ng-model="school" autocomplete="organization" required>
+                                        <input type="text" class="form-control" name="school" placeholder="School Name" ng-model="school" autocomplete="organization"
+                                            required>
                                         <span ng-show="signupform.school.$invalid && signupform.school.$dirty"><small class="text-danger">&nbsp; Please provide the school name you work at</small></span>
 
                                     </div>
                                 </div>
                                 <div class="form-group text-left" ng-class="{'has-error': signupform.password.$invalid && signupform.password.$dirty || (validPassword > 0 && validPassword < 5)}">
                                     <div class="col-lg-12">
-                                        <input type="password" class="form-control" name="pwd" placeholder="Create Password" autocomplete="new-password" ng-model="password" ng-change="validatePassword()" required>
+                                        <input type="password" class="form-control" name="pwd" placeholder="Create Password" autocomplete="new-password" ng-model="password"
+                                            ng-change="validatePassword()" required>
                                         <small ng-class="{'text-danger': validPassword == 4}" ng-hide="validPassword < 4 && validPassword > 0">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
                                         <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain atleast one number</small></span>
                                         <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain atleast one alphabet</small></span>
@@ -96,7 +220,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
-                                        <button class="btn btn-primary btn-block" type="submit" ng-disabled="(signupform.firstName.$dirty && signupform.firstName.$invalid) || (signupform.lastName.$dirty && signupform.lastName.$invalid) || (signupform.username.$dirty && signupform.username.$invalid || isUnique == 1 || validUsername == false) || (validEmail == false || (signupform.email.$invalid && signupform.email.$dirty)) || (signupform.school.$invalid && signupform.school.$dirty) || (signupform.school.$invalid && signupform.school.$dirty || (validPassword > 0 && validPassword < 5))">Sign Up</button>
+                                        <button class="btn btn-primary btn-block" type="submit" ng-disabled="(signupform.firstName.$dirty && signupform.firstName.$invalid) || (signupform.lastName.$dirty && signupform.lastName.$invalid) || (signupform.username.$dirty && signupform.username.$invalid || isUnique == 1 || validUsername == false) || emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty)) || (signupform.school.$invalid && signupform.school.$dirty) || (signupform.school.$invalid && signupform.school.$dirty || (validPassword > 0 && validPassword < 5))">Sign Up</button>
                                     </div>
                                 </div>
                             </form>
