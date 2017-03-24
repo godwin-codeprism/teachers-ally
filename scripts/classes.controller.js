@@ -1,6 +1,5 @@
 angular.module('teachersAlly')
     .controller('classesController', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
-        g_blurnav.blurInit();
         $scope.untitles = null;
         $scope.classes = [];
         $http.get('./database/' + $stateParams.user + '/' + $stateParams.user + '_data.json')

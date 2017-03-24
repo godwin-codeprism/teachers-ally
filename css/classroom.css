@@ -36,7 +36,8 @@
     padding: 1%;
 }
 
-.popover-content {
+.popover-content,
+.menu-list {
     padding: 0px;
 }
 
@@ -44,30 +45,43 @@
     margin: 0px;
 }
 
-.popover-content>.list-group>a:first-child {
+.popover-content>.list-group>a:first-child,
+.menu-list>.list-group>a:first-child {
     border-top: none;
 }
 
-.popover-content>.list-group>a:last-child {
+.popover-content>.list-group>a:last-child,
+.menu-list>.list-group>a:last-child {
     border-bottom: none;
 }
 
-.popover-content>.list-group>a {
+.popover-content>.list-group>a,
+.menu-list>.list-group>a {
     cursor: pointer;
     border-left: none;
     border-right: none;
     white-space: nowrap;
 }
 
-.popover-content>.list-group>a:hover {
+.popover-content>.list-group>a:hover,
+.menu-list>.list-group>a:hover {
     background-color: #0449D7;
     color: white;
 }
 
-.popover-content>.list-group>a>i {
+.popover-content>.list-group>a>i,
+.menu-list>.list-group>a>i {
     padding-right: 5%;
 }
-
+.menu-list{
+    padding-top:2rem;
+}
+.menu-list>.list-group>a{
+    border-radius: 0px;
+}
+.menu-list.list-group-item{
+    background-color: transparent !important;
+}
 .sidemenu-overlay {
     position: fixed;
     width: 100%;
@@ -75,12 +89,80 @@
     z-index: 1;
     top: 0;
 }
-.sidemenu-overlay .content-blurred{
+
+.sidemenu-overlay .content-blurred {
     opacity: 1 !important;
 }
-.sidemenu-overlay .overlay{
+
+.sidemenu-overlay .overlay {
     background-color: white;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0;
+}
+
+.sidemenu-overlay.ng-hide-remove {
+    animation: fadeIn .51s;
+}
+
+.sidemenu-overlay.ng-hide {
+    animation: fadeOut .51s;
+}
+
+.sidemenu-container {
+    width: 25rem;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-right: 1px solid #eee;
+    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.sidemenu-container.ng-hide-remove {
+    animation: slideInLeft .25s;
+}
+
+.sidemenu-container.ng-hide {
+    animation: slideOutLeft .25s;
+}
+
+.disable-scroll {
+    overflow: hidden;
+}
+
+.menu-profile-picture-container {
+    height: 25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    border-bottom: 2px inset #d6dbe0;
+}
+
+.menu-profile-picture {
+    width: 70%;
+    height: 61%;
+    border-radius: 50%;
+    border: 1px inset white;
+    margin-top: 23%;
+    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    color: white;
+    box-shadow: 0px 0px 15px #f14545 inset;
+    text-shadow: 0px 0px 15px #ff004f;
+    font-family: Roboto;
+    font-weight: 300;
+}
+
+@media only screen and (max-device-width: 375px) {
+    .logo {
+        border: none !important;
+    }
 }

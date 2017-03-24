@@ -1,5 +1,6 @@
 angular.module('teachersAlly')
     .controller('signupController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+        console.log('signup Controller ran');
         var signupData = null;
         $scope.isUnique = undefined;
         $scope.validUsername = undefined;

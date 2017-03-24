@@ -1,5 +1,4 @@
-var runFunction = function ($transitions, authService, $state) {
-    g_blurnav.blurInit();
+var runFunction = function ($rootScope, $transitions, authService, $state) {
     $transitions.onBefore({}, function (trans) {
         if (trans.$to().name == 'classroom') {
             if (localStorage.getItem('godwin_ta') != null) {
@@ -29,9 +28,16 @@ var runFunction = function ($transitions, authService, $state) {
                 })
             }
         }
-    })
+    });
+    $transitions.onSuccess({}, function (trans) {
+        if (trans.$to().name == 'app') {
+            g_blurnav.blurInit('home');
+        } else {
+            g_blurnav.blurInit();
+        }
+    });
 };
-runFunction.$inject = ['$transitions', 'authService', '$state'];
+runFunction.$inject = ['$rootScope', '$transitions', 'authService', '$state'];
 angular.module('teachersAlly')
     .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('app', {
@@ -44,9 +50,9 @@ angular.module('teachersAlly')
             templateUrl: './views/classroom.html',
             controller: "classroomController"
         });
-        $stateProvider.state('classroom.classes',{
-            url:"",
-            templateUrl:'./views/classes.html',
-            controller:"classesController"
+        $stateProvider.state('classroom.classes', {
+            url: "",
+            templateUrl: './views/classes.html',
+            controller: "classesController"
         });
     }]).run(runFunction);

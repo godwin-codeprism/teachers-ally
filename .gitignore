@@ -3,3 +3,4 @@
 /.vscode/
 /endpoints/connection.php
 /database/
+/dist/

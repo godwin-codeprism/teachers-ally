@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-8 col-sm-4 col-md-5 col-lg-4" style="margin-top:0.5%;">
                 <div class="row">
-                    <div class="col-md-2 col-sm-2 col-xs-2 logo">
+                    <div class="col-lg-2 col-md-1 col-sm-2 col-xs-2 text-center logo">
                         <img src="./img/logo.png" alt="Godwin Vinny Carole">
                     </div>
                     <div class="col-md-10 col-sm-10 col-xs-10">
@@ -33,7 +33,30 @@
     </div>
 </nav>
 <ui-view></ui-view>
-<div class="sidemenu-overlay" ng-show="mobileMenu">
+<div class="sidemenu-container" ng-show="mobileMenu">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center menu-profile-picture-container">
+                <div class="menu-profile-picture">
+                    {{shortName}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 menu-list">
+                <div class="list-group">
+                    <a class="list-group-item" ng-click="goToAccount()"><i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                    <a class="list-group-item" ng-click="goToAccount()"><i class="fa fa-commenting" aria-hidden="true"></i>Feature Request</a>
+                    <a class="list-group-item" ng-click="goToAccount()"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Issue Report</a>
+                    <a class="list-group-item" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sidemenu-overlay" ng-show="mobileMenu" ng-click="toggleMobileMenu()">
     <div class="content-blurred">
         <div class="content"></div>
     </div>
