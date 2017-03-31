@@ -3,6 +3,15 @@ angular.module('teachersAlly')
         $scope.mobileMenu = false;
         $scope.teacherName = undefined;
         $scope.shortName = undefined;
+        $http.post('./endpoints/fetch-userdata.php', $stateParams.user)
+            .then(function (res) {
+                $scope.teacherName = res.data[0].firstname;
+                $scope.shortName = res.data[0].firstname.charAt(0) + res.data[0].lastname.charAt(0);
+                (Object.keys($stateParams).length <= 2) ? $state.go('classroom.classes'): false;
+            }).catch(function (err) {
+                console.error(err);
+            })
+
         $scope.logout = function () {
             $scope.toggleMobileMenu();
             $http.post('./endpoints/logout.php', $stateParams.user).then(function (res) {
@@ -20,14 +29,6 @@ angular.module('teachersAlly')
             $scope.toggleMobileMenu();
             console.log('Account Function not built yet');
         }
-        $http.post('./endpoints/fetch-userdata.php', $stateParams.user)
-            .then(function (res) {
-                $scope.teacherName = res.data[0].firstname;
-                $scope.shortName = res.data[0].firstname.charAt(0) + res.data[0].lastname.charAt(0);
-                $state.go('classroom.classes');
-            }).catch(function (err) {
-                console.error(err);
-            })
 
         $scope.toggleMobileMenu = function () {
             g_blurnav.customBlur('.wrapper:last', '.sidemenu-overlay .content');

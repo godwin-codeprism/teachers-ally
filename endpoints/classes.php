@@ -8,19 +8,35 @@
             echo call_user_func_array($action,$angularData -> params);
         }
     }
-    function getUntitled($username){
-        if(is_dir("../database/".$username)){
-            $fileList = scandir("../database/".$username,0);
-            return json_encode($fileList);
-        }else{
-            return "Something went wrong";
-        }
-    }
+
+
     function createNewClass($username,$filename,$userData){
         $userDataFile = fopen("../database/".$username."/".$username."_data.json", "w");
         $jsonFile = fopen("../database/".$username."/".$filename.".json", "w");
         fwrite($userDataFile, json_encode($userData));
         fwrite($jsonFile, "");
         return 'Success';
+    }
+
+    function updateClasses($username,$newData, $userRequest){
+        $userDataFile = fopen("../database/".$username."/".$username."_data.json", "w");
+        fwrite($userDataFile, json_encode($newData));
+        if($userRequest -> type == "deleteClass"){
+            return deleteClass($username, $userRequest -> class);
+        }else{
+            return $userRequest -> class ." updated";
+        }
+    }
+
+    function deleteClass ($username,$classname){
+        if(!is_dir("../database/".$username."/trash")){
+            mkdir("../database/".$username."/trash");
+        }
+        if(copy("../database/".$username."/".$classname.".json","../database/".$username."/trash"."/".$classname.".json")){
+            unlink("../database/".$username."/".$classname.".json");
+            return $classname." deleted sucessfully";
+        }else{
+            return $classname." could not be deleted";
+        }
     }
 ?>

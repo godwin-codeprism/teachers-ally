@@ -34,6 +34,9 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
             g_blurnav.blurInit('home');
         } else {
             g_blurnav.blurInit();
+            setTimeout(function () {
+                g_blurnav.blurInit();
+            }, 10)
         }
     });
 };
@@ -54,5 +57,10 @@ angular.module('teachersAlly')
             url: "",
             templateUrl: './views/classes.html',
             controller: "classesController"
+        });
+        $stateProvider.state('classroom.exams', {
+            url: "/:class",
+            templateUrl: './views/exams.html',
+            controller: "examsController"
         });
     }]).run(runFunction);

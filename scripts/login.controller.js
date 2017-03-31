@@ -1,6 +1,5 @@
 angular.module('teachersAlly')
     .controller('loginController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
-        console.log('login Controller ran');
         $scope.goodLogin = null;
         var loginData = {};
         $scope.login = function () {
