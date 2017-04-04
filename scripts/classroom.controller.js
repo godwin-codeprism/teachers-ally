@@ -2,10 +2,12 @@ angular.module('teachersAlly')
     .controller('classroomController', ['$scope', '$http', '$stateParams', '$state', function ($scope, $http, $stateParams, $state) {
         $scope.mobileMenu = false;
         $scope.teacherName = undefined;
+        $scope.teacherFullName = undefined;
         $scope.shortName = undefined;
         $http.post('./endpoints/fetch-userdata.php', $stateParams.user)
             .then(function (res) {
                 $scope.teacherName = res.data[0].firstname;
+                $scope.teacherFullName = res.data[0].firstname+' '+res.data[0].lastname;
                 $scope.shortName = res.data[0].firstname.charAt(0) + res.data[0].lastname.charAt(0);
                 (Object.keys($stateParams).length <= 2) ? $state.go('classroom.classes'): false;
             }).catch(function (err) {
@@ -31,7 +33,7 @@ angular.module('teachersAlly')
         }
 
         $scope.toggleMobileMenu = function () {
-            g_blurnav.customBlur('.wrapper:last', '.sidemenu-overlay .content');
+            g_blurnav.customBlur('.ui-classroom .wrapper:eq(0)', '.sidemenu-overlay .content');
             $scope.mobileMenu = ($scope.mobileMenu) ? $scope.mobileMenu = false : $scope.mobileMenu = true;
             if ($scope.mobileMenu) {
                 $('body').addClass('disable-scroll');

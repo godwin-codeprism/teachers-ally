@@ -33,6 +33,12 @@
     </div>
 </nav>
 <ui-view></ui-view>
+<div class="sidemenu-overlay" ng-show="mobileMenu" ng-click="toggleMobileMenu()">
+    <div class="content-blurred-sidemenu">
+        <div class="content"></div>
+    </div>
+    <div class="overlay"></div>
+</div>
 <div class="sidemenu-container" ng-show="mobileMenu">
     <div class="container-fluid">
         <div class="row">
@@ -55,10 +61,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="sidemenu-overlay" ng-show="mobileMenu" ng-click="toggleMobileMenu()">
-    <div class="content-blurred">
-        <div class="content"></div>
-    </div>
-    <div class="overlay"></div>
 </div>

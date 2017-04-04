@@ -91,15 +91,19 @@
     top: 0;
 }
 
-.sidemenu-overlay .content-blurred {
-    opacity: 1 !important;
+.content-blurred-sidemenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    filter: blur(10px);
 }
 
 .sidemenu-overlay .overlay {
     background-color: white;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 1;
 }
 
 .sidemenu-overlay.ng-hide-remove {

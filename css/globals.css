@@ -1,0 +1,61 @@
+[contenteditable="true"] {
+    outline: none;
+}
+
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    color: #aca8a8;
+    font-family: Roboto;
+    font-weight: 300 !important;
+    /* For Firefox */
+    display: block;
+}
+
+[contenteditable="true"]:focus {
+    border: 3px solid rgb(255, 45, 85);
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(255, 45, 85, 0.59);
+}
+
+.wrapper-padding {
+    padding-top: 50px;
+}
+
+.remove-padding {
+    padding: 0px;
+}
+
+.controls-ribbion {
+    width: 100%;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    z-index: 1;
+}
+
+.controls-ribbion-btn-container {
+    padding-top: 65px;
+    height: 100%;
+    position:relative;
+    z-index: 1;
+}
+.controls-ribbion .content-blurred{
+    filter:blur(6px) !important;
+    opacity: 0.6 !important;
+}
+.btn-back {
+    width: 50px;
+    height: inherit;
+    border-radius: 0px;
+    border: none;
+    font-size: 24px;
+    border-right: 1px solid #e9e9e9;
+}
+.btn-back i{
+    font-size: 3.5rem;
+}

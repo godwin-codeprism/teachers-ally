@@ -1,4 +1,90 @@
-.exams-header{
+.exams-header {
     background-image: linear-gradient(to top, white 0%, #dfe9f3 100%);
     height: 30rem;
+}
+
+.exams-container {
+    max-width: 1000px;
+    padding: 0px;
+}
+
+.class-name {
+    margin-top: 80px;
+    padding: 0px;
+}
+
+.class-name .alert {
+    width: 230px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.class-teacher ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.class-teacher ul li {
+    display: inline;
+    list-style: none;
+}
+
+.teacherFullName {
+    padding-left: 8px;
+    font-size: medium;
+    color: #7e7e7e;
+}
+
+.exams-hr {
+    float: left;
+    width: 150px;
+    border-width: 5px;
+    border-color: #007AFF;
+}
+
+.exam-new {
+    height: 65px;
+    border-bottom: 1px solid #ccc;
+}
+.exam-new h4{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding:0px 15px;
+    line-height: 250%;
+}
+.exams-list-container {
+    width: 90%;
+    margin: auto;
+}
+
+.exams-list ul {
+    padding: 0px;
+}
+
+.exams-list .container-fluid {
+    padding: 0px;
+}
+
+.exams-list ul li {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0px;
+}
+
+.exams-list ul li h4 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.exams-bullet {
+    color: #ccc;
+    font-size: small;
+    vertical-align: inherit;
+    margin-right: 5px;
+}
+
+.exams-list-options,
+.exams-list-options div[class^="col"] {
+    padding: 0px 3px;
 }

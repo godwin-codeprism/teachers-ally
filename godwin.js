@@ -63,19 +63,21 @@
 	__webpack_require__(165);
 	__webpack_require__(167);
 	__webpack_require__(169);
-	__webpack_require__(170);
 	__webpack_require__(171);
 	__webpack_require__(172);
 	__webpack_require__(173);
 	__webpack_require__(174);
 	__webpack_require__(175);
-	//require('./blur.service');
 	__webpack_require__(176);
 	__webpack_require__(177);
+	//require('./blur.service');
 	__webpack_require__(178);
 	__webpack_require__(179);
-	//require('./class_options.directive');
 	__webpack_require__(180);
+	__webpack_require__(181);
+	__webpack_require__(182);
+	//require('./class_options.directive');
+	__webpack_require__(183);
 
 /***/ },
 /* 1 */
@@ -43698,9 +43700,14 @@
 /* 4 */
 /***/ function(module, exports) {
 
+	String.prototype.replaceAt=function(index, replacement) {
+	    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+	}
+
 	var g_blurnav = {
 	    dup: $('.wrapper:eq(0)').clone(),
 	    dupMenu: $('.wrapper:eq(0)').clone(),
+	    dupRibbon: $('.wrapper:eq(0)').clone(),
 	    renameId: function () {
 	        var temp = $('.wrapper:eq(0)').clone();
 	        temp.find('[id]').each(function (key, value) {
@@ -43708,13 +43715,18 @@
 	        });
 	        return temp;
 	    },
-	    blurInit: function (home) {
-	        if (home == undefined) {
-	            g_blurnav.dup = g_blurnav.customRenameId($('.wrapper:last').clone(), '_nav');
+	    blurInit: function (target) {
+	        if (target == undefined) {
+	            g_blurnav.dup = g_blurnav.customRenameId($('.ui-classroom .wrapper:eq(0)').clone(), '_nav');
 	            $('.content:eq(0)').html(g_blurnav.dup);
 	            $(document).off('scroll', g_blurnav.blurScrollHome);
 	            $(document).off('scroll', g_blurnav.blurScroll);
 	            $(document).on('scroll', g_blurnav.blurScroll);
+	        } else if (target == 'ribbon') {
+	            g_blurnav.dupRibbon = g_blurnav.customRenameId($('.ui-classroom .wrapper:eq(0)').clone(), '_nav');
+	            $('.controls-ribbion .content:eq(0)').html(g_blurnav.dupRibbon);
+	            $(document).off('scroll', g_blurnav.blurScrollRibbion);
+	            $(document).on('scroll', g_blurnav.blurScrollRibbion);
 	        } else {
 	            g_blurnav.dup = g_blurnav.renameId();
 	            $('.content:eq(0)').html(g_blurnav.dup);
@@ -43723,6 +43735,19 @@
 	            $(document).on('scroll', g_blurnav.blurScrollHome);
 	        }
 
+	    },
+	    blurScrollRibbion: function () {
+	        var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
+	        if ($('.ui-classroom .wrapper:eq(0)').html() != $('.controls-ribbion .wrapper').html()) {
+	            console.log('I made Ribbon content and wrapper equal');
+	            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html()); 
+	        }
+	        g_blurnav.dupRibbon.css({
+	            '-webkit-transform': translation,
+	            '-moz-transform': translation,
+	            '-ms-transform': translation,
+	            'transform': translation
+	        });
 	    },
 	    blurScrollHome: function () {
 	        var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
@@ -43735,9 +43760,9 @@
 	    },
 	    blurScroll: function () {
 	        var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-	        if ($('.wrapper:last').html() != $('nav .wrapper').html()) {
+	        if ($('.ui-classroom .wrapper:eq(0)').html() != $('nav .wrapper').html()) {
 	            console.log('I made nav content and wrapper equal');
-	            $('nav .wrapper').html($('.wrapper:last').html());
+	            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
 	        }
 	        g_blurnav.dup.css({
 	            '-webkit-transform': translation,
@@ -61755,8 +61780,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./login.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./login.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js!./globals.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!./globals.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -61774,7 +61799,7 @@
 
 
 	// module
-	exports.push([module.id, ".navbar-ios {\r\n    color: #333;\r\n    overflow: hidden;\r\n    background: #eee;\r\n    z-index: 5;\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1);\r\n}\r\n\r\n.carousel-fade .carousel-inner .item {\r\n    opacity: 0;\r\n    -webkit-transition-property: opacity;\r\n    -moz-transition-property: opacity;\r\n    -o-transition-property: opacity;\r\n    transition-property: opacity;\r\n}\r\n\r\n.carousel-fade .carousel-inner .active {\r\n    opacity: 1;\r\n}\r\n\r\n.carousel-fade .carousel-inner .active.left,\r\n.carousel-fade .carousel-inner .active.right {\r\n    left: 0;\r\n    opacity: 0;\r\n    z-index: 1;\r\n}\r\n\r\n.carousel-fade .carousel-inner .next.left,\r\n.carousel-fade .carousel-inner .prev.right {\r\n    opacity: 1;\r\n}\r\n\r\n.carousel-fade .carousel-control {\r\n    z-index: 2;\r\n}\r\n\r\n.hero-slider {\r\n    width: 100%;\r\n    position: absolute;\r\n    z-index: 0;\r\n}\r\n\r\n.fakebody-1 {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: #eee;\r\n}\r\n\r\n.fakebody-2 {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: #e2d8b5;\r\n    animation-name: cf3FadeInOut;\r\n    animation-timing-function: ease-in-out;\r\n    animation-iteration-count: infinite;\r\n    animation-duration: 2.5s;\r\n    animation-direction: alternate;\r\n}\r\n\r\n#cf,\r\n#cf_nav {\r\n    position: relative;\r\n    margin: 0 auto;\r\n}\r\n\r\n#cf img,\r\n#cf_nav img {\r\n    position: absolute;\r\n    left: 0;\r\n    -webkit-transition: opacity 1s ease-in-out;\r\n    -moz-transition: opacity 1s ease-in-out;\r\n    -o-transition: opacity 1s ease-in-out;\r\n    transition: opacity 1s ease-in-out;\r\n}\r\n\r\n@keyframes cf3FadeInOut {\r\n    0% {\r\n        opacity: 1;\r\n    }\r\n    45% {\r\n        opacity: 1;\r\n    }\r\n    55% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n    }\r\n}\r\n\r\n#cf img.top,\r\n#cf_nav img.top {\r\n    animation-name: cf3FadeInOut;\r\n    animation-timing-function: ease-in-out;\r\n    animation-iteration-count: infinite;\r\n    animation-duration: 2.5s;\r\n    animation-direction: alternate;\r\n}\r\n\r\n.content-blurred {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    filter: blur(10px);\r\n    opacity: 0.4;\r\n}\r\n\r\n.content-blurred .content {\r\n    backface-visibility: hidden;\r\n}\r\n\r\n.logo {\r\n    border-right: 1.5px solid #ddd;\r\n}\r\n\r\n.logo img {\r\n    margin: 5px 0px;\r\n    padding-right: 10px;\r\n    max-height: 40px;\r\n}\r\n\r\n.login-panel {\r\n    margin-top: 1%;\r\n}\r\n\r\n.login-panel div {\r\n    padding-left: 0px;\r\n}\r\n\r\n.login-panel button {\r\n    text-transform: uppercase;\r\n    letter-spacing: 1px;\r\n}\r\n\r\n.login-panel input {\r\n    height: 36px;\r\n}\r\n\r\n.home-content {\r\n    position: relative;\r\n    z-index: 1;\r\n    padding-top: 8%;\r\n}\r\n\r\n.signup-panel {\r\n    background-color: rgba(255, 255, 255, .85);\r\n    border-radius: 5px;\r\n    border-top: 5px solid #1D62F0;\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1)\r\n}\r\n\r\n.home-text {\r\n    margin-top: 25%;\r\n    /*margin-left: 15%;\r\n    width: 65%;*/\r\n    font-size: 20px;\r\n}\r\n\r\n.home-text hr {\r\n    width: 25%;\r\n    margin-left: 0px;\r\n    border-width: thick;\r\n    border-color: #333;\r\n}\r\n\r\n.mobile-login-container {\r\n    background-color: #fff;\r\n    border: 1px solid #dbe2e8;\r\n    box-shadow: 2px 2px 3px 0 hsla(205, 5%, 48%, .12);\r\n    padding: 0px;\r\n}\r\n\r\n.mobile-login-ul>li>a {\r\n    border-radius: 0px !important;\r\n    cursor: pointer;\r\n    background: #fafbfc !important;\r\n    border-bottom: 1px solid #dbe2e8 !important;\r\n    color: #7d97ad !important;\r\n}\r\n\r\n.mobile-login-ul .active a {\r\n    background: #fff !important;\r\n    border: none !important;\r\n    color: #1D62F0 !important;\r\n}\r\n\r\n#login-pane-btn.active a {\r\n    border-right: 1px solid #dbe2e8 !important;\r\n}\r\n\r\n#signup-pane-btn.active a {\r\n    border-left: 1px solid #dbe2e8 !important;\r\n}\r\n\r\n@media only screen and (max-device-width: 480px) {\r\n    .mobile-login-ul {\r\n        display: table !important;\r\n    }\r\n    .mobile-login-ul>li {\r\n        display: table-cell !important;\r\n    }\r\n}", ""]);
+	exports.push([module.id, "[contenteditable=\"true\"] {\r\n    outline: none;\r\n}\r\n\r\n[contenteditable=true]:empty:before {\r\n    content: attr(placeholder);\r\n    color: #aca8a8;\r\n    font-family: Roboto;\r\n    font-weight: 300 !important;\r\n    /* For Firefox */\r\n    display: block;\r\n}\r\n\r\n[contenteditable=\"true\"]:focus {\r\n    border: 3px solid rgb(255, 45, 85);\r\n    border-radius: 4px;\r\n    outline: none;\r\n    box-shadow: 0px 0px 10px rgba(255, 45, 85, 0.59);\r\n}\r\n\r\n.wrapper-padding {\r\n    padding-top: 50px;\r\n}\r\n\r\n.remove-padding {\r\n    padding: 0px;\r\n}\r\n\r\n.controls-ribbion {\r\n    width: 100%;\r\n    height: 120px;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: #fff;\r\n    overflow: hidden;\r\n    border-bottom: 1px solid #eee;\r\n    z-index: 1;\r\n}\r\n\r\n.controls-ribbion-btn-container {\r\n    padding-top: 65px;\r\n    height: 100%;\r\n    position:relative;\r\n    z-index: 1;\r\n}\r\n.controls-ribbion .content-blurred{\r\n    filter:blur(6px) !important;\r\n    opacity: 0.6 !important;\r\n}\r\n.btn-back {\r\n    width: 50px;\r\n    height: inherit;\r\n    border-radius: 0px;\r\n    border: none;\r\n    font-size: 24px;\r\n    border-right: 1px solid #e9e9e9;\r\n}\r\n.btn-back i{\r\n    font-size: 3.5rem;\r\n}", ""]);
 
 	// exports
 
@@ -61795,8 +61820,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./classroom.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./classroom.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js!./login.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!./login.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -61814,7 +61839,7 @@
 
 
 	// module
-	exports.push([module.id, ".btn-user {\r\n    width: 50px;\r\n    height: 50px;\r\n    border: none;\r\n    border-radius: 50%;\r\n    text-align: center;\r\n    padding: 6px 0;\r\n    font-size: 12px;\r\n    line-height: 1.42;\r\n    font-size: large;\r\n    font-weight: 300;\r\n    font-family: Roboto Light;\r\n    color: white;\r\n    background-image: linear-gradient(to bottom, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1);\r\n    transition: all .25s ease;\r\n}\r\n\r\n.btn-user:hover,\r\n.btn-user:active,\r\n.btn-user:focus {\r\n    opacity: 0.9;\r\n    background-image: linear-gradient(to bottom, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);\r\n    box-shadow: 0 2px 0 rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .1);\r\n}\r\n\r\n.nav-buttons {\r\n    margin-top: 0.5%;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.icon {\r\n    font-size: large;\r\n    padding: 1%;\r\n}\r\n\r\n.popover-content,\r\n.menu-list {\r\n    padding: 0px;\r\n}\r\n\r\n.popover-content>.list-group {\r\n    margin: 0px;\r\n}\r\n\r\n.popover-content>.list-group>a:first-child,\r\n.menu-list>.list-group>a:first-child {\r\n    border-top: none;\r\n}\r\n\r\n.popover-content>.list-group>a:last-child,\r\n.menu-list>.list-group>a:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\n.popover-content>.list-group>a,\r\n.menu-list>.list-group>a {\r\n    cursor: pointer;\r\n    border-left: none;\r\n    border-right: none;\r\n    white-space: nowrap;\r\n}\r\n\r\n.popover-content>.list-group>a:hover,\r\n.menu-list>.list-group>a:hover {\r\n    background-color: #0449D7;\r\n    color: white;\r\n}\r\n\r\n.popover-content>.list-group>a>i,\r\n.menu-list>.list-group>a>i {\r\n    padding-right: 5%;\r\n}\r\n\r\n.menu-list {\r\n    padding-top: 2rem;\r\n}\r\n\r\n.menu-list>.list-group>a {\r\n    border-radius: 0px;\r\n    background-color: transparent;\r\n}\r\n\r\n.sidemenu-overlay {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index: 1;\r\n    top: 0;\r\n}\r\n\r\n.sidemenu-overlay .content-blurred {\r\n    opacity: 1 !important;\r\n}\r\n\r\n.sidemenu-overlay .overlay {\r\n    background-color: white;\r\n    width: 100%;\r\n    height: 100%;\r\n    opacity: 0;\r\n}\r\n\r\n.sidemenu-overlay.ng-hide-remove {\r\n    animation: fadeIn .51s;\r\n}\r\n\r\n.sidemenu-overlay.ng-hide {\r\n    animation: fadeOut .51s;\r\n}\r\n\r\n.sidemenu-container {\r\n    width: 25rem;\r\n    height: 100%;\r\n    position: fixed;\r\n    overflow-y: auto;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(255, 255, 255, 0.8);\r\n    border-right: 1px solid #eee;\r\n    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.1);\r\n    z-index: 2;\r\n}\r\n\r\n.sidemenu-container.ng-hide-remove {\r\n    animation: slideInLeft .25s;\r\n}\r\n\r\n.sidemenu-container.ng-hide {\r\n    animation: slideOutLeft .25s;\r\n}\r\n\r\n.disable-scroll {\r\n    overflow: hidden;\r\n}\r\n\r\n.menu-profile-picture-container {\r\n    height: 25rem;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\r\n    border-bottom: 2px inset #d6dbe0;\r\n}\r\n\r\n.menu-profile-picture {\r\n    width: 70%;\r\n    height: 61%;\r\n    border-radius: 50%;\r\n    border: 1px solid white;\r\n    margin-top: 23%;\r\n    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    font-size: 7rem;\r\n    color: white;\r\n    box-shadow: 0px 0px 15px #f14545 inset;\r\n    text-shadow: 0px 0px 15px #ff004f;\r\n    font-family: Roboto;\r\n    font-weight: 300;\r\n}\r\n\r\n@media only screen and (max-device-width: 375px) {\r\n    .logo {\r\n        border: none !important;\r\n    }\r\n}", ""]);
+	exports.push([module.id, ".navbar-ios {\r\n    color: #333;\r\n    overflow: hidden;\r\n    background: #eee;\r\n    z-index: 5;\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1);\r\n}\r\n\r\n.carousel-fade .carousel-inner .item {\r\n    opacity: 0;\r\n    -webkit-transition-property: opacity;\r\n    -moz-transition-property: opacity;\r\n    -o-transition-property: opacity;\r\n    transition-property: opacity;\r\n}\r\n\r\n.carousel-fade .carousel-inner .active {\r\n    opacity: 1;\r\n}\r\n\r\n.carousel-fade .carousel-inner .active.left,\r\n.carousel-fade .carousel-inner .active.right {\r\n    left: 0;\r\n    opacity: 0;\r\n    z-index: 1;\r\n}\r\n\r\n.carousel-fade .carousel-inner .next.left,\r\n.carousel-fade .carousel-inner .prev.right {\r\n    opacity: 1;\r\n}\r\n\r\n.carousel-fade .carousel-control {\r\n    z-index: 2;\r\n}\r\n\r\n.hero-slider {\r\n    width: 100%;\r\n    position: absolute;\r\n    z-index: 0;\r\n}\r\n\r\n.fakebody-1 {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: #eee;\r\n}\r\n\r\n.fakebody-2 {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: #e2d8b5;\r\n    animation-name: cf3FadeInOut;\r\n    animation-timing-function: ease-in-out;\r\n    animation-iteration-count: infinite;\r\n    animation-duration: 2.5s;\r\n    animation-direction: alternate;\r\n}\r\n\r\n#cf,\r\n#cf_nav {\r\n    position: relative;\r\n    margin: 0 auto;\r\n}\r\n\r\n#cf img,\r\n#cf_nav img {\r\n    position: absolute;\r\n    left: 0;\r\n    -webkit-transition: opacity 1s ease-in-out;\r\n    -moz-transition: opacity 1s ease-in-out;\r\n    -o-transition: opacity 1s ease-in-out;\r\n    transition: opacity 1s ease-in-out;\r\n}\r\n\r\n@keyframes cf3FadeInOut {\r\n    0% {\r\n        opacity: 1;\r\n    }\r\n    45% {\r\n        opacity: 1;\r\n    }\r\n    55% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n    }\r\n}\r\n\r\n#cf img.top,\r\n#cf_nav img.top {\r\n    animation-name: cf3FadeInOut;\r\n    animation-timing-function: ease-in-out;\r\n    animation-iteration-count: infinite;\r\n    animation-duration: 2.5s;\r\n    animation-direction: alternate;\r\n}\r\n\r\n.content-blurred {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    filter: blur(10px);\r\n    opacity: 0.4;\r\n}\r\n\r\n.content-blurred .content {\r\n    backface-visibility: hidden;\r\n}\r\n\r\n.logo {\r\n    border-right: 1.5px solid #ddd;\r\n}\r\n\r\n.logo img {\r\n    margin: 5px 0px;\r\n    padding-right: 10px;\r\n    max-height: 40px;\r\n}\r\n\r\n.login-panel {\r\n    margin-top: 1%;\r\n}\r\n\r\n.login-panel div {\r\n    padding-left: 0px;\r\n}\r\n\r\n.login-panel button {\r\n    text-transform: uppercase;\r\n    letter-spacing: 1px;\r\n}\r\n\r\n.login-panel input {\r\n    height: 36px;\r\n}\r\n\r\n.home-content {\r\n    position: relative;\r\n    z-index: 1;\r\n    padding-top: 8%;\r\n}\r\n\r\n.signup-panel {\r\n    background-color: rgba(255, 255, 255, .85);\r\n    border-radius: 5px;\r\n    border-top: 5px solid #1D62F0;\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1)\r\n}\r\n\r\n.home-text {\r\n    margin-top: 25%;\r\n    /*margin-left: 15%;\r\n    width: 65%;*/\r\n    font-size: 20px;\r\n}\r\n\r\n.home-text hr {\r\n    width: 25%;\r\n    margin-left: 0px;\r\n    border-width: thick;\r\n    border-color: #333;\r\n}\r\n\r\n.mobile-login-container {\r\n    background-color: #fff;\r\n    border: 1px solid #dbe2e8;\r\n    box-shadow: 2px 2px 3px 0 hsla(205, 5%, 48%, .12);\r\n    padding: 0px;\r\n}\r\n\r\n.mobile-login-ul>li>a {\r\n    border-radius: 0px !important;\r\n    cursor: pointer;\r\n    background: #fafbfc !important;\r\n    border-bottom: 1px solid #dbe2e8 !important;\r\n    color: #7d97ad !important;\r\n}\r\n\r\n.mobile-login-ul .active a {\r\n    background: #fff !important;\r\n    border: none !important;\r\n    color: #1D62F0 !important;\r\n}\r\n\r\n#login-pane-btn.active a {\r\n    border-right: 1px solid #dbe2e8 !important;\r\n}\r\n\r\n#signup-pane-btn.active a {\r\n    border-left: 1px solid #dbe2e8 !important;\r\n}\r\n\r\n@media only screen and (max-device-width: 480px) {\r\n    .mobile-login-ul {\r\n        display: table !important;\r\n    }\r\n    .mobile-login-ul>li {\r\n        display: table-cell !important;\r\n    }\r\n}", ""]);
 
 	// exports
 
@@ -61835,8 +61860,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./classes.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./classes.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js!./classroom.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!./classroom.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -61854,7 +61879,7 @@
 
 
 	// module
-	exports.push([module.id, ".classes-welcome {\r\n    width: 100%;\r\n    height: 250px;\r\n    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);\r\n    box-shadow: 0px -1px 10px rgba(64, 8, 96, 0.4) inset;\r\n    border-bottom: 2px solid #ddd;\r\n}\r\n\r\n.classes-welcome-text {\r\n    padding-top: 7%;\r\n    padding-left: 10%;\r\n    color: white !important;\r\n    text-shadow: 0px 1px 3px #450f68;\r\n    letter-spacing: .5px;\r\n}\r\n\r\n.classes-welcome-text>h3 {\r\n    font-family: Roboto;\r\n    letter-spacing: 1px;\r\n}\r\n\r\n.classes-grid {\r\n    width: 100%;\r\n    background-color: #f5f5f5;\r\n    padding: 20px 0px;\r\n}\r\n\r\n.classes-grid>.container-fluid {\r\n    width: 100%;\r\n    margin: auto;\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.create-class {\r\n    display: -webkit-box;\r\n    display: -webkit-flex;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    -webkit-flex-direction: column;\r\n    -ms-flex-direction: column;\r\n    flex-direction: column;\r\n    -webkit-box-align: center;\r\n    -webkit-align-items: center;\r\n    -ms-flex-align: center;\r\n    align-items: center;\r\n    width: 300px;\r\n    height: 350px;\r\n    background: #fff;\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    cursor: pointer;\r\n    -webkit-transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: box-shadow .3s, transform .3s;\r\n    transition: box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;\r\n}\r\n\r\n.create-class:hover,\r\n.class:hover {\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08), 0 0.4rem 2rem rgba(0, 0, 0, .1);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08), 0 0.4rem 2rem rgba(0, 0, 0, .1);\r\n    -webkit-transform: translateY(-.4rem);\r\n    -ms-transform: translateY(-.4rem);\r\n    transform: translateY(-.4rem);\r\n}\r\n\r\n.class {\r\n    width: 300px;\r\n    height: 350px;\r\n    background: #fff;\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    cursor: pointer;\r\n    position: relative;\r\n    -webkit-transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: box-shadow .3s, transform .3s;\r\n    transition: box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    border-left: 8px solid #2387fb;\r\n}\r\n\r\n.create-class-content {\r\n    width: 90%;\r\n    height: 90%;\r\n    margin: auto;\r\n}\r\n\r\n.class-holder {\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin: 15px 0px;\r\n}\r\n\r\n.plus {\r\n    position: relative;\r\n    margin: auto;\r\n    margin-top: 6.25rem;\r\n    margin-bottom: 4.5rem;\r\n    width: 12rem;\r\n    height: 12rem;\r\n    border: .2rem solid rgba(49, 53, 55, .1);\r\n    -webkit-border-radius: 50%;\r\n    border-radius: 50%;\r\n    font-size: 4.1rem;\r\n    font-weight: lighter;\r\n    text-align: center;\r\n    line-height: 11.5rem;\r\n}\r\n\r\n.class-hr {\r\n    width: 40%;\r\n    margin-left: 0px;\r\n    margin-top: 32px;\r\n    margin-bottom: 10px;\r\n    border: 2px solid rgba(49, 53, 55, .4);\r\n}\r\n\r\n.class-updated,\r\n.class-exams {\r\n    padding: 0px;\r\n    color: rgba(49, 53, 55, .4);\r\n}\r\n\r\n.class-title {\r\n    padding-left: 0px;\r\n    width: 100%;\r\n    height: 210px;\r\n}\r\n\r\n\r\n/*.class-options-btn {\r\n    background-color: transparent;\r\n    outline: none !important;\r\n    border: none;\r\n    color: #ccc;\r\n    font-size: large;\r\n    position: absolute;\r\n    top: 5px;\r\n    right: 5px;\r\n    transition: all .25s ease;\r\n    cursor: pointer; \r\n}\r\n\r\n.class:hover .class-options-btn{\r\n    color: #2387fb;\r\n}*/\r\n\r\n.class-options,\r\n.class-options>div {\r\n    padding: 0px;\r\n}\r\n.sure{\r\n    display: none;\r\n}\r\n", ""]);
+	exports.push([module.id, ".btn-user {\r\n    width: 50px;\r\n    height: 50px;\r\n    border: none;\r\n    border-radius: 50%;\r\n    text-align: center;\r\n    padding: 6px 0;\r\n    font-size: 12px;\r\n    line-height: 1.42;\r\n    font-size: large;\r\n    font-weight: 300;\r\n    font-family: Roboto Light;\r\n    color: white;\r\n    background-image: linear-gradient(to bottom, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);\r\n    box-shadow: 0 1px 0 rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .1);\r\n    transition: all .25s ease;\r\n}\r\n\r\n.btn-user:hover,\r\n.btn-user:active,\r\n.btn-user:focus {\r\n    opacity: 0.9;\r\n    background-image: linear-gradient(to bottom, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);\r\n    box-shadow: 0 2px 0 rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .1);\r\n}\r\n\r\n.nav-buttons {\r\n    margin-top: 0.5%;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.icon {\r\n    font-size: large;\r\n    padding: 1%;\r\n}\r\n\r\n.popover-content,\r\n.menu-list {\r\n    padding: 0px;\r\n}\r\n\r\n.popover-content>.list-group {\r\n    margin: 0px;\r\n}\r\n\r\n.popover-content>.list-group>a:first-child,\r\n.menu-list>.list-group>a:first-child {\r\n    border-top: none;\r\n}\r\n\r\n.popover-content>.list-group>a:last-child,\r\n.menu-list>.list-group>a:last-child {\r\n    border-bottom: none;\r\n}\r\n\r\n.popover-content>.list-group>a,\r\n.menu-list>.list-group>a {\r\n    cursor: pointer;\r\n    border-left: none;\r\n    border-right: none;\r\n    white-space: nowrap;\r\n}\r\n\r\n.popover-content>.list-group>a:hover,\r\n.menu-list>.list-group>a:hover {\r\n    background-color: #0449D7;\r\n    color: white;\r\n}\r\n\r\n.popover-content>.list-group>a>i,\r\n.menu-list>.list-group>a>i {\r\n    padding-right: 5%;\r\n}\r\n\r\n.menu-list {\r\n    padding-top: 2rem;\r\n}\r\n\r\n.menu-list>.list-group>a {\r\n    border-radius: 0px;\r\n    background-color: transparent;\r\n}\r\n\r\n.sidemenu-overlay {\r\n    position: fixed;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index: 1;\r\n    top: 0;\r\n}\r\n\r\n.content-blurred-sidemenu {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    filter: blur(10px);\r\n}\r\n\r\n.sidemenu-overlay .overlay {\r\n    background-color: white;\r\n    width: 100%;\r\n    height: 100%;\r\n    opacity: 1;\r\n}\r\n\r\n.sidemenu-overlay.ng-hide-remove {\r\n    animation: fadeIn .51s;\r\n}\r\n\r\n.sidemenu-overlay.ng-hide {\r\n    animation: fadeOut .51s;\r\n}\r\n\r\n.sidemenu-container {\r\n    width: 25rem;\r\n    height: 100%;\r\n    position: fixed;\r\n    overflow-y: auto;\r\n    top: 0;\r\n    left: 0;\r\n    background-color: rgba(255, 255, 255, 0.8);\r\n    border-right: 1px solid #eee;\r\n    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.1);\r\n    z-index: 2;\r\n}\r\n\r\n.sidemenu-container.ng-hide-remove {\r\n    animation: slideInLeft .25s;\r\n}\r\n\r\n.sidemenu-container.ng-hide {\r\n    animation: slideOutLeft .25s;\r\n}\r\n\r\n.disable-scroll {\r\n    overflow: hidden;\r\n}\r\n\r\n.menu-profile-picture-container {\r\n    height: 25rem;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\r\n    border-bottom: 2px inset #d6dbe0;\r\n}\r\n\r\n.menu-profile-picture {\r\n    width: 70%;\r\n    height: 61%;\r\n    border-radius: 50%;\r\n    border: 1px solid white;\r\n    margin-top: 23%;\r\n    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    font-size: 7rem;\r\n    color: white;\r\n    box-shadow: 0px 0px 15px #f14545 inset;\r\n    text-shadow: 0px 0px 15px #ff004f;\r\n    font-family: Roboto;\r\n    font-weight: 300;\r\n}\r\n\r\n@media only screen and (max-device-width: 375px) {\r\n    .logo {\r\n        border: none !important;\r\n    }\r\n}", ""]);
 
 	// exports
 
@@ -61875,8 +61900,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./exams.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./exams.css");
+			module.hot.accept("!!../node_modules/css-loader/index.js!./classes.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!./classes.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -61894,17 +61919,57 @@
 
 
 	// module
-	exports.push([module.id, ".exams-header{\r\n    background-image: linear-gradient(to top, white 0%, #dfe9f3 100%);\r\n    height: 30rem;\r\n}", ""]);
+	exports.push([module.id, ".classes-welcome {\r\n    width: 100%;\r\n    height: 250px;\r\n    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);\r\n    box-shadow: 0px -1px 10px rgba(64, 8, 96, 0.4) inset;\r\n    border-bottom: 2px solid #ddd;\r\n}\r\n\r\n.classes-welcome-text {\r\n    padding-top: 7%;\r\n    padding-left: 10%;\r\n    color: white !important;\r\n    text-shadow: 0px 1px 3px #450f68;\r\n    letter-spacing: .5px;\r\n}\r\n\r\n.classes-welcome-text>h3 {\r\n    font-family: Roboto;\r\n    letter-spacing: 1px;\r\n}\r\n\r\n.classes-grid {\r\n    width: 100%;\r\n    background-color: #f5f5f5;\r\n    padding: 20px 0px;\r\n}\r\n\r\n.classes-grid>.container-fluid {\r\n    width: 100%;\r\n    margin: auto;\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.create-class {\r\n    display: -webkit-box;\r\n    display: -webkit-flex;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    -webkit-flex-direction: column;\r\n    -ms-flex-direction: column;\r\n    flex-direction: column;\r\n    -webkit-box-align: center;\r\n    -webkit-align-items: center;\r\n    -ms-flex-align: center;\r\n    align-items: center;\r\n    width: 300px;\r\n    height: 350px;\r\n    background: #fff;\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    cursor: pointer;\r\n    -webkit-transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: box-shadow .3s, transform .3s;\r\n    transition: box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;\r\n}\r\n\r\n.create-class:hover,\r\n.class:hover {\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08), 0 0.4rem 2rem rgba(0, 0, 0, .1);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08), 0 0.4rem 2rem rgba(0, 0, 0, .1);\r\n    -webkit-transform: translateY(-.4rem);\r\n    -ms-transform: translateY(-.4rem);\r\n    transform: translateY(-.4rem);\r\n}\r\n\r\n.class {\r\n    width: 300px;\r\n    height: 350px;\r\n    background: #fff;\r\n    -webkit-box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    box-shadow: inset 0.1rem 0 0 0 rgba(0, 0, 0, .05), inset -0.1rem 0 0 0 rgba(0, 0, 0, .05), inset 0 -0.1rem 0 0 rgba(0, 0, 0, .08);\r\n    cursor: pointer;\r\n    position: relative;\r\n    -webkit-transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    transition: box-shadow .3s, transform .3s;\r\n    transition: box-shadow .3s, transform .3s, -webkit-box-shadow .3s, -webkit-transform .3s;\r\n    border-left: 8px solid #2387fb;\r\n}\r\n\r\n.create-class-content {\r\n    width: 90%;\r\n    height: 90%;\r\n    margin: auto;\r\n}\r\n\r\n.class-holder {\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin: 15px 0px;\r\n}\r\n\r\n.plus {\r\n    position: relative;\r\n    margin: auto;\r\n    margin-top: 6.25rem;\r\n    margin-bottom: 4.5rem;\r\n    width: 12rem;\r\n    height: 12rem;\r\n    border: .2rem solid rgba(49, 53, 55, .1);\r\n    -webkit-border-radius: 50%;\r\n    border-radius: 50%;\r\n    font-size: 4.1rem;\r\n    font-weight: lighter;\r\n    text-align: center;\r\n    line-height: 11.5rem;\r\n}\r\n\r\n.class-hr {\r\n    width: 40%;\r\n    margin-left: 0px;\r\n    margin-top: 32px;\r\n    margin-bottom: 10px;\r\n    border: 2px solid rgba(49, 53, 55, .4);\r\n}\r\n\r\n.class-updated,\r\n.class-exams {\r\n    padding: 0px;\r\n    color: rgba(49, 53, 55, .4);\r\n}\r\n\r\n.class-title {\r\n    padding-left: 0px;\r\n    width: 100%;\r\n    height: 20rem;\r\n}\r\n\r\n\r\n/*.class-options-btn {\r\n    background-color: transparent;\r\n    outline: none !important;\r\n    border: none;\r\n    color: #ccc;\r\n    font-size: large;\r\n    position: absolute;\r\n    top: 5px;\r\n    right: 5px;\r\n    transition: all .25s ease;\r\n    cursor: pointer; \r\n}\r\n\r\n.class:hover .class-options-btn{\r\n    color: #2387fb;\r\n}*/\r\n\r\n.class-options,\r\n.class-options>div {\r\n    padding: 0px;\r\n}\r\n\r\n.sure {\r\n    display: none;\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
 /* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(170);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(78)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../node_modules/css-loader/index.js!./exams.css", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!./exams.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(8)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".exams-header {\r\n    background-image: linear-gradient(to top, white 0%, #dfe9f3 100%);\r\n    height: 30rem;\r\n}\r\n\r\n.exams-container {\r\n    max-width: 1000px;\r\n    padding: 0px;\r\n}\r\n\r\n.class-name {\r\n    margin-top: 80px;\r\n    padding: 0px;\r\n}\r\n\r\n.class-name .alert {\r\n    width: 230px;\r\n    padding-top: 3px;\r\n    padding-bottom: 3px;\r\n}\r\n\r\n.class-teacher ul {\r\n    margin: 0px;\r\n    padding: 0px;\r\n}\r\n\r\n.class-teacher ul li {\r\n    display: inline;\r\n    list-style: none;\r\n}\r\n\r\n.teacherFullName {\r\n    padding-left: 8px;\r\n    font-size: medium;\r\n    color: #7e7e7e;\r\n}\r\n\r\n.exams-hr {\r\n    float: left;\r\n    width: 150px;\r\n    border-width: 5px;\r\n    border-color: #007AFF;\r\n}\r\n\r\n.exam-new {\r\n    height: 65px;\r\n    border-bottom: 1px solid #ccc;\r\n}\r\n.exam-new h4{\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0px;\r\n    padding:0px 15px;\r\n    line-height: 250%;\r\n}\r\n.exams-list-container {\r\n    width: 90%;\r\n    margin: auto;\r\n}\r\n\r\n.exams-list ul {\r\n    padding: 0px;\r\n}\r\n\r\n.exams-list .container-fluid {\r\n    padding: 0px;\r\n}\r\n\r\n.exams-list ul li {\r\n    list-style: none;\r\n    border-bottom: 1px solid #ccc;\r\n    padding: 15px 0px;\r\n}\r\n\r\n.exams-list ul li h4 {\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n}\r\n\r\n.exams-bullet {\r\n    color: #ccc;\r\n    font-size: small;\r\n    vertical-align: inherit;\r\n    margin-right: 5px;\r\n}\r\n\r\n.exams-list-options,\r\n.exams-list-options div[class^=\"col\"] {\r\n    padding: 0px 3px;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 171 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate"])
-	    .controller('appController', ['$scope', '$http', '$state', '$stateParams', function ($scope, $http, $state, $stateParams) {
+	    .controller('appController', ['$scope', '$http', '$state', '$stateParams', '$rootScope', function ($scope, $http, $state, $stateParams, $rootScope) {
 	        $scope.logout = function () {
 	            $http.post('./endpoints/logout.php', $stateParams.user).then(function (res) {
 	                if (res.status == 200) {
@@ -61920,16 +61985,27 @@
 	        $scope.goToAccount = function () {
 	            console.log('Account Function not built yet');
 	        }
+	        $rootScope.backButton = function () {
+	            var from_index = $rootScope.trans._treeChanges.from.length;
+	            var currentState = $rootScope.trans._treeChanges.to[$rootScope.trans._treeChanges.to.length -1].state.name;
+	            if (from_index > 1) {
+	                $state.go($rootScope.trans._treeChanges.from[from_index - 1].state.name);
+	            }else{
+	                if(currentState == 'classroom.exams'){
+	                    $state.go('classroom.classes');
+	                }
+	            }
+	        }
 
 	    }]);
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports) {
 
 	var runFunction = function ($rootScope, $transitions, authService, $state) {
 	    $transitions.onBefore({}, function (trans) {
-	        if (trans.$to().name == 'classroom') {
+	        if (trans.$to().name != 'app') {
 	            if (localStorage.getItem('godwin_ta') != null) {
 	                authService.checkToken(trans.params().user, localStorage.getItem('godwin_ta')).then(function (res) {
 	                    if (res != 'good') {
@@ -61959,13 +62035,18 @@
 	        }
 	    });
 	    $transitions.onSuccess({}, function (trans) {
+	        $rootScope.trans = trans;
 	        if (trans.$to().name == 'app') {
 	            g_blurnav.blurInit('home');
 	        } else {
 	            g_blurnav.blurInit();
 	            setTimeout(function () {
+	                $('[data-toggle="tooltip"]').tooltip();
 	                g_blurnav.blurInit();
-	            }, 10)
+	                if ($('.controls-ribbion').length > 0) {
+	                    g_blurnav.blurInit('ribbon');
+	                }
+	            }, 10);
 	        }
 	    });
 	};
@@ -61995,7 +62076,7 @@
 	    }]).run(runFunction);
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62025,7 +62106,7 @@
 	    }]);
 
 /***/ },
-/* 172 */
+/* 174 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62104,17 +62185,19 @@
 	    }]);
 
 /***/ },
-/* 173 */
+/* 175 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
 	    .controller('classroomController', ['$scope', '$http', '$stateParams', '$state', function ($scope, $http, $stateParams, $state) {
 	        $scope.mobileMenu = false;
 	        $scope.teacherName = undefined;
+	        $scope.teacherFullName = undefined;
 	        $scope.shortName = undefined;
 	        $http.post('./endpoints/fetch-userdata.php', $stateParams.user)
 	            .then(function (res) {
 	                $scope.teacherName = res.data[0].firstname;
+	                $scope.teacherFullName = res.data[0].firstname+' '+res.data[0].lastname;
 	                $scope.shortName = res.data[0].firstname.charAt(0) + res.data[0].lastname.charAt(0);
 	                (Object.keys($stateParams).length <= 2) ? $state.go('classroom.classes'): false;
 	            }).catch(function (err) {
@@ -62140,7 +62223,7 @@
 	        }
 
 	        $scope.toggleMobileMenu = function () {
-	            g_blurnav.customBlur('.wrapper:last', '.sidemenu-overlay .content');
+	            g_blurnav.customBlur('.ui-classroom .wrapper:eq(0)', '.sidemenu-overlay .content');
 	            $scope.mobileMenu = ($scope.mobileMenu) ? $scope.mobileMenu = false : $scope.mobileMenu = true;
 	            if ($scope.mobileMenu) {
 	                $('body').addClass('disable-scroll');
@@ -62151,7 +62234,7 @@
 	    }]);
 
 /***/ },
-/* 174 */
+/* 176 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62177,13 +62260,14 @@
 	                'date_modified': Date.now(),
 	                'exams': 0
 	            }
+	            $scope.classes.push(userData);
 	            $scope.userRequest.type = 'createNewClass';
 	            $scope.userRequest.class = userData.date_created;
 	            $http.post('./endpoints/classes.php', {
 	                'action': 'createNewClass',
-	                'params': [$stateParams.user, userData.date_created, userData]
-	            }).then(function () {
-	                $scope.classes.push(userData);
+	                'params': [$stateParams.user, userData.date_created, $scope.classes]
+	            }).then(function (res) {
+	                console.log(res.data);
 	            }).catch(function (err) {
 	                console.error(err);
 	            })
@@ -62234,24 +62318,183 @@
 	    }]);
 
 /***/ },
-/* 175 */
+/* 177 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
 	    .controller('examsController', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+	        var classIndex, userData;
+	        $scope.exams = [];
+	        $http.get('./database/' + $stateParams.user + '/' + $stateParams.user + '_data.json')
+	            .then(function (res) {
+	                userData = res.data;
+	                var arr = res.data;
+	                for (var i = 0; i < arr.length; i++) {
+	                    if (arr[i].date_created == $stateParams.class) {
+	                        classIndex = i;
+	                        $scope.classInfo = arr[i];
+	                        break;
+	                    }
+	                }
+	                if ($scope.classInfo == undefined || $scope.classInfo == null) {
+	                    console.log("Class Info not found");
+	                }
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+
 	        $http.get('./database/' + $stateParams.user + '/' + $stateParams.class + '.json').then(function (res) {
-	            if(res.data == undefined || res.data == ""){
-	                $scope.classData = [];
-	            }else{
-	                $scope.classData = res.data;
+	            if (res.data == undefined || res.data == "") {
+	                $scope.exams = [];
+	            } else {
+	                $scope.exams = res.data;
 	            }
 	        }).catch(function (err) {
-	            console.error(err);
+	            console.log(err);
 	        })
+
+	        $scope.postChanges = function (elm) {
+	            if (elm[0].nodeName == 'H1') {
+	                updateClassName(elm[0].innerText);
+	            }
+	            if (elm[0].nodeName == 'H4') {
+	                addNewExam(elm[0].innerText);
+	                elm[0].innerText = "";
+	            }
+	            if (elm[0].dataset.type == 'examName') {
+	                updateExamName(elm[0].dataset.id, elm[0].innerText);
+	            }
+	        }
+
+	        function updateClassName(value) {
+	            $scope.classInfo.class = value;
+	            userData[classIndex] = $scope.classInfo;
+	            $http.post('./endpoints/classes.php', {
+	                action: 'updateClasses',
+	                params: [$stateParams.user, userData, {
+	                    class: $scope.classInfo.class,
+	                    type: 'updateClassName'
+	                }]
+	            }).then(function (res) {
+	                console.log(res.data);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
+
+	        function addNewExam(name) {
+	            var exam = {
+	                "id": Date.now(),
+	                "name": name,
+	                marks_data: [],
+	                marks: []
+	            }
+	            $scope.$apply(function () {
+	                $scope.exams.push(exam);
+	            });
+	            $http.post('./endpoints/exams.php', {
+	                action: 'addNewExam',
+	                params: [$stateParams.user, $stateParams.class, $scope.exams]
+	            }).then(function (res) {
+	                console.log(res.data);
+	                updateUserData(Date.now(), $scope.exams.length);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
+	        $scope.deleteExamConformation = function (e) {
+	            if ($(e.target).hasClass('delete')) {
+	                $(e.target).parent().find('.sure').removeClass('sure');
+	                $(e.target).addClass('sure');
+	            } else {
+	                $(e.target).parents('.exam-options').find('.input-group').addClass('sure');
+	                $(e.target).parents('.exam-options').find('.delete').removeClass('sure');
+	            }
+	        }
+
+	        $scope.deleteExam = function (examID) {
+	            var deletedExam = null;
+	            $scope.exams.forEach(function (value, index, arr) {
+	                if (examID == $scope.exams[index].id) {
+	                    deletedExam = $scope.exams[index];
+	                    $scope.exams.splice(index, 1);
+	                }
+	            });
+	            $http.post('./endpoints/exams.php', {
+	                action: 'deleteExam',
+	                params: [$stateParams.user, $stateParams.class, $scope.exams, deletedExam.name]
+	            }).then(function (res) {
+	                console.log(res.data);
+	                updateUserData(Date.now(), $scope.exams.length);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
+
+	        $scope.duplicateExams = function (examID) {
+	            var examClone = {};
+	            $scope.exams.forEach(function (value, index, arr) {
+	                if (value.id == examID) {
+	                    Object.keys(value).forEach(function (v, i, a) {
+	                        if (v.indexOf('$') < 0) {
+	                            examClone[v] = value[v];
+	                        }
+	                    });
+	                    examClone.id = Date.now();
+	                    $scope.exams.push(examClone);
+	                }
+	            });
+	            $http.post('./endpoints/exams.php', {
+	                action: 'duplicateExam',
+	                params: [$stateParams.user, $stateParams.class, $scope.exams, examClone.name]
+	            }).then(function (res) {
+	                console.log(res.data);
+	                updateUserData(Date.now(), $scope.exams.length);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
+
+	        function updateUserData(lastUpdate, examsNum) {
+	            userData[classIndex].exams = examsNum;
+	            userData[classIndex].date_modified = lastUpdate;
+	            $http.post('./endpoints/classes.php', {
+	                action: 'updateClasses',
+	                params: [$stateParams.user, userData, {
+	                    class: $stateParams.class,
+	                    type: 'lastUpdated_ExamsNum'
+	                }]
+	            }).then(function (res) {
+	                console.log(res.data);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
+
+	        function updateExamName(examID, newName) {
+	            var oldname = null;
+	            $scope.exams.forEach(function (value, index, arr) {
+	                if (value.id == examID) {
+	                    oldname = value.name;
+	                    $scope.exams[index].name = newName;
+	                }
+	            });
+	            $http.post('./endpoints/exams.php', {
+	                action: 'updateExamName',
+	                params: [$stateParams.user, $stateParams.class, $scope.exams, {
+	                    oldName: oldname,
+	                    newName: newName
+	                }]
+	            }).then(function (res) {
+	                console.log(res.data);
+	            }).catch(function (err) {
+	                console.log(err);
+	            })
+	        }
 	    }]);
 
 /***/ },
-/* 176 */
+/* 178 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62271,7 +62514,7 @@
 	    }]);
 
 /***/ },
-/* 177 */
+/* 179 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62289,7 +62532,7 @@
 	    })
 
 /***/ },
-/* 178 */
+/* 180 */
 /***/ function(module, exports) {
 
 	var template = '<div class="list-group compile"><a class="list-group-item" ng-click="goToAccount()"><i class="fa fa-user" aria-hidden="true"></i> Account</a><a class="list-group-item" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a></div>';
@@ -62319,7 +62562,7 @@
 	    }]);
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')
@@ -62347,7 +62590,40 @@
 	    }])
 
 /***/ },
-/* 180 */
+/* 182 */
+/***/ function(module, exports) {
+
+	angular.module('teachersAlly')
+	    .directive('watchChanges', [function () {
+	        return {
+	            restriced: 'A',
+	            scope: true,
+	            link: function ($scope, elm, attrs) {
+	                var startWatch = function (e) {
+	                    ($(elm).attr('made-changes') != true) ? $(elm).attr('made-changes', true): false;
+	                }
+	                $(elm).on('focus', function () {
+	                    $(elm).on("DOMSubtreeModified", startWatch);
+	                    $(elm).on('keypress', function (e) {
+	                        if (e.keyCode == 13) {
+	                            e.preventDefault();
+	                            $(elm).blur();
+	                        }
+	                    });
+	                });
+	                $(elm).on('blur', function () {
+	                    $(elm).off("DOMSubtreeModified", startWatch);
+	                    if ($(elm).attr('made-changes') == 'true') {
+	                        $scope.postChanges(elm);
+	                    }
+	                    $(elm).attr('made-changes', false);
+	                });
+	            }
+	        }
+	    }])
+
+/***/ },
+/* 183 */
 /***/ function(module, exports) {
 
 	angular.module('teachersAlly')

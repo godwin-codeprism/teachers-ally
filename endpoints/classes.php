@@ -23,7 +23,12 @@
         fwrite($userDataFile, json_encode($newData));
         if($userRequest -> type == "deleteClass"){
             return deleteClass($username, $userRequest -> class);
-        }else{
+        }elseif($userRequest -> type == "updateClassName"){
+            return "Update Class Name with: ".$userRequest -> class;
+        }else if($userRequest -> type == "lastUpdated_ExamsNum"){
+            return "Changed LastUpdated and Date";
+        }
+        else{
             return $userRequest -> class ." updated";
         }
     }

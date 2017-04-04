@@ -1,47 +1,50 @@
-<div class="wrapper">
-    <div class="classes-welcome">
-        <div class="clearfix visible-xs-block" style="height: 50px;"></div>
-        <div class="container-fluid classes-welcome-text">
-            <h2>Welcome {{teacherName}},</h2>
-            <h3>Here are all your classes</h3>
+<div class="ui-classroom">
+    <div class="wrapper">
+        <div class="classes-welcome">
+            <div class="clearfix visible-xs-block" style="height: 50px;"></div>
+            <div class="container-fluid classes-welcome-text">
+                <h2>Welcome {{teacherName}},</h2>
+                <h3>Here are all your classes</h3>
+            </div>
         </div>
-    </div>
-    <div class="classes-grid">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 class-holder" gw-orientation>
-                    <div class="create-class" ng-click="createNewClass()">
-                        <div class="create-class-content">
-                            <div class="plus">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="text-center text-uppercase">
-                                <p>Create New Class</p>
+        <div class="classes-grid">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 class-holder" gw-orientation>
+                        <div class="create-class" ng-click="createNewClass()">
+                            <div class="create-class-content">
+                                <div class="plus">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="text-center text-uppercase">
+                                    <p>Create New Class</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 class-holder" ng-repeat="class in classes | orderBy:'-date_created'">
-                    <div class="class" ng-click="openClass($event,class.date_created)">
-                        <div class="container-fluid text-left">
-                            <hr class="class-hr">
-                            <div class="col-sm-12 col-md-12 class-updated">
-                                <small>Last Updated {{class.date_modified | date:'medium'}}</small>
-                            </div>
-                            <div class="col-sm-12 col-md-12 class-title text-capitalize">
-                                <h3>{{class.class}}</h3>
-                            </div>
-                            <div class="col-sm-12 col-md-12 class-exams">
-                                <small>{{class.exams}} exams</small>
-                            </div>
-                            <br/>
-                            <div class="col-sm-12 col-md-12 class-options">
-                                <div class="col-sm-4 text-center"><button class="btn btn-xs btn-default"><i class="fa fa-share" aria-hidden="true"></i> Export</button></div>
-                                <div class="col-sm-4 text-center"><button class="btn btn-xs btn-default"><i class="fa fa-clone" aria-hidden="true"></i> Duplicate</button></div>
-                                <div class="col-sm-4 text-center"><button class="btn btn-xs btn-default delete" ng-click="deleteConformation($event)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-                                <span class="input-group sure">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 class-holder" ng-repeat="class in classes | orderBy:'-date_modified'">
+                        <div class="class" ng-click="openClass($event,class.date_created)">
+                            <div class="container-fluid text-left">
+                                <hr class="class-hr">
+                                <div class="col-sm-12 col-md-12 class-updated">
+                                    <small>Last Updated {{class.date_modified | date:'medium'}}</small>
+                                </div>
+                                <div class="col-sm-12 col-md-12 class-title text-capitalize">
+                                    <h3>{{class.class}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-12 class-exams">
+                                    <small>{{class.exams}} exams</small>
+                                </div>
+                                <div class="col-sm-12 hidden-xs">
+                                    <br>
+                                </div>
+                                <div class="col-sm-12 col-md-12 class-options">
+                                    <div class="col-xs-4 col-sm-4 text-center"><button class="btn btn-xs btn-default"><i class="fa fa-share" aria-hidden="true"></i> Export</button></div>
+                                    <div class="col-xs-4 col-sm-4 text-center"><button class="btn btn-xs btn-default"><i class="fa fa-clone" aria-hidden="true"></i> Duplicate</button></div>
+                                    <div class="col-xs-4 col-sm-4 text-center"><button class="btn btn-xs btn-default delete" ng-click="deleteConformation($event)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                        <span class="input-group sure">
 								<span class="input-group-addon" style="padding:4px;"> Sure? </span>
-									<span class="input-group-btn">
+                                        <span class="input-group-btn">
 									<button class="btn btn-default btn-xs" ng-click="deleteClass(class.date_modified)">
 										<i class="fa fa-check-circle"></i>
 										</button>
@@ -49,7 +52,8 @@
 										<i class="fa fa-times-circle"></i>
 									</button>
                                     </span>
-                                    </span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

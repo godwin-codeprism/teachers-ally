@@ -1,6 +1,11 @@
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
+
 var g_blurnav = {
     dup: $('.wrapper:eq(0)').clone(),
     dupMenu: $('.wrapper:eq(0)').clone(),
+    dupRibbon: $('.wrapper:eq(0)').clone(),
     renameId: function () {
         var temp = $('.wrapper:eq(0)').clone();
         temp.find('[id]').each(function (key, value) {
@@ -8,13 +13,18 @@ var g_blurnav = {
         });
         return temp;
     },
-    blurInit: function (home) {
-        if (home == undefined) {
-            g_blurnav.dup = g_blurnav.customRenameId($('.wrapper:last').clone(), '_nav');
+    blurInit: function (target) {
+        if (target == undefined) {
+            g_blurnav.dup = g_blurnav.customRenameId($('.ui-classroom .wrapper:eq(0)').clone(), '_nav');
             $('.content:eq(0)').html(g_blurnav.dup);
             $(document).off('scroll', g_blurnav.blurScrollHome);
             $(document).off('scroll', g_blurnav.blurScroll);
             $(document).on('scroll', g_blurnav.blurScroll);
+        } else if (target == 'ribbon') {
+            g_blurnav.dupRibbon = g_blurnav.customRenameId($('.ui-classroom .wrapper:eq(0)').clone(), '_nav');
+            $('.controls-ribbion .content:eq(0)').html(g_blurnav.dupRibbon);
+            $(document).off('scroll', g_blurnav.blurScrollRibbion);
+            $(document).on('scroll', g_blurnav.blurScrollRibbion);
         } else {
             g_blurnav.dup = g_blurnav.renameId();
             $('.content:eq(0)').html(g_blurnav.dup);
@@ -23,6 +33,19 @@ var g_blurnav = {
             $(document).on('scroll', g_blurnav.blurScrollHome);
         }
 
+    },
+    blurScrollRibbion: function () {
+        var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
+        if ($('.ui-classroom .wrapper:eq(0)').html() != $('.controls-ribbion .wrapper').html()) {
+            console.log('I made Ribbon content and wrapper equal');
+            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html()); 
+        }
+        g_blurnav.dupRibbon.css({
+            '-webkit-transform': translation,
+            '-moz-transform': translation,
+            '-ms-transform': translation,
+            'transform': translation
+        });
     },
     blurScrollHome: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
@@ -35,9 +58,9 @@ var g_blurnav = {
     },
     blurScroll: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        if ($('.wrapper:last').html() != $('nav .wrapper').html()) {
+        if ($('.ui-classroom .wrapper:eq(0)').html() != $('nav .wrapper').html()) {
             console.log('I made nav content and wrapper equal');
-            $('nav .wrapper').html($('.wrapper:last').html());
+            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
         }
         g_blurnav.dup.css({
             '-webkit-transform': translation,

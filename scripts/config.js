@@ -1,6 +1,6 @@
 var runFunction = function ($rootScope, $transitions, authService, $state) {
     $transitions.onBefore({}, function (trans) {
-        if (trans.$to().name == 'classroom') {
+        if (trans.$to().name != 'app') {
             if (localStorage.getItem('godwin_ta') != null) {
                 authService.checkToken(trans.params().user, localStorage.getItem('godwin_ta')).then(function (res) {
                     if (res != 'good') {
@@ -30,13 +30,18 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
         }
     });
     $transitions.onSuccess({}, function (trans) {
+        $rootScope.trans = trans;
         if (trans.$to().name == 'app') {
             g_blurnav.blurInit('home');
         } else {
             g_blurnav.blurInit();
             setTimeout(function () {
+                $('[data-toggle="tooltip"]').tooltip();
                 g_blurnav.blurInit();
-            }, 10)
+                if ($('.controls-ribbion').length > 0) {
+                    g_blurnav.blurInit('ribbon');
+                }
+            }, 10);
         }
     });
 };

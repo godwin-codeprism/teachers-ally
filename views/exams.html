@@ -1,8 +1,71 @@
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 exams-header">
-                
+<div class="controls-ribbion">
+    <div class="content-blurred">
+        <div class="content"></div>
+    </div>
+    <div class="container-fluid remove-padding controls-ribbion-btn-container">
+        <button class="btn btn-default btn-back" data-toggle="tooltip" data-placement="right" title="Click to go back" ng-click="backButton()"><i class="fa fa-angle-left"></i></button>
+    </div>
+</div>
+<div class="ui-classroom">
+    <div class="wrapper">
+        <div class="container-fluid wrapper-padding">
+            <div class="container-fluid center-block exams-container">
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 class-name">
+                    <h1 contenteditable="true" watch-changes placeholder="Give a name to your class">{{classInfo.class}}</h1>
+                    <div class="alert alert-dismissible alert-danger" ng-show="classInfo.class == 'Untitled'">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <small><strong><i class="fa fa-warning"></i></strong> Give a name to your class</small>
+                    </div>
+                    <div class="class-teacher">
+                        <ul>
+                            <li><button class="btn btn-circle btn-user text-uppercase">{{shortName}}</button></li>
+                            <li><span class="teacherFullName">{{teacherFullName}}</span></li>
+                        </ul>
+                    </div>
+                    <hr class="exams-hr">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                        <p style="font-style: italic; color:#777;"><i class="fa fa-info-circle" style="font-size:x-large;"></i> &nbsp;&nbsp; Here are all your exams.
+                            You can create new exams or duplicate the existing once.</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 exams-list-container">
+                    <div class="exams-list">
+                        <ul>
+                            <li ng-repeat="exam in exams">
+                                <div class="container-fluid">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
+                                        <h4><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i> <span contenteditable="true" watch-changes style="padding: 5px;" data-id="{{exam.id}}" data-type="examName">{{exam.name}}</span></h4>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 exams-list-options">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-bottom:.5rem">
+                                            <button class="btn btn-default btn-block btn-xs">Configure Marks List</button>
+                                        </div>
+                                        <div class="remove-padding col-xs-12 col-sm-12 col-md-12 col-lg-12 exam-options" style="margin-bottom:.5rem">
+                                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><button class="btn btn-xs btn-default btn-block"><i class="fa fa-share"></i> Export</button></div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"><button class="btn btn-xs btn-default btn-block" ng-click="duplicateExams(exam.id)"><i class="fa fa-clone"></i> Duplicate</button></div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"><button class="btn btn-xs btn-default btn-block delete" ng-click="deleteExamConformation($event)"><i class="fa fa-trash"></i> Delete</button>
+                                                <span class="input-group sure text-right">
+                                            <span class="input-group-addon remove-padding" style="width:100%"> Sure? </span>
+                                                <span class="input-group-btn">
+                                            <button class="btn btn-default btn-xs" ng-click="deleteExam(exam.id)">
+                                                <i class="fa fa-check-circle"></i>
+                                                </button>
+                                            <button class="btn btn-default btn-xs" ng-click="deleteExamConformation($event)">
+                                                <i class="fa fa-times-circle"></i>
+                                            </button>
+                                            </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 remove-padding exam-new">
+                        <h4 contenteditable="true" watch-changes placeholder="Add new examination.."></h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

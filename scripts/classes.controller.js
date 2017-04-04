@@ -21,13 +21,14 @@ angular.module('teachersAlly')
                 'date_modified': Date.now(),
                 'exams': 0
             }
+            $scope.classes.push(userData);
             $scope.userRequest.type = 'createNewClass';
             $scope.userRequest.class = userData.date_created;
             $http.post('./endpoints/classes.php', {
                 'action': 'createNewClass',
-                'params': [$stateParams.user, userData.date_created, userData]
-            }).then(function () {
-                $scope.classes.push(userData);
+                'params': [$stateParams.user, userData.date_created, $scope.classes]
+            }).then(function (res) {
+                console.log(res.data);
             }).catch(function (err) {
                 console.error(err);
             })
