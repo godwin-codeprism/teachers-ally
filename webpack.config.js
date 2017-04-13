@@ -18,6 +18,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass']
+            },
+            {
+                test: /jquery-mousewheel/,
+                loader: "imports?define=>false&this=>window"
             }
         ]
     }

@@ -1,5 +1,5 @@
 angular.module('teachersAlly')
-    .controller('examsController', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+    .controller('examsController', ['$scope', '$http', '$stateParams', 'smoothScroll', '$timeout', '$state', function ($scope, $http, $stateParams, smoothScroll, $timeout, $state) {
         var classIndex, userData;
         $scope.exams = [];
         $http.get('./database/' + $stateParams.user + '/' + $stateParams.user + '_data.json')
@@ -119,6 +119,9 @@ angular.module('teachersAlly')
                     });
                     examClone.id = Date.now();
                     $scope.exams.push(examClone);
+                    $timeout(function () {
+                        smoothScroll.scrollTo($('#' + examClone.id + "_exam").eq(0));
+                    }, 10);
                 }
             });
             $http.post('./endpoints/exams.php', {
@@ -129,6 +132,13 @@ angular.module('teachersAlly')
                 updateUserData(Date.now(), $scope.exams.length);
             }).catch(function (err) {
                 console.log(err);
+            })
+        }
+
+        $scope.configureState = function (examId) {
+            $state.go('classroom.configure', {
+                class: $stateParams.class,
+                exam: examId
             })
         }
 

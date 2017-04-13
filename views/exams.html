@@ -32,13 +32,13 @@
                     <div class="exams-list">
                         <ul>
                             <li ng-repeat="exam in exams">
-                                <div class="container-fluid">
+                                <div class="container-fluid" id="{{exam.id}}_exam">
                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-                                        <h4><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i> <span contenteditable="true" watch-changes style="padding: 5px;" data-id="{{exam.id}}" data-type="examName">{{exam.name}}</span></h4>
+                                        <h4><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i> <span contenteditable="true" watch-changes style="padding: 5px;" data-id="{{exam.id}}" data-type="examName" placeholder="Examination name">{{exam.name}}</span></h4>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 exams-list-options">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-bottom:.5rem">
-                                            <button class="btn btn-default btn-block btn-xs">Configure Marks List</button>
+                                            <button class="btn btn-default btn-block btn-xs" ng-click="configureState(exam.id)">Configure Marks List</button>
                                         </div>
                                         <div class="remove-padding col-xs-12 col-sm-12 col-md-12 col-lg-12 exam-options" style="margin-bottom:.5rem">
                                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><button class="btn btn-xs btn-default btn-block"><i class="fa fa-share"></i> Export</button></div>

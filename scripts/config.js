@@ -68,4 +68,9 @@ angular.module('teachersAlly')
             templateUrl: './views/exams.html',
             controller: "examsController"
         });
+        $stateProvider.state('classroom.configure', {
+            url: '/:class/:exam',
+            templateUrl: './views/configure.html',
+            controller: "configureController"
+        })
     }]).run(runFunction);

@@ -8,7 +8,7 @@
     font-family: Roboto;
     font-weight: 300 !important;
     /* For Firefox */
-    display: block;
+    /*display: block;*/
 }
 
 [contenteditable="true"]:focus {
@@ -19,7 +19,7 @@
 }
 
 .wrapper-padding {
-    padding-top: 50px;
+    padding-top: 110px;
 }
 
 .remove-padding {

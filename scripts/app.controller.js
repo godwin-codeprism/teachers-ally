@@ -1,5 +1,5 @@
-angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate"])
-    .controller('appController', ['$scope', '$http', '$state', '$stateParams', '$rootScope', function ($scope, $http, $state, $stateParams, $rootScope) {
+angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate", "ngScrollbars"])
+    .controller('appController', ['$scope', '$http', '$state', '$stateParams', '$rootScope', 'ScrollBarsProvider', function ($scope, $http, $state, $stateParams, $rootScope, ScrollBarsProvider) {
         $scope.logout = function () {
             $http.post('./endpoints/logout.php', $stateParams.user).then(function (res) {
                 if (res.status == 200) {
@@ -16,15 +16,28 @@ angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate"])
             console.log('Account Function not built yet');
         }
         $rootScope.backButton = function () {
-            var from_index = $rootScope.trans._treeChanges.from.length;
-            var currentState = $rootScope.trans._treeChanges.to[$rootScope.trans._treeChanges.to.length -1].state.name;
-            if (from_index > 1) {
-                $state.go($rootScope.trans._treeChanges.from[from_index - 1].state.name);
-            }else{
-                if(currentState == 'classroom.exams'){
-                    $state.go('classroom.classes');
-                }
+            var currentState = $rootScope.trans._treeChanges.to[$rootScope.trans._treeChanges.to.length - 1].state.name;
+            switch (currentState) {
+                case "classroom.exams":
+                    $state.go("classroom.classes");
+                    break;
+                case "classroom.configure":
+                    $state.go("classroom.exams", $stateParams);
+                    break;
+                default:
+                    $state.go("app");
+                    break;
             }
+        }
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: "auto",
+                enable: !0
+            },
+            scrollInertia: 400,
+            axis: "y",
+            theme: "dark-thin",
+            autoHideScrollbar: !1
         }
 
     }]);
