@@ -22,7 +22,16 @@
                                         <span>eg: Roll no., Student name etc.</span>
                                     </small>
                             </div>
-                            <button class="btn btn-primary btn-circle config-card-add-btn">
+                            <div class="container-fulid">
+                                <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
+                                    <ul class="config-card-list">
+                                        <li ng-repeat="column in settings.columns"><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
+                                            <p contenteditable="true" watch-changes placeholder="Column name" data-type="column" data-index="{{$index}}">{{column}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-circle config-card-add-btn" ng-click="addColumns($event)">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -35,6 +44,10 @@
                                      <span>Add Subjects as column titles.</span>
                                      <span>eg: English, Science, etc.</span>
                                  </small>
+                            </div>
+                            <div class="container-fulid">
+                                <div class="col-sm-12 col-md-12 col-lg-12" ng-scrollbars>
+                                </div>
                             </div>
                             <button class="btn btn-primary btn-circle config-card-add-btn">
                                 <i class="fa fa-plus" aria-hidden="true"></i>

@@ -4,7 +4,7 @@ module.exports = {
     entry: "./scripts/imports.js",
     output: {
         path: "./",
-        filename: "godwin.js"
+        filename: "godwin.js",
     },
     module: {
         loaders: [{
@@ -21,6 +21,10 @@ module.exports = {
             },
             {
                 test: /jquery-mousewheel/,
+                loader: "imports?define=>false&this=>window"
+            },
+            {
+                test: /malihu-custom-scrollbar-plugin/,
                 loader: "imports?define=>false&this=>window"
             }
         ]

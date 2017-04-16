@@ -63,8 +63,12 @@ angular.module('teachersAlly')
             var exam = {
                 "id": Date.now(),
                 "name": name,
-                marks_data: [],
-                marks: []
+                settings: {
+                    columns:[],
+                    subjects:[],
+                    calculations:[]
+                },
+                marks: {}
             }
             $scope.$apply(function () {
                 $scope.exams.push(exam);

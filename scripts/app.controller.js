@@ -1,5 +1,5 @@
 angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate", "ngScrollbars"])
-    .controller('appController', ['$scope', '$http', '$state', '$stateParams', '$rootScope', 'ScrollBarsProvider', function ($scope, $http, $state, $stateParams, $rootScope, ScrollBarsProvider) {
+    .controller('appController', ['$scope', '$http', '$state', '$stateParams', '$rootScope', function ($scope, $http, $state, $stateParams, $rootScope) {
         $scope.logout = function () {
             $http.post('./endpoints/logout.php', $stateParams.user).then(function (res) {
                 if (res.status == 200) {
@@ -28,16 +28,6 @@ angular.module('teachersAlly', ["ngSanitize", "ui.router", "ngAnimate", "ngScrol
                     $state.go("app");
                     break;
             }
-        }
-        ScrollBarsProvider.defaults = {
-            scrollButtons: {
-                scrollAmount: "auto",
-                enable: !0
-            },
-            scrollInertia: 400,
-            axis: "y",
-            theme: "dark-thin",
-            autoHideScrollbar: !1
         }
 
     }]);

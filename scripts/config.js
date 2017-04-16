@@ -47,30 +47,37 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
 };
 runFunction.$inject = ['$rootScope', '$transitions', 'authService', '$state'];
 angular.module('teachersAlly')
-    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+    .config(["$stateProvider", "$urlRouterProvider", "ScrollBarsProvider", function ($stateProvider, $urlRouterProvider, ScrollBarsProvider) {
         $stateProvider.state('app', {
-            url: "",
-            templateUrl: './views/login.html',
-            controller: "appController"
-        });
-        $stateProvider.state('classroom', {
-            url: "/:user",
-            templateUrl: './views/classroom.html',
-            controller: "classroomController"
-        });
-        $stateProvider.state('classroom.classes', {
-            url: "",
-            templateUrl: './views/classes.html',
-            controller: "classesController"
-        });
-        $stateProvider.state('classroom.exams', {
-            url: "/:class",
-            templateUrl: './views/exams.html',
-            controller: "examsController"
-        });
-        $stateProvider.state('classroom.configure', {
-            url: '/:class/:exam',
-            templateUrl: './views/configure.html',
-            controller: "configureController"
-        })
+                url: "",
+                templateUrl: './views/login.html',
+                controller: "appController"
+            })
+            .state('classroom', {
+                url: "/:user",
+                templateUrl: './views/classroom.html',
+                controller: "classroomController"
+            }).state('classroom.classes', {
+                url: "",
+                templateUrl: './views/classes.html',
+                controller: "classesController"
+            }).state('classroom.exams', {
+                url: "/:class",
+                templateUrl: './views/exams.html',
+                controller: "examsController"
+            }).state('classroom.configure', {
+                url: '/:class/:exam',
+                templateUrl: './views/configure.html',
+                controller: "configureController"
+            }),
+            ScrollBarsProvider.defaults = {
+                scrollButtons: {
+                    scrollAmount: "auto",
+                    enable: false
+                },
+                scrollInertia: 400,
+                axis: "y",
+                theme: "dark-3",
+                autoHideScrollbar: true
+            }
     }]).run(runFunction);

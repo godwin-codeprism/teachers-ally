@@ -43,7 +43,7 @@
 }
 
 .config-card-add-btn {
-    width:50px;
+    width: 50px;
     height: 50px;
     position: absolute;
     bottom: 10px;
@@ -51,4 +51,39 @@
     border-radius: 50%;
     box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1), 2px 3px 7px rgba(0, 76, 255, 0.2);
     font-size: large;
+    z-index: 1;
+}
+
+.config-card-list-container {
+    height: 300px;
+}
+
+.config-card-list {
+    padding: 0px;
+    list-style: none;
+}
+
+.config-card-list>li {
+    width: 98%;
+    height: 50px;
+    background-color: white;
+    box-shadow: 3px 3px 5px #c9c9c9;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0% 2%;
+}
+
+.config-card-list>li>p {
+    margin: 0px;
+    width: 100%;
+    padding: 2px 0px;
+}
+
+.config-card-list>li>p,
+.config-card-list>li>i {
+    color: #454545 !important;
 }
