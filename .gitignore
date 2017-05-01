@@ -1,6 +1,7 @@
 /node_modules/
 /bower_components/
 /.vscode/
-/endpoints/connection.php
+/endpoints*/connection.php
 /database/
 /dist/
+*godwin.js
