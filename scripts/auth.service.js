@@ -7,7 +7,7 @@ angular.module('teachersAlly')
             };
             return $http.post('./endpoints/check-token.php', data)
                 .then(function (response) {
-                    return response.data;
+                    return response.data.trim();
                 }).catch(function (err) {
                     console.error(err);
                 })

@@ -21,8 +21,11 @@ angular.module('teachersAlly')
         $scope.postChanges = function (elm) {
             var text = elm[0].innerText;
             if (elm[0].dataset.type == "column") {
-                console.log($scope.settings);
-                $scope.settings.columns[parseInt(elm[0].dataset.index)] = text;
+                if (text != "") {
+                    $scope.settings.columns[parseInt(elm[0].dataset.index)] = text;
+                } else {
+                    $scope.settings.columns.splice(parseInt(elm[0].dataset.index), 1);
+                }
                 updateColumns($scope.settings);
             }
         }

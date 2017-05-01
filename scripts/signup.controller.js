@@ -16,7 +16,7 @@ angular.module('teachersAlly')
                 'password': $scope.password
             };
             $http.post('./endpoints/signup.php', signupData).then(function (response) {
-                localStorage.setItem('godwin_ta', response.data);
+                localStorage.setItem('godwin_ta', response.data.trim());
                 $state.go('classroom', {
                     user: $scope.username
                 });
@@ -26,7 +26,7 @@ angular.module('teachersAlly')
         }
         $scope.validateUsername = function () {
             $http.post('./endpoints/username-avalibility.php', $scope.username).then(function (response) {
-                $scope.isUnique = response.data;
+                $scope.isUnique = response.data.trim();
             }).catch(function (err) {
                 console.error(err);
             });
@@ -47,7 +47,6 @@ angular.module('teachersAlly')
                 $scope.validEmail = false;
             }
             $scope.emailBlured = true;
-            console.log($scope.emailBlured);
         }
         $scope.validatePassword = function () {
             var srt = $scope.password;

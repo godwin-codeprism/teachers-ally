@@ -10,7 +10,7 @@ angular.module('teachersAlly')
             $http.post('./endpoints/login.php', loginData)
                 .then(function (response) {
                     if (response.data != 'ERROR') {
-                        localStorage.setItem('godwin_ta', response.data);
+                        localStorage.setItem('godwin_ta', response.data.trim());
                         $state.go('classroom', {
                             user: $scope.username
                         });
