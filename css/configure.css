@@ -66,6 +66,7 @@
 .config-card-list>li {
     width: 98%;
     height: 50px;
+    position: relative;
     background-color: white;
     box-shadow: 3px 3px 5px #c9c9c9;
     border-radius: 2px;
@@ -86,4 +87,15 @@
 .config-card-list>li>p,
 .config-card-list>li>i {
     color: #454545 !important;
+}
+
+.config-card-list .checkbox {
+    position: absolute;
+    width: 100%;
+    top: 28%;
+    margin: 0px;
+}
+
+.config-card-list .checkbox label {
+    width: 100%;
 }
