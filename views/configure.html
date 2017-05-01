@@ -31,7 +31,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-circle config-card-add-btn" ng-click="addColumns($event)">
+                            <button class="btn btn-primary btn-circle config-card-add-btn" ng-click="addColumnsOrSubjects($event)" data-type="columns">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -46,10 +46,15 @@
                                  </small>
                             </div>
                             <div class="container-fulid">
-                                <div class="col-sm-12 col-md-12 col-lg-12" ng-scrollbars>
+                                <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
+                                    <ul class="config-card-list">
+                                        <li ng-repeat="subject in settings.subjects"><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
+                                            <p contenteditable="true" watch-changes placeholder="Subject" data-type="subject" data-index="{{$index}}">{{subject}}</p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-circle config-card-add-btn">
+                            <button class="btn btn-primary btn-circle config-card-add-btn" ng-click="addColumnsOrSubjects($event)" data-type="subjects">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -62,6 +67,19 @@
                                      <span>Select the calcualtion you need in your marks list</span>
                                      <span>from the options below.</span>
                                  </small>
+                            </div>
+                            <div class="container-fulid">
+                                <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
+                                    <ul class="config-card-list">
+                                        <li>
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="">Totals</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -136,7 +136,7 @@
 }
 
 .login-panel input {
-    height: 36px;
+    height: 36px !important;
 }
 
 .home-content {
