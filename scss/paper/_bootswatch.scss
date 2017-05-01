@@ -55,13 +55,16 @@ $web-font-path: "../fonts/fonts.css" !default;
   .btn-#{$class} {
     &:focus {
       background-color: $bg;
+      outline:none !important;
     }
     &:hover,
     &:active:hover {
       background-color: darken($bg, 6%);
+      outline:none !important;
     }
     &:active {
       @include box-shadow(2px 2px 4px rgba(0, 0, 0, .4));
+      outline:none !important;
     }
     @include ripple($color);
   }
@@ -75,8 +78,9 @@ $web-font-path: "../fonts/fonts.css" !default;
 @include btn(danger, $btn-danger-bg, $btn-danger-color);
 @include btn(link, #fff, $btn-default-color);
 .btn {
-  text-transform: uppercase;
+  text-transform: capitalize;
   border: none;
+  outline: none !important;
   @include box-shadow(1px 1px 4px rgba(0, 0, 0, .4));
   @include transition(all 0.4s);
   &-link {

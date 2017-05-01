@@ -48,6 +48,14 @@
     filter:blur(6px) !important;
     opacity: 0.6 !important;
 }
+.btn-default{
+    border: 1px solid #212121;
+    box-shadow: none;
+}
+.btn-default:hover{
+    color:white;
+    background-color: #212121;
+}
 .btn-back {
     width: 50px;
     height: inherit;
