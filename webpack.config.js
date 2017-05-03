@@ -12,12 +12,20 @@ module.exports = {
                 loader: 'style-loader!css-loader'
             },
             {
-                test: /\.(png|jpg|eot|woff2|woff|svg|ttf)$/,
-                loader: "url-loader?limit=100000"
+                test: /\.(png|jpg)$/,
+                loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
-                test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
+                test: /\.(woff|woff2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader?name=assets/[path][name].[ext]"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader?name=assets/[path][name].[ext]"
+            },
+            {
+                test: /\.(ttf|eot|svg|woff|woff2)(\?v=3.0.0-alpha.3)?$/,
+                loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
                 test: /jquery-mousewheel/,
