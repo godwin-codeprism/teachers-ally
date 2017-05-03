@@ -6,7 +6,7 @@ window.g_blurnav = require('./blurnav.js');
 require('../node_modules/angular-animate/angular-animate.js');
 require('../css/bootstrap.css');
 require('../css/font-awesome.css');
-require('../node_modules/ionicons/dist/css/ionicons.css');
+require('../css/ionicons.css');
 require('../node_modules/animate.css/animate.css');
 require('../node_modules/bootstrap/dist/js/bootstrap');
 require('../node_modules/angular-sanitize');

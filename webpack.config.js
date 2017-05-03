@@ -16,15 +16,11 @@ module.exports = {
                 loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
-                test: /\.(woff|woff2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?(\-alpha\.[0-9])?$/,
                 loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=assets/[path][name].[ext]"
-            },
-            {
-                test: /\.(ttf|eot|svg|woff|woff2)(\?v=3.0.0-alpha.3)?$/,
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?(\-alpha\.[0-9])?$/,
                 loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
