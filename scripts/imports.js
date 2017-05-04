@@ -53,5 +53,3 @@ require('./classroom.controller');
 require('./classes.controller');
 require('./exams.controller');
 require('./configure.controller');
-
-//static folder imports

@@ -18,6 +18,10 @@ module.exports = {
                 loader: "file-loader?name=assets/[path][name].[ext]"
             },
             {
+                test: /\.(html)$/,
+                loader: "file-loader?name=./[path][name].[ext]"
+            },
+            {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?(\-alpha\.[0-9])?$/,
                 loader: "file-loader?name=assets/[path][name].[ext]"
             },
@@ -43,6 +47,10 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: './views',
             to:'./views'
+        }]),
+        new CopyWebpackPlugin([{
+            from: './img',
+            to:'./assets/img'
         }]),
         new CopyWebpackPlugin([{
             from: './endpoints',
