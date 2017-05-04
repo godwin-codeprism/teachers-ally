@@ -25,11 +25,11 @@ require('../css/jquery.mCustomScrollbar.css');
 require('./app.controller.js');
 require('./config');
 
-    //for custom scrollbars//
+//for custom scrollbars//
 require("jquery-mousewheel")($);
 require('malihu-custom-scrollbar-plugin')($);
 require('./scrollbars.min');
-    //********************//
+//********************//
 
 //services
 require('./auth.service');
@@ -53,3 +53,5 @@ require('./classroom.controller');
 require('./classes.controller');
 require('./exams.controller');
 require('./configure.controller');
+
+//static folder imports

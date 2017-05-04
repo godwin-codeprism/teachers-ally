@@ -1,9 +1,11 @@
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: "./scripts/imports.js",
     output: {
-        path: "./",
+        path: __dirname + "/dist",
         filename: "godwin.js",
     },
     module: {
@@ -32,5 +34,26 @@ module.exports = {
                 loader: "imports?define=>false&this=>window"
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            inject: 'body',
+        }),
+        new CopyWebpackPlugin([{
+            from: './views',
+            to:'./views'
+        }]),
+        new CopyWebpackPlugin([{
+            from: './endpoints',
+            to:'./endpoints'
+        }]),
+        new CopyWebpackPlugin([{
+            from: './database',
+            to:'./database'
+        }]),
+        new CopyWebpackPlugin([{
+            from: './favicon.ico'
+        }])
+    ]
 }
