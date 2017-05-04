@@ -73,11 +73,11 @@ angular.module('teachersAlly')
             ScrollBarsProvider.defaults = {
                 scrollButtons: {
                     scrollAmount: "auto",
-                    enable: false
+                    enable: true
                 },
                 scrollInertia: 400,
                 axis: "y",
-                theme: "dark-3",
-                autoHideScrollbar: true
+                theme: "inset-dark",
+                autoHideScrollbar: false
             }
     }]).run(runFunction);

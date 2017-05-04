@@ -8,7 +8,7 @@ require('../css/bootstrap.css');
 require('../css/font-awesome.css');
 require('../css/ionicons.css');
 require('../node_modules/animate.css/animate.css');
-require('../node_modules/bootstrap/dist/js/bootstrap');
+require('../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
 require('../node_modules/angular-sanitize');
 require('../node_modules/angular-ui-router');
 // godwin's scripts

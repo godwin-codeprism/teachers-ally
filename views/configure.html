@@ -68,34 +68,35 @@
                                      <span>from the options below.</span>
                                  </small>
                             </div>
-                            <div class="container-fulid">
+                            <div class="container-fluid">
                                 <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
                                     <ul class="config-card-list">
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="">Student Totals</label>
+                                                    <label><input type="checkbox" value="Student_Totals"
+                                                    ng-model="Student_Totals" ng-checked="Student_Totals" ng-change="checkboxStateChange()">Student Totals</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="">Subject Grading</label>
+                                                    <label><input type="checkbox" value="Subject_Grading" ng-model="Subject_Grading" ng-checked="Subject_Grading" ng-change="checkboxStateChange()">Subject Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="">Overall Grading</label>
+                                                    <label><input type="checkbox" value="Overall_Grading" ng-model="Overall_Grading" ng-checked="Overall_Grading" ng-change="checkboxStateChange()">Overall Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="">Ranks</label>
+                                                    <label><input type="checkbox" value="Ranks" ng-model="Ranks" ng-checked="Ranks" ng-change="checkboxStateChange()">Ranks</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -103,6 +104,36 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="container-fluid center-block">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="table-formater">
+                            <div class="config-card-title">
+                                <h3 class="text-primary">Reorder Columns</h3>
+                                <small class="text-primary">
+                                        <span>Arrange your coulmns as per your preference</span>
+                                        <span>by dragging them in assending order</span>
+                                    </small>
+                            </div>
+                            <div class="container-fluid config-card-list-container" ng-scrollbars>
+                                <ul class="list-group">
+                                    <li class="list-group-item">List Item 1</li>
+                                    <li class="list-group-item">List Item 2</li>
+                                    <li class="list-group-item">List Item 3</li>
+                                    <li class="list-group-item">List Item 4</li>
+                                    <li class="list-group-item">List Item 5</li>
+                                    <li class="list-group-item">List Item 6</li>
+                                    <li class="list-group-item">List Item 7</li>
+                                    <li class="list-group-item">List Item 8</li>
+                                    <li class="list-group-item">List Item 9</li>
+                                    <li class="list-group-item">List Item 10</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-8">
+
                     </div>
                 </div>
             </div>

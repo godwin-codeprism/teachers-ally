@@ -14,6 +14,11 @@ angular.module('teachersAlly')
                         $state.go('classroom', {
                             user: $scope.username
                         });
+                        $http.post('./endpoints/check-userfiles.php', {
+                            username: $scope.username
+                        }).then(function(res){
+                            console.log(res.data);
+                        })
                     } else {
                         $scope.goodLogin = response.data;
                     }

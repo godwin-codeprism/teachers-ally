@@ -36,9 +36,9 @@ var g_blurnav = {
     },
     blurScrollRibbion: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        if ($('.ui-classroom .wrapper:eq(0)').html() != $('.controls-ribbion .wrapper').html()) {
+        if ($('.controls-ribbion .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
             console.log('I made Ribbon content and wrapper equal');
-            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html()); 
+            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g,'ids="')); 
         }
         g_blurnav.dupRibbon.css({
             '-webkit-transform': translation,
@@ -58,9 +58,9 @@ var g_blurnav = {
     },
     blurScroll: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        if ($('.ui-classroom .wrapper:eq(0)').html() != $('nav .wrapper').html()) {
+        if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
             console.log('I made nav content and wrapper equal');
-            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
+            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g,'idg="'));
         }
         g_blurnav.dup.css({
             '-webkit-transform': translation,

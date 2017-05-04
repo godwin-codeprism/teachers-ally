@@ -19,6 +19,7 @@
 .btn-user:hover,
 .btn-user:active,
 .btn-user:focus {
+    color: white;
     opacity: 0.9;
     background-image: linear-gradient(to bottom, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
     box-shadow: 0 2px 0 rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .1);

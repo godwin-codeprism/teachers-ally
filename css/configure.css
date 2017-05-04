@@ -99,3 +99,11 @@
 .config-card-list .checkbox label {
     width: 100%;
 }
+
+.table-formater {
+    width: 100%;
+    height: 400px;
+    background-color: white;
+    box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1), 2px 3px 7px rgba(0, 76, 255, 0.2);
+    border-radius: 4px;
+}

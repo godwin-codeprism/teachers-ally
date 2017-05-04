@@ -1,5 +1,6 @@
 angular.module('teachersAlly')
     .controller('configureController', ['$scope', '$http', '$stateParams', '$timeout', function ($scope, $http, $stateParams, $timeout) {
+        var calculations = ["Student_Totals", "Subject_Grading", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
         $http.get('./database/' + $stateParams.user + "/" + $stateParams.class + ".json")
             .then(function (res) {
@@ -8,6 +9,12 @@ angular.module('teachersAlly')
                         $scope.exam_index = i;
                         $scope.settings = res.data[i].settings;
                     }
+                }
+                if ($scope.settings.calculations.length > 0) {
+                    calculations = $scope.settings.calculations;
+                    calculations.forEach(function(val,index,arr){
+                        $scope[val] = true;
+                    })
                 }
             })
         // angular function to add columns and subjects
@@ -41,6 +48,16 @@ angular.module('teachersAlly')
                     updateSettings($scope.settings, 'updateSubjects');
                     break;
             }
+        }
+
+        $scope.checkboxStateChange = function () {
+            $scope.settings.calculations = [];
+            calculations.forEach(function (val, index, arr) {
+                if ($scope[val]) {
+                    $scope.settings.calculations.push(val);
+                }
+            })
+            updateSettings($scope.settings,"updateCalculations")
         }
 
         function updateSettings(settings, action) {
