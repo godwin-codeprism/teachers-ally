@@ -41,21 +41,25 @@
 .controls-ribbion-btn-container {
     padding-top: 65px;
     height: 100%;
-    position:relative;
+    position: relative;
     z-index: 1;
 }
-.controls-ribbion .content-blurred{
-    filter:blur(6px) !important;
+
+.controls-ribbion .content-blurred {
+    filter: blur(6px) !important;
     opacity: 0.6 !important;
 }
-.btn-default{
+
+.btn-default {
     border: 1px solid #212121;
     box-shadow: none;
 }
-.btn-default:hover{
-    color:white;
+
+.btn-default:hover {
+    color: white;
     background-color: #212121;
 }
+
 .btn-back {
     width: 50px;
     height: inherit;
@@ -64,6 +68,16 @@
     font-size: 24px;
     border-right: 1px solid #e9e9e9;
 }
-.btn-back i{
+
+.btn-back i {
     font-size: 3.5rem;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

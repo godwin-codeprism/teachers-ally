@@ -2,6 +2,7 @@ angular.module('teachersAlly')
     .controller('configureController', ['$scope', '$http', '$stateParams', '$timeout', function ($scope, $http, $stateParams, $timeout) {
         var calculations = ["Student_Totals", "Subject_Grading", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
+        // Collects the data for settings when this controller and template are loaded
         $http.get('./database/' + $stateParams.user + "/" + $stateParams.class + ".json")
             .then(function (res) {
                 for (var i = 0; i < res.data.length; i++) {
@@ -27,6 +28,7 @@ angular.module('teachersAlly')
                 $(_this).parent().find('.config-card-list li').eq($scope.settings[type].length - 1).find('p').focus();
             }, 1)
         }
+        // angular function to collecte changes from the directive watch changes
         $scope.postChanges = function (elm) {
             var text = elm[0].innerText,
                 type = elm[0].dataset.type;
@@ -49,7 +51,7 @@ angular.module('teachersAlly')
                     break;
             }
         }
-
+        // checks for change of state for calculation checkboxes
         $scope.checkboxStateChange = function () {
             $scope.settings.calculations = [];
             calculations.forEach(function (val, index, arr) {
@@ -59,7 +61,7 @@ angular.module('teachersAlly')
             })
             updateSettings($scope.settings,"updateCalculations")
         }
-
+        // angular function to post all the changes to database throught PHP
         function updateSettings(settings, action) {
             $http.post('./endpoints/configure.php', {
                 action: action,

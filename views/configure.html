@@ -117,18 +117,9 @@
                                     </small>
                             </div>
                             <div class="container-fluid config-card-list-container" ng-scrollbars>
-                                <ul class="list-group">
-                                    <li class="list-group-item">List Item 1</li>
-                                    <li class="list-group-item">List Item 2</li>
-                                    <li class="list-group-item">List Item 3</li>
-                                    <li class="list-group-item">List Item 4</li>
-                                    <li class="list-group-item">List Item 5</li>
-                                    <li class="list-group-item">List Item 6</li>
-                                    <li class="list-group-item">List Item 7</li>
-                                    <li class="list-group-item">List Item 8</li>
-                                    <li class="list-group-item">List Item 9</li>
-                                    <li class="list-group-item">List Item 10</li>
-                                </ul>
+                                <div reorder-list>
+                                    <div class="reorder-item noselect" reorder-item ng-repeat="item in [1,2,3,4,5,6,7,8,9,10]">List Item {{item}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -41,6 +41,7 @@ require('./app.directive');
 require('./shortname.directive');
 require('./orientation.directive');
 require('./watch_changes.directive');
+require('./reorder_list.directive');
 //require('./class_options.directive');
 
 //filters
