@@ -1,7 +1,16 @@
-String.prototype.replaceAt=function(index, replacement) {
-    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+String.prototype.replaceAt = function (index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
-
+Array.prototype.move = function (old_index, new_index) {
+    if (new_index >= this.length) {
+        var k = new_index - this.length;
+        while ((k--) + 1) {
+            this.push(undefined);
+        }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
+};
 var g_blurnav = {
     dup: $('.wrapper:eq(0)').clone(),
     dupMenu: $('.wrapper:eq(0)').clone(),
@@ -38,7 +47,7 @@ var g_blurnav = {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
         if ($('.controls-ribbion .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
             console.log('I made Ribbon content and wrapper equal');
-            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g,'ids="')); 
+            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'ids="'));
         }
         g_blurnav.dupRibbon.css({
             '-webkit-transform': translation,
@@ -60,7 +69,7 @@ var g_blurnav = {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
         if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
             console.log('I made nav content and wrapper equal');
-            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g,'idg="'));
+            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'idg="'));
         }
         g_blurnav.dup.css({
             '-webkit-transform': translation,
