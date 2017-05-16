@@ -2,7 +2,7 @@ angular.module('teachersAlly')
     .controller('configureController', ['$scope', '$http', '$stateParams', '$timeout', function ($scope, $http, $stateParams, $timeout) {
         var calculations = ["Student_Totals", "Subject_Grading", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
-        $scope.reorderList = ['1','2','3','4'];
+        $scope.reorderList = ['1','2','3','4','5','6','7','8','9','10'];
         // Collects the data for settings when this controller and template are loaded
         $http.get('./database/' + $stateParams.user + "/" + $stateParams.class + ".json")
             .then(function (res) {
