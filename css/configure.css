@@ -136,6 +136,8 @@
     position: relative;
 }
 
+
+
 .transition {
-    transition: top 0.2s cubic-bezier(0.333, 0, 0, 1);
+    transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
 }

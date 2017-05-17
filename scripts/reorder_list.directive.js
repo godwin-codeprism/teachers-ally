@@ -18,12 +18,12 @@ angular.module('teachersAlly')
                     mainArr = $scope.reorderList;
                 var setPostions = function (arr) {
                     var parentHeight = $(elm).height();
+                    var styleStr = "";
                     arr.each(function (index, val) {
-                        $(val).css({
-                            'left': 0,
-                            'top': index == 0 ? 0 + 'px' : ($(arr[index - 1]).position().top + $(arr[index - 1]).height()) + 'px'
-                        });
+                        var _top = index == 0 ? 0 + 'px' : ($(arr[index - 1]).position().top + $(arr[index - 1]).height()) + 'px';
+                        styleStr += "[reorder-list] [reorder-item]:nth-child(" + (index + 1) + ") {left:0; top:" + _top + ";} ";
                     })
+                    $("<style type='text/css'>" + styleStr + "</style>").appendTo("head");
                     $(elm).css({
                         height: parentHeight + 'px'
                     })
@@ -69,16 +69,7 @@ angular.module('teachersAlly')
                 var detectHit = function (el, direction, top, bottom, index, arr) {
                     var newIndex = Math.round((currentTop / el.height()));
                     if (index != newIndex) {
-                        console.log(direction + ": " + newIndex);
-                        if (direction == 'up') {
-                            $(arr[newIndex]).css({
-                                top: $(arr[newIndex]).position().top + $(arr[newIndex]).height() + 'px'
-                            });
-                        } else {
-                            $(arr[newIndex]).css({
-                                top: $(arr[newIndex]).position().top - $(arr[newIndex]).height() + 'px'
-                            });
-                        }
+                        //console.log(direction + ": " + newIndex);
                         mainArr.move(index, newIndex);
                         $scope.reorderList = mainArr;
                         $scope.$apply();

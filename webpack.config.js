@@ -6,6 +6,7 @@ module.exports = {
     entry: "./scripts/imports.js",
     output: {
         path: __dirname + "/dist",
+        //path: __dirname,
         filename: "godwin.js",
     },
     module: {
