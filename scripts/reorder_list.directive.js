@@ -14,7 +14,8 @@ angular.module('teachersAlly')
                     originalTop = null,
                     originalBottom = null,
                     orginalIndex = null,
-                    originalArr = null;
+                    originalArr = null,
+                    mainArr = $scope.reorderList;
                 var setPostions = function (arr) {
                     var parentHeight = $(elm).height();
                     arr.each(function (index, val) {
@@ -66,25 +67,23 @@ angular.module('teachersAlly')
                     return el.position().top <= currentTop ? 'up' : 'down';
                 }
                 var detectHit = function (el, direction, top, bottom, index, arr) {
-                    var newIndex = null;
-                    if (direction == 'up') {
-                        if (index != Math.round(currentTop / el.height())) {
-                            newIndex = Math.round(currentTop / el.height());
-                            console.log(newIndex);
+                    var newIndex = Math.round((currentTop / el.height()));
+                    if (index != newIndex) {
+                        console.log(direction + ": " + newIndex);
+                        if (direction == 'up') {
                             $(arr[newIndex]).css({
                                 top: $(arr[newIndex]).position().top + $(arr[newIndex]).height() + 'px'
-                            })
-                            el.attr('new-index', newIndex);
-                        }
-                    } else {
-                        if (index != Math.round((currentTop + el.height()) / el.height())) {
-                            newIndex = Math.round((currentTop + el.height()) / el.height());
-                            console.log(newIndex);
+                            });
+                        } else {
                             $(arr[newIndex]).css({
                                 top: $(arr[newIndex]).position().top - $(arr[newIndex]).height() + 'px'
-                            })
-                            el.attr('new-index', newIndex);
+                            });
                         }
+                        mainArr.move(index, newIndex);
+                        $scope.reorderList = mainArr;
+                        $scope.$apply();
+                        originalArr = $(elm).find('[reorder-item]');
+                        el.attr('new-index', newIndex);
                     }
                 }
 
