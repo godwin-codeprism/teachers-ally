@@ -37,8 +37,8 @@ angular.module('teachersAlly')
 
                 var detectHit = function (el, direction, top, bottom, index, arr) {
                     var newIndex = Math.round((currentTop / el.height()));
-                    if (index != newIndex) {
-                        //console.log(direction + ": " + newIndex);
+                    if (index != newIndex && newIndex >= 0) {
+                        console.log(direction + ": " + newIndex);
                         el.attr('new-index', newIndex);
                         var gotHitTo = $(elm).find('.item-' + newIndex).eq(0);
                         var str = gotHitTo.attr('class');
@@ -47,10 +47,7 @@ angular.module('teachersAlly')
                         } else {
                             gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
                         }
-                        /* mainArr.move(index, newIndex);
-                         $scope.reorderList = mainArr;
-                         $scope.$apply();
-                         originalArr = $(elm).find('[reorder-item]');*/
+                        mainArr.move(index, newIndex);
                     }
                 }
 
@@ -72,7 +69,6 @@ angular.module('teachersAlly')
                     $scope.updateScrollbar('disable');
                 }
                 var onGrabbing = function (e) {
-                    console.log(e.type);
                     e.preventDefault();
                     var _this = $(e.target);
                     var _top = (e.type == 'touchmove' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + (_this.height() / 2));
@@ -94,6 +90,11 @@ angular.module('teachersAlly')
                     currentTop = null;
                     originalTop = null;
                     originalBottom = null;
+                    $scope.reorderList = mainArr;
+                    $scope.$apply();
+                    originalArr = $(elm).find('[reorder-item]');
+                    _this.attr('class', _this.attr('class').replace(/item-[0-9]/, 'item-' + _this[0].dataset.index));
+                    _this[0].style.top = "";
                 }
             }
         }
