@@ -1,3 +1,9 @@
+html {
+    touch-action: manipulation;
+}
+.scroll-lock{
+    overflow: hidden;
+}
 [contenteditable="true"] {
     outline: none;
 }

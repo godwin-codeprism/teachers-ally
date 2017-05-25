@@ -115,11 +115,12 @@
                                         <span>Arrange your coulmns as per your preference</span>
                                         <!--<span>by dragging them in assending order</span>-->
                                         <small ng-repeat="item in reorderList">{{item}}, </small>
-                                    </small>
+                                </small>
                             </div>
-                            <div class="container-fluid config-card-list-container" ng-scrollbars>
+                            <div class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
                                 <div reorder-list style="min-height:300px">
-                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0}" reorder-item ng-repeat="item in reorderList" data-index="{{$index}}">List Item {{item}}</div>
+                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0}" reorder-item ng-repeat="item in reorderList"
+                                        data-index="{{$index}}">List Item {{item}}</div>
                                 </div>
                             </div>
                         </div>

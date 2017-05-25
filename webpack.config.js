@@ -47,19 +47,19 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: './views',
-            to:'./views'
+            to: './views'
         }]),
         new CopyWebpackPlugin([{
             from: './img',
-            to:'./assets/img'
+            to: './assets/img'
         }]),
         new CopyWebpackPlugin([{
             from: './endpoints',
-            to:'./endpoints'
+            to: './endpoints'
         }]),
         new CopyWebpackPlugin([{
             from: './database',
-            to:'./database'
+            to: './database'
         }]),
         new CopyWebpackPlugin([{
             from: './favicon.ico'
