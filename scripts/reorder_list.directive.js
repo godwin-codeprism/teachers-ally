@@ -13,7 +13,7 @@ angular.module('teachersAlly')
                     originalTop = null,
                     originalBottom = null,
                     orginalIndex = null,
-                    originalArr = null,
+                    originalArr = $(elm).find('[reorder-item]'),
                     mainArr = $scope.reorderList;
                 //helper functions
                 var setPostions = function (arr) {
@@ -29,26 +29,6 @@ angular.module('teachersAlly')
                         height: parentHeight + 'px'
                     })
                     $(elm).find('[reorder-item]').css('position', 'absolute');
-                }
-
-                var detectDirection = function (el) {
-                    return el.position().top <= currentTop ? 'up' : 'down';
-                }
-
-                var detectHit = function (el, direction, top, bottom, index, arr) {
-                    var newIndex = Math.round((currentTop / el.height()));
-                    if (index != newIndex && newIndex >= 0) {
-                        console.log(direction + ": " + newIndex);
-                        el.attr('new-index', newIndex);
-                        var gotHitTo = $(elm).find('.item-' + newIndex).eq(0);
-                        var str = gotHitTo.attr('class');
-                        if (direction == 'down') {
-                            gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex - 1)));
-                        } else {
-                            gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
-                        }
-                        mainArr.move(index, newIndex);
-                    }
                 }
 
                 // event Handlers
@@ -72,12 +52,14 @@ angular.module('teachersAlly')
                     e.preventDefault();
                     var _this = $(e.target);
                     var _top = (e.type == 'touchmove' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + (_this.height() / 2));
-                    _top > 0 ? _this.css({
-                        top: _top + "px"
-                    }) : false;
-                    _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : false;
-                    detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr);
-                    currentTop = _top;
+                    if (_top > 0) {
+                        _this.css({
+                            top: _top + "px"
+                        })
+                        _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : parseInt(_this.attr('data-index'));
+                        detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr);
+                        currentTop = _top;
+                    }
                 }
                 var onGrabEnd = function (e) {
                     var _this = $(e.target);
@@ -92,9 +74,34 @@ angular.module('teachersAlly')
                     originalBottom = null;
                     $scope.reorderList = mainArr;
                     $scope.$apply();
-                    originalArr = $(elm).find('[reorder-item]');
                     _this.attr('class', _this.attr('class').replace(/item-[0-9]/, 'item-' + _this[0].dataset.index));
+                    console.log(_this[0].dataset.index);
                     _this[0].style.top = "";
+                }
+
+                //movement detections
+                var detectDirection = function (el) {
+                    return el.position().top <= currentTop ? 'up' : 'down';
+                }
+
+                var detectHit = function (el, direction, top, bottom, index, arr) {
+                    //console.log(currentTop + ' : ' + parseFloat(el[0].style.top));
+                    var newIndex = Math.round((parseInt(el[0].style.top) / el.height()));
+                    console.log(newIndex);
+                    if (newIndex >= 0) {
+                        var gotHitTo = $(elm).find('.item-' + newIndex).eq(0);
+                        //console.log(direction + ": " + newIndex);
+                        if (gotHitTo.length > 0) {
+                            el.attr('new-index', newIndex);
+                            var str = gotHitTo.attr('class');
+                            if (direction == 'down') {
+                                gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex - 1)));
+                            } else {
+                                gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
+                            }
+                            mainArr.move(index, newIndex);
+                        }
+                    }
                 }
             }
         }
