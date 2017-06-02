@@ -75,7 +75,7 @@ angular.module('teachersAlly')
                     $scope.reorderList = mainArr;
                     $scope.$apply();
                     _this.attr('class', _this.attr('class').replace(/item-[0-9]/, 'item-' + _this[0].dataset.index));
-                    console.log(_this[0].dataset.index);
+                    console.log(_this);
                     _this[0].style.top = "";
                 }
 
@@ -85,22 +85,30 @@ angular.module('teachersAlly')
                 }
 
                 var detectHit = function (el, direction, top, bottom, index, arr) {
-                    //console.log(currentTop + ' : ' + parseFloat(el[0].style.top));
                     var newIndex = Math.round((parseInt(el[0].style.top) / el.height()));
-                    console.log(newIndex);
                     if (newIndex >= 0) {
                         var gotHitTo = $(elm).find('.item-' + newIndex).eq(0);
-                        //console.log(direction + ": " + newIndex);
-                        if (gotHitTo.length > 0) {
+                        if (newIndex != index) {
+                            console.log(gotHitTo.attr('data-index'));
                             el.attr('new-index', newIndex);
-                            var str = gotHitTo.attr('class');
-                            if (direction == 'down') {
-                                gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex - 1)));
-                            } else {
-                                gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
-                            }
                             mainArr.move(index, newIndex);
+                            var str = gotHitTo.attr('class');
+                            gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + newIndex));
+                            console.log(gotHitTo.attr('class'));
                         }
+                        //console.log(direction + ": " + newIndex);
+                        // if (newIndex != index && gotHitTo.length > 0) {
+                        //     el.attr('new-index', newIndex);
+                        //     var str = gotHitTo.attr('class');
+                        //     if (direction == 'down') {
+                        //         console.log(direction + ": " + (newIndex - 1) + " index: " + index);
+                        //         gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex - 1)));
+                        //     } else {
+                        //         console.log(direction + ": " + (newIndex + 1) + " index: " + index);
+                        //         gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
+                        //     }
+                        //     mainArr.move(index, newIndex);
+                        // }
                     }
                 }
             }
