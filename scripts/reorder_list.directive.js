@@ -4,17 +4,22 @@ angular.module('teachersAlly')
             restrict: 'A',
             scope: true,
             link: function ($scope, elm, attrs) {
+                //init function for this directive
                 $timeout(function () {
                     $(elm).find('[reorder-item]').attr('draggable', 'false');
                     $(elm).find('[reorder-item]').on('mousedown touchstart', onGrabStart);
                     setPostions($(elm).find('[reorder-item]'));
                 }, 1)
+
+                //global vars for this directive
                 var currentTop = null,
                     originalTop = null,
                     originalBottom = null,
                     orginalIndex = null,
+                    scrollLoop = null,
                     originalArr = $(elm).find('[reorder-item]'),
                     mainArr = $scope.reorderList;
+
                 //helper functions
                 var setPostions = function (arr) {
                     var parentHeight = $(elm).height();
@@ -37,6 +42,7 @@ angular.module('teachersAlly')
                     $(window).on('mouseup touchend', onGrabEnd);
                     $(this).addClass('reorder-item-grabbing');
                     $(this).removeClass('transition');
+                    $(this).attr('class', $(this).attr('class').replace("item-" + $(this).attr('class').match(/[0-9]/g).join().replace(/,/g, ""), ''));
                     e.type == 'touchstart' ? $('html').addClass('scroll-lock') : false;
                     var _top = (e.type == 'touchstart' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + ($(this).height() / 2));
                     _top > 0 ? $(this).css({
@@ -48,23 +54,73 @@ angular.module('teachersAlly')
                     orginalIndex = parseInt($(this)[0].dataset.index);
                     $scope.updateScrollbar('disable');
                 }
+
+                // while dragging
                 var onGrabbing = function (e) {
                     e.preventDefault();
+
+                    //local Grabbing Vars
                     var _this = $('.reorder-item-grabbing');
+                    var bound = checkLimits(e, $('#reorderListContainer'), _this);
                     var _top = (e.type == 'touchmove' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + (_this.height() / 2));
-                    if (_top > 0) {
+                    var scrollNewIndex = null;
+
+                    // jumbling logic when dragging inside.
+                    if (_top > 0 && bound == "inside") {
+                        scrollLoop != null ? clearInterval(scrollLoop) : false;
+                        scrollLoop = null;
                         _this.css({
                             top: _top + "px"
                         })
                         _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : parseInt(_this.attr('data-index'));
-                        detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr);
+                        detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr, scrollNewIndex);
                         currentTop = _top;
-                        console.log("if");
-                    }else{
-                        console.log("else");
+                    }
+
+                    // continues scrolling when dragging outsite
+                    switch (bound) {
+                        case "top":
+                            if (scrollLoop == null) {
+                                scrollLoop = setInterval(function () {
+                                    if (parseInt($(elm).parent().css('top')) < 0) {
+                                        $(elm).parent().css('top', parseInt($(elm).parent().css('top')) + 3);
+                                        _this.css('top', parseInt(_this.css('top')) - 3);
+                                        scrollNewIndex = Math.round((parseInt(_this[0].style.top) / _this.height()));
+                                        _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : parseInt(_this.attr('data-index'));
+                                        detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr, scrollNewIndex);
+                                    } else {
+                                        scrollNewIndex = null;
+                                        clearInterval(scrollLoop);
+                                        scrollLoop = null;
+                                    }
+                                }, 20);
+                            }
+                            break;
+
+                        case "bottom":
+                            if (scrollLoop == null) {
+                                scrollLoop = setInterval(function () {
+                                    if ($('#reorderListContainer').height() - $(elm).parent().height() < parseInt($(elm).parent().css('top'))) {
+                                        $(elm).parent().css('top', parseInt($(elm).parent().css('top')) - 3);
+                                        _this.css('top', parseInt(_this.css('top')) + 3);
+                                        scrollNewIndex = Math.round((parseInt(_this[0].style.top) / _this.height()));
+                                        _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : parseInt(_this.attr('data-index'));
+                                        detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr, scrollNewIndex);
+                                    } else {
+                                        scrollNewIndex = null;
+                                        clearInterval(scrollLoop);
+                                        scrollLoop = null;
+                                    }
+                                }, 20);
+                            }
+                            break;
                     }
                 }
+
+                // when drag ends
                 var onGrabEnd = function (e) {
+                    scrollLoop != null ? clearInterval(scrollLoop) : false;
+                    scrollLoop = null;
                     var _this = $('.reorder-item-grabbing');
                     $(window).off('mousemove touchmove', onGrabbing);
                     $(window).off('mouseup touchend', onGrabEnd);
@@ -76,8 +132,9 @@ angular.module('teachersAlly')
                     originalBottom = null;
                     $scope.reorderList = mainArr;
                     $scope.$apply();
-                    _this.attr('class', _this.attr('class').replace(/item-[0-9]/, 'item-' + _this[0].dataset.index));
+                    _this.addClass('item-' + _this[0].dataset.index);
                     _this[0].style.top = "";
+                    _this.attr('new-index') != undefined ? _this.removeAttr('new-index') : false;
                     _this.removeClass('reorder-item-grabbing');
                 }
 
@@ -86,8 +143,34 @@ angular.module('teachersAlly')
                     return el.position().top <= currentTop ? 'up' : 'down';
                 }
 
-                var detectHit = function (el, direction, top, bottom, index, arr) {
-                    var newIndex = Math.round((parseInt(el[0].style.top) / el.height()));
+                // gets new position 
+                var detectHit = function (el, direction, top, bottom, index, arr, scrollNewIndex) {
+                    var newIndex = scrollNewIndex != null ? scrollNewIndex : Math.round((parseInt(el[0].style.top) / el.height()));
+                    if (index != newIndex && $('.item-' + newIndex).length > 0) {
+                        el.attr('new-index', newIndex);
+                        var str = $('.item-' + newIndex).attr('class');
+                        if (direction == "up") {
+                            $('.item-' + newIndex).attr('class', str.replace("item-" + str.match(/[0-9]/g).join().replace(/,/g, ""), 'item-' + (newIndex + 1)));
+                        } else {
+                            $('.item-' + newIndex).attr('class', str.replace("item-" + str.match(/[0-9]/g).join().replace(/,/g, ""), 'item-' + (newIndex - 1)));
+                        }
+                        mainArr.move(index, newIndex);
+                    }
+                }
+
+                // checks for upper and lower limits of loop scroll
+                var checkLimits = function (e, div, dragItem) {
+                    var mouse_y = e.type == 'touchstart' ? e.changedTouches[0].pageY : e.pageY;
+                    var top_limit = div.offset().top + (dragItem.height() / 2);
+                    var bottom_limit = div.offset().top + (div.height() - (dragItem.height() / 2));
+                    if (mouse_y < top_limit) {
+                        return "top"
+                    } else if (mouse_y > bottom_limit) {
+                        return "bottom"
+                    } else {
+                        return "inside"
+                    }
+
                 }
             }
         }
