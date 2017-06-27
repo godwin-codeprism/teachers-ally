@@ -117,7 +117,7 @@
                                         <small ng-repeat="item in reorderList">{{item}}, </small>
                                 </small>
                             </div>
-                            <div class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
+                            <div id="reorderListContainer" class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
                                 <div reorder-list style="min-height:300px">
                                     <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0}" reorder-item ng-repeat="item in reorderList"
                                         data-index="{{$index}}">List Item {{item}}</div>
@@ -126,7 +126,10 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-8">
-
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>

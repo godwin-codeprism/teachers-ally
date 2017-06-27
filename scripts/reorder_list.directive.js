@@ -33,8 +33,8 @@ angular.module('teachersAlly')
 
                 // event Handlers
                 var onGrabStart = function (e) {
-                    $(document).on('mousemove touchmove', onGrabbing);
-                    $(document).on('mouseup touchend', onGrabEnd);
+                    $(window).on('mousemove touchmove', onGrabbing);
+                    $(window).on('mouseup touchend', onGrabEnd);
                     $(this).addClass('reorder-item-grabbing');
                     $(this).removeClass('transition');
                     e.type == 'touchstart' ? $('html').addClass('scroll-lock') : false;
@@ -50,7 +50,7 @@ angular.module('teachersAlly')
                 }
                 var onGrabbing = function (e) {
                     e.preventDefault();
-                    var _this = $(e.target);
+                    var _this = $('.reorder-item-grabbing');
                     var _top = (e.type == 'touchmove' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + (_this.height() / 2));
                     if (_top > 0) {
                         _this.css({
@@ -59,13 +59,15 @@ angular.module('teachersAlly')
                         _this.attr('new-index') != undefined ? orginalIndex = parseInt(_this.attr('new-index')) : parseInt(_this.attr('data-index'));
                         detectHit(_this, detectDirection(_this), originalTop, originalBottom, orginalIndex, originalArr);
                         currentTop = _top;
+                        console.log("if");
+                    }else{
+                        console.log("else");
                     }
                 }
                 var onGrabEnd = function (e) {
-                    var _this = $(e.target);
-                    $(document).off('mousemove touchmove', onGrabbing);
-                    $(document).off('mouseup touchend', onGrabEnd);
-                    _this.removeClass('reorder-item-grabbing');
+                    var _this = $('.reorder-item-grabbing');
+                    $(window).off('mousemove touchmove', onGrabbing);
+                    $(window).off('mouseup touchend', onGrabEnd);
                     _this.addClass('transition');
                     $('html').removeClass('scroll-lock');
                     $scope.updateScrollbar('update');
@@ -75,8 +77,8 @@ angular.module('teachersAlly')
                     $scope.reorderList = mainArr;
                     $scope.$apply();
                     _this.attr('class', _this.attr('class').replace(/item-[0-9]/, 'item-' + _this[0].dataset.index));
-                    console.log(_this);
                     _this[0].style.top = "";
+                    _this.removeClass('reorder-item-grabbing');
                 }
 
                 //movement detections
@@ -86,30 +88,6 @@ angular.module('teachersAlly')
 
                 var detectHit = function (el, direction, top, bottom, index, arr) {
                     var newIndex = Math.round((parseInt(el[0].style.top) / el.height()));
-                    if (newIndex >= 0) {
-                        var gotHitTo = $(elm).find('.item-' + newIndex).eq(0);
-                        if (newIndex != index) {
-                            console.log(gotHitTo.attr('data-index'));
-                            el.attr('new-index', newIndex);
-                            mainArr.move(index, newIndex);
-                            var str = gotHitTo.attr('class');
-                            gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + newIndex));
-                            console.log(gotHitTo.attr('class'));
-                        }
-                        //console.log(direction + ": " + newIndex);
-                        // if (newIndex != index && gotHitTo.length > 0) {
-                        //     el.attr('new-index', newIndex);
-                        //     var str = gotHitTo.attr('class');
-                        //     if (direction == 'down') {
-                        //         console.log(direction + ": " + (newIndex - 1) + " index: " + index);
-                        //         gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex - 1)));
-                        //     } else {
-                        //         console.log(direction + ": " + (newIndex + 1) + " index: " + index);
-                        //         gotHitTo.attr('class', str.replace(/item-[0-9]/, 'item-' + (newIndex + 1)));
-                        //     }
-                        //     mainArr.move(index, newIndex);
-                        // }
-                    }
                 }
             }
         }
