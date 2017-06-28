@@ -93,7 +93,7 @@ angular.module('teachersAlly')
                                         clearInterval(scrollLoop);
                                         scrollLoop = null;
                                     }
-                                }, 20);
+                                }, 15);
                             }
                             break;
 
@@ -111,7 +111,7 @@ angular.module('teachersAlly')
                                         clearInterval(scrollLoop);
                                         scrollLoop = null;
                                     }
-                                }, 20);
+                                }, 15);
                             }
                             break;
                     }

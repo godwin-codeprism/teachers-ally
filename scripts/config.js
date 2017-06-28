@@ -47,9 +47,12 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
 };
 runFunction.$inject = ['$rootScope', '$transitions', 'authService', '$state'];
 angular.module('teachersAlly')
-    .config(["$stateProvider", "$urlRouterProvider", "ScrollBarsProvider", function ($stateProvider, $urlRouterProvider, ScrollBarsProvider) {
+    .config(["$stateProvider", "$urlRouterProvider", "ScrollBarsProvider", "$locationProvider", function ($stateProvider, $urlRouterProvider, ScrollBarsProvider, $locationProvider) {
+        $urlRouterProvider.otherwise('/login');
+        $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode(true);
         $stateProvider.state('app', {
-                url: "",
+                url: "/login",
                 templateUrl: './views/login.html',
                 controller: "appController"
             })

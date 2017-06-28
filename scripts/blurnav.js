@@ -45,10 +45,18 @@ var g_blurnav = {
     },
     blurScrollRibbion: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        if ($('.controls-ribbion .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
-            console.log('I made Ribbon content and wrapper equal');
-            $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'ids="'));
+        if ($('.ui-classroom .wrapper:eq(0)').html().match(/id="/g) != null) {
+            if ($('.controls-ribbion .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
+                console.log('I made Ribbon content and wrapper equal and removed IDs');
+                $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'ids="'));
+            }
+        } else {
+            if ($('.controls-ribbion .wrapper').html().length != $('.ui-classroom .wrapper:eq(0)').html().length) {
+                console.log('I made Ribbon content and wrapper equal');
+                $('.controls-ribbion .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
+            }
         }
+
         g_blurnav.dupRibbon.css({
             '-webkit-transform': translation,
             '-moz-transform': translation,
@@ -67,9 +75,16 @@ var g_blurnav = {
     },
     blurScroll: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
-            console.log('I made nav content and wrapper equal');
-            $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'idg="'));
+        if ($('.ui-classroom .wrapper:eq(0)').html().match(/id="/g) != null) {
+            if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
+                console.log('I made nav content and wrapper equal and Removed Ids');
+                $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'idg="'));
+            }
+        } else {
+            if ($('nav .wrapper').html().length != $('.ui-classroom .wrapper:eq(0)').html().length) {
+                console.log('I made nav content and wrapper equal and Removed Ids');
+                $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
+            }
         }
         g_blurnav.dup.css({
             '-webkit-transform': translation,
