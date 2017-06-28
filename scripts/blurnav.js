@@ -28,10 +28,13 @@ var g_blurnav = {
             $('.content:eq(0)').html(g_blurnav.dup);
             $(document).off('scroll', g_blurnav.blurScrollHome);
             $(document).off('scroll', g_blurnav.blurScroll);
+            $(document).off('scroll', g_blurnav.blurScrollRibbion);
             $(document).on('scroll', g_blurnav.blurScroll);
         } else if (target == 'ribbon') {
             g_blurnav.dupRibbon = g_blurnav.customRenameId($('.ui-classroom .wrapper:eq(0)').clone(), '_nav');
             $('.controls-ribbion .content:eq(0)').html(g_blurnav.dupRibbon);
+            $(document).off('scroll', g_blurnav.blurScrollHome);
+            $(document).off('scroll', g_blurnav.blurScroll);
             $(document).off('scroll', g_blurnav.blurScrollRibbion);
             $(document).on('scroll', g_blurnav.blurScrollRibbion);
         } else {
