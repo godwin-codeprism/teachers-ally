@@ -7,7 +7,7 @@ angular.module('teachersAlly')
                 //init function for this directive
                 $timeout(function () {
                     $(elm).find('[reorder-item]').attr('draggable', 'false');
-                    $(elm).find('[reorder-item]').on('mousedown touchstart', onGrabStart);
+                    $(elm).find('[reorder-item] i').on('mousedown touchstart', onGrabStart);
                     setPostions($(elm).find('[reorder-item]'));
                 }, 1)
 
@@ -40,18 +40,18 @@ angular.module('teachersAlly')
                 var onGrabStart = function (e) {
                     $(window).on('mousemove touchmove', onGrabbing);
                     $(window).on('mouseup touchend', onGrabEnd);
-                    $(this).addClass('reorder-item-grabbing');
-                    $(this).removeClass('transition');
-                    $(this).attr('class', $(this).attr('class').replace("item-" + $(this).attr('class').match(/[0-9]/g).join().replace(/,/g, ""), ''));
+                    $(this).parent().addClass('reorder-item-grabbing');
+                    $(this).parent().removeClass('transition');
+                    $(this).parent().attr('class', $(this).parent().attr('class').replace("item-" + $(this).parent().attr('class').match(/[0-9]/g).join().replace(/,/g, ""), ''));
                     e.type == 'touchstart' ? $('html').addClass('scroll-lock') : false;
-                    var _top = (e.type == 'touchstart' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + ($(this).height() / 2));
-                    _top > 0 ? $(this).css({
+                    var _top = (e.type == 'touchstart' ? e.changedTouches[0].pageY : e.pageY) - ($(elm).parent().offset().top + ($(this).parent().height() / 2));
+                    _top > 0 ? $(this).parent().css({
                         top: _top + "px"
                     }) : false;
-                    currentTop = $(this).position().top;
+                    currentTop = $(this).parent().position().top;
                     originalTop = currentTop;
-                    originalBottom = currentTop + $(this).height();
-                    orginalIndex = parseInt($(this)[0].dataset.index);
+                    originalBottom = currentTop + $(this).parent().height();
+                    orginalIndex = parseInt($(this).parent()[0].dataset.index);
                     $scope.updateScrollbar('disable');
                 }
 
@@ -160,7 +160,7 @@ angular.module('teachersAlly')
 
                 // checks for upper and lower limits of loop scroll
                 var checkLimits = function (e, div, dragItem) {
-                    var mouse_y = e.type == 'touchstart' ? e.changedTouches[0].pageY : e.pageY;
+                    var mouse_y = e.type == 'touchmove' ? e.changedTouches[0].pageY : e.pageY;
                     var top_limit = div.offset().top + (dragItem.height() / 2);
                     var bottom_limit = div.offset().top + (div.height() - (dragItem.height() / 2));
                     if (mouse_y < top_limit) {
