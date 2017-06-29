@@ -15,7 +15,7 @@
         $jsonFile = fopen("../database/".$username."/".$filename.".json", "w");
         fwrite($userDataFile, json_encode($userData));
         fwrite($jsonFile, "");
-        return 'Success';
+        return 'Created New Class By '.$username;
     }
 
     function updateClasses($username,$newData, $userRequest){

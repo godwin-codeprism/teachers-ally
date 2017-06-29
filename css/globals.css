@@ -41,7 +41,7 @@ html {
     background-color: #fff;
     overflow: hidden;
     border-bottom: 1px solid #eee;
-    z-index: 1;
+    z-index: 4;
 }
 
 .controls-ribbion-btn-container {

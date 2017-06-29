@@ -20,7 +20,9 @@ angular.module('teachersAlly')
                 $http.post('./endpoints/check-userfiles.php', {
                     username: $scope.username
                 }).then(function (res) {
-                    console.log(res);
+                    $state.go('classroom', {
+                        user: $scope.username
+                    });
                 })
             }).catch(function (err) {
                 console.error(err);
