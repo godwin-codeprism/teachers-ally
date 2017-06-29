@@ -10,7 +10,13 @@ angular.module('teachersAlly')
                     $(elm).find('[reorder-item] i').on('mousedown touchstart', onGrabStart);
                     setPostions($(elm).find('[reorder-item]'));
                 }, 1)
-
+                $scope.$watch("reorderList", function (newValue, oldValue) {
+                    if (newValue != oldValue) {
+                        setPostions($(elm).find('[reorder-item]'));
+                        console.log($(elm).find('[reorder-item]'))
+                    }
+                    console.log("reset positions");
+                });
                 //global vars for this directive
                 var currentTop = null,
                     originalTop = null,
@@ -34,6 +40,7 @@ angular.module('teachersAlly')
                         height: parentHeight + 'px'
                     })
                     $(elm).find('[reorder-item]').css('position', 'absolute');
+                    mainArr = $scope.reorderList;
                 }
 
                 // event Handlers
