@@ -16,8 +16,8 @@ angular.module('teachersAlly')
                         });
                         $http.post('./endpoints/check-userfiles.php', {
                             username: $scope.username
-                        }).then(function(res){
-                            console.log(res.data);
+                        }).then(function (res) {
+                            res.data != "" ? console.log(res.data) : false;
                         })
                     } else {
                         $scope.goodLogin = response.data;

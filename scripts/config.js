@@ -2,7 +2,7 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
     $transitions.onBefore({}, function (trans) {
         if (trans.$to().name != 'app') {
             if (localStorage.getItem('godwin_ta') != null) {
-                authService.checkToken(trans.params().user, localStorage.getItem('godwin_ta')).then(function (res) {
+                authService.checkToken(localStorage.getItem('godwin_ta').split('|')[0], localStorage.getItem('godwin_ta')).then(function (res) {
                     if (res != 'good') {
                         console.log('Token mismatch');
                         localStorage.removeItem('godwin_ta');
@@ -48,11 +48,10 @@ var runFunction = function ($rootScope, $transitions, authService, $state) {
 runFunction.$inject = ['$rootScope', '$transitions', 'authService', '$state'];
 angular.module('teachersAlly')
     .config(["$stateProvider", "$urlRouterProvider", "ScrollBarsProvider", "$locationProvider", function ($stateProvider, $urlRouterProvider, ScrollBarsProvider, $locationProvider) {
-        $urlRouterProvider.otherwise('/login');
-        $locationProvider.hashPrefix('');
+        $locationProvider.hashPrefix("");
         $locationProvider.html5Mode(true);
         $stateProvider.state('app', {
-                url: "/login",
+                url: "",
                 templateUrl: './views/login.html',
                 controller: "appController"
             })
@@ -82,5 +81,6 @@ angular.module('teachersAlly')
                 axis: "y",
                 theme: "inset-dark",
                 autoHideScrollbar: false
-            }
+            };
+            $urlRouterProvider.otherwise("");
     }]).run(runFunction);

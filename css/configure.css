@@ -135,8 +135,11 @@
     position: relative;
 }
 
-
-
+.list-drag{
+    font-size: large;
+    width: 30px;
+    text-align: center;
+}
 .transition {
     transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
 }

@@ -79,16 +79,17 @@ var g_blurnav = {
     },
     blurScroll: function () {
         var translation = 'translate3d(0,' + (-$(document).scrollTop() + 'px') + ',0)';
-        console.log($('.ui-classroom .wrapper:eq(0)'));
-        if ($('.ui-classroom .wrapper:eq(0)').html().match(/id="/g) != null) {
-            if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
-                console.log('I made nav content and wrapper equal and Removed Ids');
-                $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'idg="'));
-            }
-        } else {
-            if ($('nav .wrapper').html().length != $('.ui-classroom .wrapper:eq(0)').html().length) {
-                console.log('I made nav content and wrapper equal and Removed Ids');
-                $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
+        if ($('.ui-classroom .wrapper:eq(0)').html() != undefined) {
+            if ($('.ui-classroom .wrapper:eq(0)').html().match(/id="/g) != null) {
+                if ($('nav .wrapper').html().length != ($('.ui-classroom .wrapper:eq(0)').html().length + $('.ui-classroom .wrapper:eq(0)').html().match(/id="/g).length)) {
+                    console.log('I made nav content and wrapper equal and Removed Ids');
+                    $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html().replace(/id="/g, 'idg="'));
+                }
+            } else {
+                if ($('nav .wrapper').html().length != $('.ui-classroom .wrapper:eq(0)').html().length) {
+                    console.log('I made nav content and wrapper equal and Removed Ids');
+                    $('nav .wrapper').html($('.ui-classroom .wrapper:eq(0)').html());
+                }
             }
         }
         g_blurnav.dup.css({

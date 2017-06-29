@@ -1,9 +1,9 @@
 // libraries
-window.jQuery = require('../node_modules/jquery/dist/jquery.min');
+window.jQuery = require('jquery');
 window.$ = jQuery;
-window.angular = require('../node_modules/angular');
+window.angular = require('angular');
 window.g_blurnav = require('./blurnav.js');
-require('./modernizr-custom.js');
+//require('./modernizr-custom.js');
 require('../node_modules/angular-animate/angular-animate.js');
 require('../css/bootstrap.css');
 require('../css/font-awesome.css');

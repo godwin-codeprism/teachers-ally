@@ -17,9 +17,11 @@ angular.module('teachersAlly')
             };
             $http.post('./endpoints/signup.php', signupData).then(function (response) {
                 localStorage.setItem('godwin_ta', response.data.trim());
-                $state.go('classroom', {
-                    user: $scope.username
-                });
+                $http.post('./endpoints/check-userfiles.php', {
+                    username: $scope.username
+                }).then(function (res) {
+                    console.log(res);
+                })
             }).catch(function (err) {
                 console.error(err);
             });
@@ -30,9 +32,9 @@ angular.module('teachersAlly')
             }).catch(function (err) {
                 console.error(err);
             });
-            if(!/^[a-zA-Z0-9-]*$/.test($scope.username)){
+            if (!/^[a-zA-Z0-9-]*$/.test($scope.username)) {
                 $scope.validUsername = false;
-            }else{
+            } else {
                 $scope.validUsername = true;
             }
         }

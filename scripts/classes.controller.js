@@ -21,6 +21,7 @@ angular.module('teachersAlly')
                 'date_modified': Date.now(),
                 'exams': 0
             }
+            console.log($scope.classes);
             $scope.classes.push(userData);
             $scope.userRequest.type = 'createNewClass';
             $scope.userRequest.class = userData.date_created;
