@@ -2,20 +2,23 @@ angular.module('teachersAlly')
     .directive('reorderList', ['$parse', '$timeout', function ($parse, $timeout) {
         return {
             restrict: 'A',
-            scope: true,
+            //transclude: true,
+            scope: false,
             link: function ($scope, elm, attrs) {
-                //init function for this directive
-                $timeout(function () {
-                    $(elm).find('[reorder-item]').attr('draggable', 'false');
-                    $(elm).find('[reorder-item] i').on('mousedown touchstart', onGrabStart);
-                    setPostions($(elm).find('[reorder-item]'));
-                }, 1)
                 $scope.$watch("reorderList", function (newValue, oldValue) {
                     if (newValue != oldValue) {
-                        setPostions($(elm).find('[reorder-item]'));
-                        console.log($(elm).find('[reorder-item]'))
+                        $(elm).find('[reorder-item]').each(function (index, val) {
+                            if ($(val).attr('draggable') != "false") {
+                                $(elm).find('[reorder-item]').attr('draggable', 'false');
+                                $(elm).find('[reorder-item] i').on('mousedown touchstart', onGrabStart);
+                            }
+                        })
+                        $timeout(function () {
+                            setPostions($(elm).find('[reorder-item]'));
+                            $scope.updateScrollbar('update');
+                            console.log("Detected change in re-order list. So I've reset the positions");
+                        }, 400);
                     }
-                    console.log("reset positions");
                 });
                 //global vars for this directive
                 var currentTop = null,
@@ -32,12 +35,19 @@ angular.module('teachersAlly')
                     var styleStr = "";
                     arr.each(function (index, val) {
                         var _top = $(val).height() * index;
-                        styleStr += "[reorder-list] .item-" + (index) + " {left:0; top:" + _top + "px;} ";
+                        styleStr += "[reorder-list] .item-" + (index) + " {left:0; top:" + _top + "px; visibility: visible;} ";
+                        if ($(val).attr('class').match(/item-[0-9]/)) {
+                            var len = $(val).attr('class').match(/item-[0-9]/).length;
+                            for (i = 0; i < len; i++) {
+                                $(val).removeClass($(val).attr('class').match(/item-[0-9]/)[i]);
+                            }
+                        }
                         $(val).addClass('item-' + index);
                     })
-                    $("<style type='text/css'>" + styleStr + "</style>").appendTo("head");
+                    $('#dynamicStyles').remove();
+                    $("<style type='text/css' id='dynamicStyles'>" + styleStr + "</style>").appendTo("head");
                     $(elm).css({
-                        height: parentHeight + 'px'
+                        height: ($(elm).find('[reorder-item]').length * $('[reorder-item]').height() + $(elm).find('[reorder-item]').length) + 'px'
                     })
                     $(elm).find('[reorder-item]').css('position', 'absolute');
                     mainArr = $scope.reorderList;

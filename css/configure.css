@@ -115,6 +115,7 @@
     padding: 0px 10px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
+    visibility: hidden;
 }
 
 .reorder-item-grabbing {
@@ -125,6 +126,7 @@
     border-radius: 4px;
     background-color: white;
     z-index: 501;
+    visibility: visible;
 }
 
 .reorder-item-move {

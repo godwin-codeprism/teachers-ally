@@ -85,5 +85,6 @@ angular.module('teachersAlly')
             $scope.reorderList = $scope.reorderList.concat($scope.settings.subjects);
             $scope.reorderList = $scope.reorderList.concat($scope.settings.calculations);
             $scope.updateScrollbar('update');
+            //$scope.testForDir();
         }
     }])
