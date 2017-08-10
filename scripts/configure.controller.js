@@ -19,7 +19,7 @@ angular.module('teachersAlly')
                         $scope[val] = true;
                     })
                 }
-                updateReorderList();
+                buildReorderList();
             })
         // angular function to add columns and subjects
         $scope.addColumnsOrSubjects = function (e) {
@@ -32,7 +32,7 @@ angular.module('teachersAlly')
             }, 1)
         }
         // angular function to collecte changes from the directive watch changes
-        $scope.postChanges = function (elm) {
+        $scope.postChanges = function (elm, oldVal, newVal) {
             var text = elm[0].innerText,
                 type = elm[0].dataset.type;
             switch (type) {
@@ -42,7 +42,7 @@ angular.module('teachersAlly')
                     } else {
                         $scope.settings.columns.splice(parseInt(elm[0].dataset.index), 1);
                     }
-                    updateSettings($scope.settings, 'updateColumns');
+                    updateSettings($scope.settings, 'updateColumns', oldVal, newVal);
                     break;
                 case "subject":
                     if (text != "") {
@@ -50,7 +50,7 @@ angular.module('teachersAlly')
                     } else {
                         $scope.settings.subjects.splice(parseInt(elm[0].dataset.index), 1);
                     }
-                    updateSettings($scope.settings, 'updateSubjects');
+                    updateSettings($scope.settings, 'updateSubjects', oldVal, newVal);
                     break;
             }
         }
@@ -62,23 +62,23 @@ angular.module('teachersAlly')
                     $scope.settings.calculations.push(val);
                 }
             })
-            updateSettings($scope.settings, "updateCalculations")
+            updateSettings($scope.settings, "updateCalculations");
         }
         // angular function to post all the changes to database through PHP
-        function updateSettings(settings, action) {
+        function updateSettings(settings, action, oldVal, newVal) {
             $http.post('./endpoints/configure.php', {
                 action: action,
                 params: [$stateParams.user, $stateParams.class, $stateParams.exam, $scope.exam_index, settings]
             }).then(function (res) {
-                console.log(res.data)
-                updateReorderList();
+                console.log(res.data);
+                updateReorderList(oldVal, newVal);
             }).catch(function (err) {
                 console.log(err);
             })
         }
 
         // reorder list updater 
-        function updateReorderList() {
+        function buildReorderList() {
             // for reorder list
             $scope.reorderList = [];
             $scope.reorderList = $scope.reorderList.concat($scope.settings.columns);
@@ -86,5 +86,14 @@ angular.module('teachersAlly')
             $scope.reorderList = $scope.reorderList.concat($scope.settings.calculations);
             $scope.updateScrollbar('update');
             //$scope.testForDir();
+        }
+
+        function updateReorderList(oldVal, newVal) {
+            if (oldVal != undefined) {
+                console.log($scope.reorderList);
+                $scope.reorderList[$scope.reorderList.indexOf(oldVal)] = newVal;
+                console.log($scope.reorderList);
+                $scope.updateScrollbar('update');
+            }
         }
     }])

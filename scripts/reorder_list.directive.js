@@ -6,6 +6,7 @@ angular.module('teachersAlly')
             scope: false,
             link: function ($scope, elm, attrs) {
                 $scope.$watch("reorderList", function (newValue, oldValue) {
+                    console.log("watch fired from directive");
                     if (newValue != oldValue) {
                         $(elm).find('[reorder-item]').each(function (index, val) {
                             if ($(val).attr('draggable') != "false") {
@@ -37,8 +38,7 @@ angular.module('teachersAlly')
                         var _top = $(val).height() * index;
                         styleStr += "[reorder-list] .item-" + (index) + " {left:0; top:" + _top + "px; visibility: visible;} ";
                         if ($(val).attr('class').match(/item-[0-9]/)) {
-                            var len = $(val).attr('class').match(/item-[0-9]/).length;
-                            for (i = 0; i < len; i++) {
+                            for (var i = 0, len = $(val).attr('class').match(/item-[0-9]/).length; i < len; i++) {
                                 $(val).removeClass($(val).attr('class').match(/item-[0-9]/)[i]);
                             }
                         }
