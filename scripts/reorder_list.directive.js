@@ -5,22 +5,49 @@ angular.module('teachersAlly')
             //transclude: true,
             scope: false,
             link: function ($scope, elm, attrs) {
-                $scope.$watch("reorderList", function (newValue, oldValue) {
-                    console.log("watch fired from directive");
-                    if (newValue != oldValue) {
+                $scope.buildList = function () {
+                    $timeout(function () {
                         $(elm).find('[reorder-item]').each(function (index, val) {
                             if ($(val).attr('draggable') != "false") {
                                 $(elm).find('[reorder-item]').attr('draggable', 'false');
                                 $(elm).find('[reorder-item] i').on('mousedown touchstart', onGrabStart);
                             }
                         })
-                        $timeout(function () {
-                            setPostions($(elm).find('[reorder-item]'));
-                            $scope.updateScrollbar('update');
-                            console.log("Detected change in re-order list. So I've reset the positions");
-                        }, 400);
+                        setPostions($(elm).find('[reorder-item]'));
+                        $scope.updateScrollbar('update');
+                    }, 400);
+                }
+                $scope.forceReset = function (oldVal, newVal, eventType) {
+                    switch (eventType) {
+                        case 'edited':
+                            $scope.reorderList[$scope.reorderList.indexOf(oldVal)] = newVal;
+                            $timeout(function () {
+                                var newEl = $(elm).find('[reorder-item]').get($scope.reorderList.indexOf(newVal));
+                                setPostions($(elm).find('[reorder-item]'));
+                                $scope.updateScrollbar('update');
+                                $(newEl).attr('draggable', 'false');
+                                $(newEl).find('i').on('mousedown touchstart', onGrabStart);
+                            }, 400);
+                            break;
+                        case 'added':
+                            $scope.reorderList.push(newVal);
+                            $timeout(function () {
+                                var newEl = $(elm).find('[reorder-item]').get($scope.reorderList.indexOf(newVal));
+                                setPostions($(elm).find('[reorder-item]'));
+                                $scope.updateScrollbar('update');
+                                $(newEl).attr('draggable', 'false');
+                                $(newEl).find('i').on('mousedown touchstart', onGrabStart);
+                            }, 400);
+                            break;
+                        case 'deleted':
+                            $scope.reorderList.splice($scope.reorderList.indexOf(oldVal), 1);
+                            $timeout(function () {
+                                setPostions($(elm).find('[reorder-item]'));
+                                $scope.updateScrollbar('update');
+                            }, 400);
+                            break;
                     }
-                });
+                }
                 //global vars for this directive
                 var currentTop = null,
                     originalTop = null,
