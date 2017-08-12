@@ -103,4 +103,14 @@ angular.module('teachersAlly')
             }
             $scope.updateScrollbar('update');
         }
+        $scope.tableScroll = {
+            scrollButtons: {
+                scrollAmount: "auto",
+                enable: true
+            },
+            scrollInertia: 400,
+            axis: "xy",
+            theme: "inset-dark",
+            autoHideScrollbar: false
+        }
     }])

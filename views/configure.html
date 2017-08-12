@@ -120,16 +120,34 @@
                             <div id="reorderListContainer" class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
                                 <div reorder-list style="min-height:300px">
                                     <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0}" reorder-item ng-repeat="item in reorderList"
-                                        data-index="{{$index}}">{{item}} <i class="ion-drag pull-right list-drag"></i></div>
+                                        data-index="{{$index}}">{{item.replace('_',' ')}} <i class="ion-drag pull-right list-drag"></i></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-8">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                        <div class="config-card table-preview-container" ng-scrollbars ng-scrollbars-config="tableScroll">
+                            <table class="table-preview">
+                                <tr>
+                                    <th ng-repeat="item in reorderList">{{item.replace('_',' ')}}</th>
+                                </tr>
+                                <tr>
+                                    <td ng-repeat="item in reorderList"></td>
+                                </tr>
+                                <tr>
+                                    <td ng-repeat="item in reorderList"></td>
+                                </tr>
+                                <tr>
+                                    <td ng-repeat="item in reorderList"></td>
+                                </tr>
+                                <tr>
+                                    <td ng-repeat="item in reorderList"></td>
+                                </tr>
+                                <tr>
+                                    <td ng-repeat="item in reorderList"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -119,7 +119,6 @@
 }
 
 .reorder-item-grabbing {
-    /*transform: scale(0.96);*/
     background-color: #ddd;
     color: #222;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 20px;
@@ -137,11 +136,34 @@
     position: relative;
 }
 
-.list-drag{
+.list-drag {
     font-size: large;
     width: 30px;
     text-align: center;
 }
+
 .transition {
     transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
+}
+
+.table-preview-container{
+    overflow: hidden;
+}
+
+.table-preview {
+    min-width: 100%;
+}
+
+.table-preview th {
+    min-width: 100px;
+    text-align: center;
+    background-color: rgb(255, 45, 85);
+    border: 1px solid whitesmoke;
+    color: white;
+    font-weight: 300;
+}
+
+.table-preview td {
+    height: 40px;
+    border: 1px solid #E8E8E8;
 }
