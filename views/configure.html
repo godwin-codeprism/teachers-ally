@@ -126,27 +126,39 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-8">
-                        <div class="config-card table-preview-container" ng-scrollbars ng-scrollbars-config="tableScroll">
-                            <table class="table-preview">
-                                <tr>
-                                    <th ng-repeat="item in reorderList">{{item.replace('_',' ')}}</th>
-                                </tr>
-                                <tr>
-                                    <td ng-repeat="item in reorderList"></td>
-                                </tr>
-                                <tr>
-                                    <td ng-repeat="item in reorderList"></td>
-                                </tr>
-                                <tr>
-                                    <td ng-repeat="item in reorderList"></td>
-                                </tr>
-                                <tr>
-                                    <td ng-repeat="item in reorderList"></td>
-                                </tr>
-                                <tr>
-                                    <td ng-repeat="item in reorderList"></td>
-                                </tr>
-                            </table>
+                        <div class="config-card table-preview-holder">
+                            <div class="config-card-title">
+                                <br>
+                                <h3 class="text-primary text-center">Table Preview</h3>
+                                <small class="text-primary">
+                                            <span></span>
+                                        </small>
+                            </div>
+                            <div id="reorderListContainer" class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-config="tableScroll">
+                                <div class="container-fluid table-preview-container">
+                                    <br>
+                                    <table class="table-preview">
+                                        <tr>
+                                            <th ng-repeat="item in reorderList">{{item.replace('_',' ')}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td ng-repeat="item in reorderList"></td>
+                                        </tr>
+                                        <tr>
+                                            <td ng-repeat="item in reorderList"></td>
+                                        </tr>
+                                        <tr>
+                                            <td ng-repeat="item in reorderList"></td>
+                                        </tr>
+                                        <tr>
+                                            <td ng-repeat="item in reorderList"></td>
+                                        </tr>
+                                        <tr>
+                                            <td ng-repeat="item in reorderList"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
