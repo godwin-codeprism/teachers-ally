@@ -147,7 +147,8 @@
 }
 
 .table-preview-container{
-    overflow: hidden;
+    height: 320px;
+    padding: 10px;
 }
 
 .table-preview {
