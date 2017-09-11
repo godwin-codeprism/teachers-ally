@@ -21,6 +21,7 @@ require('../css/classes.css');
 require('../css/exams.css');
 require('../css/configure.css');
 require('../css/jquery.mCustomScrollbar.css');
+require('../css/sheet.css');
 
 // angular module initiater
 require('./app.controller.js');

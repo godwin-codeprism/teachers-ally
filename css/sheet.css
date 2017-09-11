@@ -1,0 +1,15 @@
+.sheet {
+}
+
+.sheet-head{
+    min-width: 100px;
+    text-align: center;
+    background-color: rgb(255, 45, 85);
+    color: white;
+    font-weight: 300;
+    float: left;
+    padding: 5px;
+    border-width: 1px 1px 0px 0px;
+    border-color: #F1F1F1;
+    border-style: solid;
+}

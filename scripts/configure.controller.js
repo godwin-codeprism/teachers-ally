@@ -67,13 +67,11 @@ angular.module('teachersAlly')
         }
         // angular function to post all the changes to database through PHP
         function updateSettings(settings, action, oldVal, newVal) {
-            console.log(settings);
             $http.post('./endpoints/configure.php', {
                 action: action,
                 params: [$stateParams.user, $stateParams.class, $stateParams.exam, $scope.exam_index, settings]
             }).then(function (res) {
                 console.log(res.data);
-                console.log(oldVal);
                 updateReorderList(oldVal, newVal);
             }).catch(function (err) {
                 console.log(err);
@@ -96,12 +94,21 @@ angular.module('teachersAlly')
                 $scope.forceReset(oldVal, newVal, 'edited');
             } else if (oldVal == "" && newVal != "") {
                 $scope.forceReset(oldVal, newVal, 'added');
+                $('.table-preview-container').mCustomScrollbar("scrollTo", "last", {
+                    scrollEasing: "easeOut"
+                },10);
             } else if (oldVal != "" && newVal == "") {
                 $scope.forceReset(oldVal, newVal, 'deleted');
+                $timeout(function(){
+                    $('.table-preview-container:eq(2) table').parent().css("width", $('.table-preview-container:eq(2) table').width() + "px");
+                },1);
             } else {
                 $scope.buildReorderList();
             }
-            $scope.updateScrollbar('update');
+            $timeout(function () {
+                $scope.updateScrollbar('update');
+                $('.table-preview-container').mCustomScrollbar("update");
+            }, 1);
         }
         $scope.tableScroll = {
             scrollButtons: {
