@@ -6,7 +6,7 @@
         <button class="btn btn-default btn-back" data-toggle="tooltip" data-placement="right" title="Click to go back" ng-click="backButton()"><i class="fa fa-angle-left"></i></button>
     </div>
 </div>
-<div class="ui-classroom">
+<div class="ui-classroom" ng-class="{'blur-in':invokedPopup == true,'blur-out':invokedPopup == false}">
     <div class="wrapper">
         <div class="container-fluid wrapper-padding config-container-outter">
             <div class="config-container remove-padding">
@@ -74,29 +74,28 @@
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="Student_Totals"
-                                                    ng-model="Student_Totals" ng-checked="Student_Totals" ng-change="checkboxStateChange('Student_Totals')">Student Totals</label>
+                                                    <label class="ios7-switch"><input type="checkbox" checked value="Student_Totals" ng-model="Student_Totals" ng-checked="Student_Totals" ng-change="checkboxStateChange('Student_Totals')"><span></span>Student Totals</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="Subject_Grading" ng-model="Subject_Grading" ng-checked="Subject_Grading" ng-change="checkboxStateChange('Subject_Grading')">Subject Grading</label>
+                                                    <label class="ios7-switch"><input type="checkbox" value="Subject_Grading" ng-model="Subject_Grading" ng-checked="Subject_Grading" ng-change="checkboxStateChange('Subject_Grading')"><span></span>Subject Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="Overall_Grading" ng-model="Overall_Grading" ng-checked="Overall_Grading" ng-change="checkboxStateChange('Overall_Grading')">Overall Grading</label>
+                                                    <label class="ios7-switch"><input type="checkbox" value="Overall_Grading" ng-model="Overall_Grading" ng-checked="Overall_Grading" ng-change="checkboxStateChange('Overall_Grading')"><span></span>Overall Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox" value="Ranks" ng-model="Ranks" ng-checked="Ranks" ng-change="checkboxStateChange('Ranks')">Ranks</label>
+                                                    <label class="ios7-switch"><input type="checkbox" value="Ranks" ng-model="Ranks" ng-checked="Ranks" ng-change="checkboxStateChange('Ranks')"><span></span>Ranks</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -159,7 +158,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+<div class="popup-container" ng-show="invokedPopup" ng-include="popupView"></div>

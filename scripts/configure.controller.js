@@ -3,7 +3,8 @@ angular.module('teachersAlly')
         var calculations = ["Student_Totals", "Subject_Grading", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
         $scope.reorderList = [];
-
+        $scope.invokedPopup = false;
+        $scope.popupView = "";
         // Collects the data for settings when this controller and template are loaded
         $http.get('./database/' + $stateParams.user + "/" + $stateParams.class + ".json")
             .then(function (res) {
@@ -56,7 +57,23 @@ angular.module('teachersAlly')
         }
         // checks for change of state for calculation checkboxes
         $scope.checkboxStateChange = function (item) {
-            console.log(item);
+            switch (item) {
+                case "Subject_Grading":
+                    if ($scope.Subject_Grading) {
+                        $scope.invokedPopup = true;
+                        $scope.popupView = 'views/subject_grading.html';
+                    }
+                    break;
+                case "Overall_Grading":
+                    if ($scope.Overall_Grading) {
+                        $scope.invokedPopup = true;
+                        $scope.popupView = 'views/overall_grading.html';
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             if ($scope[item]) {
                 $scope.settings.calculations.push(item);
                 updateSettings($scope.settings, "updateCalculations", "", item);
@@ -96,12 +113,12 @@ angular.module('teachersAlly')
                 $scope.forceReset(oldVal, newVal, 'added');
                 $('.table-preview-container').mCustomScrollbar("scrollTo", "last", {
                     scrollEasing: "easeOut"
-                },10);
+                }, 10);
             } else if (oldVal != "" && newVal == "") {
                 $scope.forceReset(oldVal, newVal, 'deleted');
-                $timeout(function(){
+                $timeout(function () {
                     $('.table-preview-container:eq(2) table').parent().css("width", $('.table-preview-container:eq(2) table').width() + "px");
-                },1);
+                }, 1);
             } else {
                 $scope.buildReorderList();
             }
@@ -109,6 +126,10 @@ angular.module('teachersAlly')
                 $scope.updateScrollbar('update');
                 $('.table-preview-container').mCustomScrollbar("update");
             }, 1);
+        }
+
+        $scope.revokePopup = function () {
+            $scope.invokedPopup = false;
         }
         $scope.tableScroll = {
             scrollButtons: {

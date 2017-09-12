@@ -3,6 +3,7 @@ angular.module('teachersAlly')
         $scope.mobileMenu = false;
         $scope.teacherName = undefined;
         $scope.teacherFullName = undefined;
+        $scope.invokPopup = true;
         if ($stateParams.user == "" && localStorage.getItem('godwin_ta') != null) {
             authService.checkToken(localStorage.getItem('godwin_ta').split('|')[0], localStorage.getItem('godwin_ta')).then(function (res) {
                 if (res == 'good') {
