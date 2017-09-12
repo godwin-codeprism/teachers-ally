@@ -142,13 +142,10 @@
     padding: 10px;
 }
 
-.table-preview {
-    /* min-width: 100%; */
-}
-
 .table-preview th {
     min-width: 100px;
     max-width: 200px;
+    padding: 0px 5px;
     text-align: center;
     background-color: rgb(255, 45, 85);
     border: 1px solid whitesmoke;
