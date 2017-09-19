@@ -1,6 +1,6 @@
 angular.module('teachersAlly')
     .controller('configureController', ['$scope', '$http', '$stateParams', '$timeout', function ($scope, $http, $stateParams, $timeout) {
-        var calculations = ["Student_Totals", "Subject_Grading", "Overall_Grading", "Ranks"];
+        var calculations = ["Student_Totals", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
         $scope.reorderList = [];
         $scope.invokedPopup = false;
@@ -19,6 +19,9 @@ angular.module('teachersAlly')
                     calculations.forEach(function (val, index, arr) {
                         $scope[val] = true;
                     })
+                }
+                if($scope.settings.sub_gr.gradables.length > 0){
+                    $scope.Subject_Grading = true;
                 }
                 buildReorderList();
             })
@@ -97,8 +100,21 @@ angular.module('teachersAlly')
                 }
             }
         }
+
+        function updateSubject_Grading(oldVal, newVal) {
+            if (oldVal == "" && newVal != "") { //means subject added thus add its grade
+                $scope.settings.sub_gr.gradables.push(newVal + " Grades");
+            } else if (oldVal != "" && newVal == "") { //means subject deleted thus delete its grade
+                $scope.settings.sub_gr.gradables.splice($scope.settings.sub_gr.gradables.indexOf(oldVal + " Grades"), 1);
+            } else if (oldVal != "" && newVal != "") { //means subject edited thus edit it's grade
+                $scope.settings.sub_gr.gradables[$scope.settings.sub_gr.gradables.indexOf(oldVal + " Grades")] = newVal + " Grades";
+            }
+        }
         // angular function to post all the changes to database through PHP
         function updateSettings(settings, action, oldVal, newVal) {
+            if (action == 'updateSubjects' && $scope.Subject_Grading == true) {
+                updateSubject_Grading(oldVal, newVal);
+            }
             $http.post('./endpoints/configure.php', {
                 action: action,
                 params: [$stateParams.user, $stateParams.class, $stateParams.exam, $scope.exam_index, settings]

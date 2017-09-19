@@ -71,11 +71,12 @@ angular.module('teachersAlly')
                         gradables: [],
                         structure: []
                     },
-                    overall_gr:{
-                        structure:[]
-                    }
+                    overall_gr: {
+                        structure: []
+                    },
+                    reorderList: []
                 },
-                data: {}
+                Gdata: {}
             }
             $scope.$apply(function () {
                 $scope.exams.push(exam);
