@@ -64,11 +64,18 @@ angular.module('teachersAlly')
                 "id": Date.now(),
                 "name": name,
                 settings: {
-                    columns:[],
-                    subjects:[],
-                    calculations:[]
+                    columns: [],
+                    subjects: [],
+                    calculations: [],
+                    sub_gr: {
+                        gradables: [],
+                        structure: []
+                    },
+                    overall_gr:{
+                        structure:[]
+                    }
                 },
-                marks: {}
+                data: {}
             }
             $scope.$apply(function () {
                 $scope.exams.push(exam);

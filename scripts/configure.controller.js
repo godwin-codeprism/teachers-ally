@@ -75,11 +75,26 @@ angular.module('teachersAlly')
                     break;
             }
             if ($scope[item]) {
-                $scope.settings.calculations.push(item);
-                updateSettings($scope.settings, "updateCalculations", "", item);
+                if (item == "Subject_Grading") {
+                    $scope.settings.subjects.forEach(function (element) {
+                        if ($scope.settings.subjects.indexOf(element + " Grades") < 0) {
+                            $scope.settings.sub_gr.gradables.push(element + " Grades");
+                        }
+                    }, this);
+                    updateSettings($scope.settings, "updateCalculations", "", item);
+                    console.log($scope.settings);
+                } else {
+                    $scope.settings.calculations.push(item);
+                    updateSettings($scope.settings, "updateCalculations", "", item);
+                }
             } else {
-                $scope.settings.calculations.splice($scope.settings.calculations.indexOf(item));
-                updateSettings($scope.settings, "updateCalculations", item, "");
+                if (item == "Subject_Grading") {
+                    $scope.settings.sub_gr.gradables = [];
+                    removeSubjectGrades();
+                } else {
+                    $scope.settings.calculations.splice($scope.settings.calculations.indexOf(item));
+                    updateSettings($scope.settings, "updateCalculations", item, "");
+                }
             }
         }
         // angular function to post all the changes to database through PHP
@@ -89,12 +104,15 @@ angular.module('teachersAlly')
                 params: [$stateParams.user, $stateParams.class, $stateParams.exam, $scope.exam_index, settings]
             }).then(function (res) {
                 console.log(res.data);
-                updateReorderList(oldVal, newVal);
+                if (newVal == "Subject_Grading") {
+                    injectSubjectGrades();
+                } else {
+                    updateReorderList(oldVal, newVal);
+                }
             }).catch(function (err) {
                 console.log(err);
             })
         }
-
         // reorder list updater 
         function buildReorderList() {
             // for reorder list
@@ -102,6 +120,34 @@ angular.module('teachersAlly')
             $scope.reorderList = $scope.reorderList.concat($scope.settings.columns);
             $scope.reorderList = $scope.reorderList.concat($scope.settings.subjects);
             $scope.reorderList = $scope.reorderList.concat($scope.settings.calculations);
+            $scope.Subject_Grading ? injectSubjectGrades() : false;
+            $scope.buildList();
+            $scope.updateScrollbar('update');
+        }
+
+        // adds, deletes and edits subject grades
+        function injectSubjectGrades() {
+            $scope.settings.subjects.forEach(function (value, index, arr) {
+                var subjectIndex = $scope.reorderList.indexOf(value),
+                    sub_gr_index = $scope.reorderList.indexOf(value + " Grades");
+                if (subjectIndex >= 0 && sub_gr_index < 0) {
+                    $scope.reorderList.splice((subjectIndex + 1), 0, value + " Grades");
+                } else if (subjectIndex >= 0 && sub_gr_index >= 0) {
+                    $scope.reorderList[sub_gr_index] = value + " Grades";
+                }
+            });
+            $scope.buildList();
+            $scope.updateScrollbar('update');
+        }
+
+        function removeSubjectGrades() {
+            $scope.settings.subjects.forEach(function (value, index, arr) {
+                var subjectIndex = $scope.reorderList.indexOf(value),
+                    sub_gr_index = $scope.reorderList.indexOf(value + " Grades");
+                if (subjectIndex >= 0 && sub_gr_index >= 0) {
+                    $scope.reorderList.splice(sub_gr_index, 1);
+                }
+            });
             $scope.buildList();
             $scope.updateScrollbar('update');
         }
