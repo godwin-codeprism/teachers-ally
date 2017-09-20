@@ -12,6 +12,7 @@ require('../node_modules/animate.css/animate.css');
 require('../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
 require('../node_modules/angular-sanitize');
 require('../node_modules/angular-ui-router');
+
 // godwin's scripts
 //style sheets
 require('../css/globals.css');

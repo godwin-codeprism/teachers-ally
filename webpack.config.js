@@ -1,9 +1,11 @@
+var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 module.exports = {
-    entry: "./scripts/imports.js",
+    entry:"./scripts/imports.js",
     output: {
         path: __dirname + "/dist",
         //path: __dirname,
@@ -43,26 +45,25 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
-            inject: 'body',
+            // inject: 'body',
+            chunks: ['vendor', 'app']
         }),
-        new CopyWebpackPlugin([{
+        new CopyWebpackPlugin([ {
+            from: './favicon.ico'
+        }, {
+            from: './endpoints',
+            to: './endpoints'
+        }, {
+            from: './img',
+            to: './assets/img'
+        }, {
             from: './views',
             to: './views'
         }]),
-        new CopyWebpackPlugin([{
-            from: './img',
-            to: './assets/img'
-        }]),
-        new CopyWebpackPlugin([{
-            from: './endpoints',
-            to: './endpoints'
-        }]),
-        new CopyWebpackPlugin([{
-            from: './database',
-            to: './database'
-        }]),
-        new CopyWebpackPlugin([{
-            from: './favicon.ico'
-        }])
+        // new webpack.ProvidePlugin({
+        //     $: "jquery",
+        //     jQuery: "jquery",
+        //     angular:"angular"
+        // })
     ]
 }
