@@ -20,9 +20,9 @@ angular.module('teachersAlly')
                 $scope.forceReset = function (oldVal, newVal, eventType) {
                     switch (eventType) {
                         case 'edited':
-                            $scope.reorderList[$scope.reorderList.indexOf(oldVal)] = newVal;
+                            $scope.settings.reorderList[$scope.settings.reorderList.indexOf(oldVal)] = newVal;
                             $timeout(function () {
-                                var newEl = $(elm).find('[reorder-item]').get($scope.reorderList.indexOf(newVal));
+                                var newEl = $(elm).find('[reorder-item]').get($scope.settings.reorderList.indexOf(newVal));
                                 setPostions($(elm).find('[reorder-item]'));
                                 $scope.updateScrollbar('update');
                                 $(newEl).attr('draggable', 'false');
@@ -30,9 +30,9 @@ angular.module('teachersAlly')
                             }, 400);
                             break;
                         case 'added':
-                            $scope.reorderList.push(newVal);
+                            $scope.settings.reorderList.push(newVal);
                             $timeout(function () {
-                                var newEl = $(elm).find('[reorder-item]').get($scope.reorderList.indexOf(newVal));
+                                var newEl = $(elm).find('[reorder-item]').get($scope.settings.reorderList.indexOf(newVal));
                                 setPostions($(elm).find('[reorder-item]'));
                                 $scope.updateScrollbar('update');
                                 $(newEl).attr('draggable', 'false');
@@ -40,7 +40,7 @@ angular.module('teachersAlly')
                             }, 400);
                             break;
                         case 'deleted':
-                            $scope.reorderList.splice($scope.reorderList.indexOf(oldVal), 1);
+                            $scope.settings.reorderList.splice($scope.settings.reorderList.indexOf(oldVal), 1);
                             $timeout(function () {
                                 setPostions($(elm).find('[reorder-item]'));
                                 $scope.updateScrollbar('update');
@@ -55,7 +55,7 @@ angular.module('teachersAlly')
                     orginalIndex = null,
                     scrollLoop = null,
                     originalArr = $(elm).find('[reorder-item]'),
-                    mainArr = $scope.reorderList;
+                    mainArr = $scope.settings.reorderList;
 
                 //helper functions
                 var setPostions = function (arr) {
@@ -77,7 +77,7 @@ angular.module('teachersAlly')
                         height: ($(elm).find('[reorder-item]').length * $('[reorder-item]').height() + $(elm).find('[reorder-item]').length) + 'px'
                     })
                     $(elm).find('[reorder-item]').css('position', 'absolute');
-                    mainArr = $scope.reorderList;
+                    mainArr = $scope.settings.reorderList;
                 }
 
                 // event Handlers
@@ -174,7 +174,8 @@ angular.module('teachersAlly')
                     currentTop = null;
                     originalTop = null;
                     originalBottom = null;
-                    $scope.reorderList = mainArr;
+                    $scope.updateSettings($scope.settings, 'updateReorderList', $scope.settings.reorderList, mainArr);
+                    $scope.settings.reorderList = mainArr;
                     $scope.$apply();
                     _this.addClass('item-' + _this[0].dataset.index);
                     _this[0].style.top = "";

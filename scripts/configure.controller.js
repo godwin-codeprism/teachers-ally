@@ -2,9 +2,21 @@ angular.module('teachersAlly')
     .controller('configureController', ['$scope', '$http', '$stateParams', '$timeout', function ($scope, $http, $stateParams, $timeout) {
         var calculations = ["Student_Totals", "Overall_Grading", "Ranks"];
         $scope.exam_index = undefined;
-        $scope.reorderList = [];
         $scope.invokedPopup = false;
         $scope.popupView = "";
+        $scope.settings = {
+            columns: [],
+            subjects: [],
+            calculations: [],
+            sub_gr: {
+                gradables: [],
+                structure: []
+            },
+            overall_gr: {
+                structure: []
+            },
+            reorderList: []
+        }
         // Collects the data for settings when this controller and template are loaded
         $http.get('./database/' + $stateParams.user + "/" + $stateParams.class + ".json")
             .then(function (res) {
@@ -20,10 +32,14 @@ angular.module('teachersAlly')
                         $scope[val] = true;
                     })
                 }
-                if($scope.settings.sub_gr.gradables.length > 0){
+                if ($scope.settings.sub_gr.gradables.length > 0) {
                     $scope.Subject_Grading = true;
                 }
-                buildReorderList();
+                if ($scope.settings.reorderList.length > 0) {
+                    $scope.buildList();
+                } else {
+                    buildReorderList();
+                }
             })
         // angular function to add columns and subjects - runs when clicked plus sign
         $scope.addColumnsOrSubjects = function (e) {
@@ -46,7 +62,7 @@ angular.module('teachersAlly')
                     } else {
                         $scope.settings.columns.splice(parseInt(elm[0].dataset.index), 1);
                     }
-                    updateSettings($scope.settings, 'updateColumns', oldVal, newVal);
+                    $scope.updateSettings($scope.settings, 'updateColumns', oldVal, newVal);
                     break;
                 case "subject":
                     if (text != "") {
@@ -54,7 +70,7 @@ angular.module('teachersAlly')
                     } else {
                         $scope.settings.subjects.splice(parseInt(elm[0].dataset.index), 1);
                     }
-                    updateSettings($scope.settings, 'updateSubjects', oldVal, newVal);
+                    $scope.updateSettings($scope.settings, 'updateSubjects', oldVal, newVal);
                     break;
             }
         }
@@ -84,11 +100,11 @@ angular.module('teachersAlly')
                             $scope.settings.sub_gr.gradables.push(element + " Grades");
                         }
                     }, this);
-                    updateSettings($scope.settings, "updateCalculations", "", item);
+                    $scope.updateSettings($scope.settings, "updateCalculations", "", item);
                     console.log($scope.settings);
                 } else {
                     $scope.settings.calculations.push(item);
-                    updateSettings($scope.settings, "updateCalculations", "", item);
+                    $scope.updateSettings($scope.settings, "updateCalculations", "", item);
                 }
             } else {
                 if (item == "Subject_Grading") {
@@ -96,7 +112,7 @@ angular.module('teachersAlly')
                     removeSubjectGrades();
                 } else {
                     $scope.settings.calculations.splice($scope.settings.calculations.indexOf(item));
-                    updateSettings($scope.settings, "updateCalculations", item, "");
+                    $scope.updateSettings($scope.settings, "updateCalculations", item, "");
                 }
             }
         }
@@ -111,7 +127,13 @@ angular.module('teachersAlly')
             }
         }
         // angular function to post all the changes to database through PHP
-        function updateSettings(settings, action, oldVal, newVal) {
+        $scope.updateSettings = function (settings, action, oldVal, newVal) {
+            if (newVal == "Subject_Grading") {
+                injectSubjectGrades();
+            } else {
+                updateReorderList(oldVal, newVal);
+                $scope.settings.reorderList = $scope.settings.reorderList;
+            }
             if (action == 'updateSubjects' && $scope.Subject_Grading == true) {
                 updateSubject_Grading(oldVal, newVal);
             }
@@ -120,11 +142,6 @@ angular.module('teachersAlly')
                 params: [$stateParams.user, $stateParams.class, $stateParams.exam, $scope.exam_index, settings]
             }).then(function (res) {
                 console.log(res.data);
-                if (newVal == "Subject_Grading") {
-                    injectSubjectGrades();
-                } else {
-                    updateReorderList(oldVal, newVal);
-                }
             }).catch(function (err) {
                 console.log(err);
             })
@@ -132,10 +149,10 @@ angular.module('teachersAlly')
         // reorder list updater 
         function buildReorderList() {
             // for reorder list
-            $scope.reorderList = [];
-            $scope.reorderList = $scope.reorderList.concat($scope.settings.columns);
-            $scope.reorderList = $scope.reorderList.concat($scope.settings.subjects);
-            $scope.reorderList = $scope.reorderList.concat($scope.settings.calculations);
+            $scope.settings.reorderList = [];
+            $scope.settings.reorderList = $scope.settings.reorderList.concat($scope.settings.columns);
+            $scope.settings.reorderList = $scope.settings.reorderList.concat($scope.settings.subjects);
+            $scope.settings.reorderList = $scope.settings.reorderList.concat($scope.settings.calculations);
             $scope.Subject_Grading ? injectSubjectGrades() : false;
             $scope.buildList();
             $scope.updateScrollbar('update');
@@ -144,12 +161,12 @@ angular.module('teachersAlly')
         // adds, deletes and edits subject grades
         function injectSubjectGrades() {
             $scope.settings.subjects.forEach(function (value, index, arr) {
-                var subjectIndex = $scope.reorderList.indexOf(value),
-                    sub_gr_index = $scope.reorderList.indexOf(value + " Grades");
+                var subjectIndex = $scope.settings.reorderList.indexOf(value),
+                    sub_gr_index = $scope.settings.reorderList.indexOf(value + " Grades");
                 if (subjectIndex >= 0 && sub_gr_index < 0) {
-                    $scope.reorderList.splice((subjectIndex + 1), 0, value + " Grades");
+                    $scope.settings.reorderList.splice((subjectIndex + 1), 0, value + " Grades");
                 } else if (subjectIndex >= 0 && sub_gr_index >= 0) {
-                    $scope.reorderList[sub_gr_index] = value + " Grades";
+                    $scope.settings.reorderList[sub_gr_index] = value + " Grades";
                 }
             });
             $scope.buildList();
@@ -158,10 +175,10 @@ angular.module('teachersAlly')
 
         function removeSubjectGrades() {
             $scope.settings.subjects.forEach(function (value, index, arr) {
-                var subjectIndex = $scope.reorderList.indexOf(value),
-                    sub_gr_index = $scope.reorderList.indexOf(value + " Grades");
+                var subjectIndex = $scope.settings.reorderList.indexOf(value),
+                    sub_gr_index = $scope.settings.reorderList.indexOf(value + " Grades");
                 if (subjectIndex >= 0 && sub_gr_index >= 0) {
-                    $scope.reorderList.splice(sub_gr_index, 1);
+                    $scope.settings.reorderList.splice(sub_gr_index, 1);
                 }
             });
             $scope.buildList();
