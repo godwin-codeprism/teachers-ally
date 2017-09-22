@@ -100,39 +100,38 @@ angular.module('teachersAlly')
                             $scope.settings.sub_gr.gradables.push(element + " Grades");
                         }
                     }, this);
-                    $scope.updateSettings($scope.settings, "updateCalculations", "", item);
-                    console.log($scope.settings);
                 } else {
                     $scope.settings.calculations.push(item);
-                    $scope.updateSettings($scope.settings, "updateCalculations", "", item);
                 }
+                $scope.updateSettings($scope.settings, "updateCalculations", "", item);
             } else {
                 if (item == "Subject_Grading") {
                     $scope.settings.sub_gr.gradables = [];
                     removeSubjectGrades();
                 } else {
                     $scope.settings.calculations.splice($scope.settings.calculations.indexOf(item));
-                    $scope.updateSettings($scope.settings, "updateCalculations", item, "");
                 }
+                $scope.updateSettings($scope.settings, "updateCalculations", item, "");
             }
         }
 
         function updateSubject_Grading(oldVal, newVal) {
             if (oldVal == "" && newVal != "") { //means subject added thus add its grade
                 $scope.settings.sub_gr.gradables.push(newVal + " Grades");
+                $scope.updateReorderList
             } else if (oldVal != "" && newVal == "") { //means subject deleted thus delete its grade
                 $scope.settings.sub_gr.gradables.splice($scope.settings.sub_gr.gradables.indexOf(oldVal + " Grades"), 1);
             } else if (oldVal != "" && newVal != "") { //means subject edited thus edit it's grade
                 $scope.settings.sub_gr.gradables[$scope.settings.sub_gr.gradables.indexOf(oldVal + " Grades")] = newVal + " Grades";
             }
         }
-        // angular function to post all the changes to database through PHP
+
+        // angular function to post all the changes to database through PHP - Final post function
         $scope.updateSettings = function (settings, action, oldVal, newVal) {
             if (newVal == "Subject_Grading") {
                 injectSubjectGrades();
             } else {
                 updateReorderList(oldVal, newVal);
-                $scope.settings.reorderList = $scope.settings.reorderList;
             }
             if (action == 'updateSubjects' && $scope.Subject_Grading == true) {
                 updateSubject_Grading(oldVal, newVal);
@@ -190,9 +189,11 @@ angular.module('teachersAlly')
                 $scope.forceReset(oldVal, newVal, 'edited');
             } else if (oldVal == "" && newVal != "") {
                 $scope.forceReset(oldVal, newVal, 'added');
-                $('.table-preview-container').mCustomScrollbar("scrollTo", "last", {
-                    scrollEasing: "easeOut"
-                }, 10);
+                $timeout(function () {
+                    $('.table-preview-container').mCustomScrollbar("scrollTo", "last", {
+                        scrollEasing: "easeOut"
+                    }, 10);
+                }, 66);
             } else if (oldVal != "" && newVal == "") {
                 $scope.forceReset(oldVal, newVal, 'deleted');
                 $timeout(function () {
@@ -204,7 +205,7 @@ angular.module('teachersAlly')
             $timeout(function () {
                 $scope.updateScrollbar('update');
                 $('.table-preview-container').mCustomScrollbar("update");
-            }, 1);
+            }, 65);
         }
 
         $scope.revokePopup = function () {
