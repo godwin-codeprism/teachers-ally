@@ -113,7 +113,7 @@ angular.module('teachersAlly')
                         $scope.settings.columns.splice(parseInt(elm[0].dataset.index), 1);
                     }
                     //updates columns in ReorderList
-                    $scope.updateReorderList(oldVal, newVal, 'updateColumns');
+                    updateReorderList(oldVal, newVal, 'updateColumns');
                     break;
                 case "subject":
                     if (text != "") {

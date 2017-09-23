@@ -84,9 +84,37 @@
     padding: 2px 0px;
 }
 
+.columns>li {
+    background-color: #FCF8F3;
+    border: 1px solid #FCF1E4;
+    box-shadow: 0px 2px 5px #FFD8AC;
+}
+
+.subjects>li {
+    background-color: #FFF0F3;
+    border: 1px solid #FFE5EA;
+    box-shadow: 0px 2px 5px #FDDDE3;
+}
+
+.calculations>li {
+    background-color: #F3F4FD;
+    border: 1px solid #E6EAFF;
+    box-shadow: 0px 2px 5px #D6DEFD;
+    color: #304FFE;
+}
+
 .config-card-list>li>p,
 .config-card-list>li>i {
-    color: #454545 !important;
+    color: #454545;
+}
+
+.columns>li>p,
+.columns>li>i {
+    color: #E65100;
+}
+.subjects>li>p,
+.subjects>li>i {
+    color: #D50000;
 }
 
 .config-card-list .checkbox {
@@ -99,6 +127,7 @@
 .config-card-list .checkbox label {
     width: 100%;
 }
+
 .reorder-item {
     width: 100%;
     height: 50px;
@@ -137,7 +166,7 @@
     transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
 }
 
-.table-preview-container{
+.table-preview-container {
     height: 320px;
     padding: 10px;
 }
