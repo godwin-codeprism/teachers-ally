@@ -85,10 +85,10 @@ angular.module('teachersAlly')
                 action: 'addNewExam',
                 params: [$stateParams.user, $stateParams.class, $scope.exams]
             }).then(function (res) {
-                console.log(res.data);
+                console.log(res.data); //DND
                 updateUserData(Date.now(), $scope.exams.length);
             }).catch(function (err) {
-                console.log(err);
+                console.log(err); //DND
             })
         }
         $scope.deleteExamConformation = function (e) {
