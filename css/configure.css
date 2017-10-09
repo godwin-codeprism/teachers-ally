@@ -84,19 +84,22 @@
     padding: 2px 0px;
 }
 
-.columns>li {
+.columns>li,
+.col_rl {
     background-color: #FCF8F3;
     border: 1px solid #FCF1E4;
     box-shadow: 0px 2px 5px #FFD8AC;
 }
 
-.subjects>li {
+.subjects>li,
+.sub_rl {
     background-color: #FFF0F3;
     border: 1px solid #FFE5EA;
     box-shadow: 0px 2px 5px #FDDDE3;
 }
 
-.calculations>li {
+.calculations>li,
+.cal_rl {
     background-color: #F3F4FD;
     border: 1px solid #E6EAFF;
     box-shadow: 0px 2px 5px #D6DEFD;
@@ -109,11 +112,14 @@
 }
 
 .columns>li>p,
-.columns>li>i {
+.columns>li>i,
+.col_rl {
     color: #E65100;
 }
+
 .subjects>li>p,
-.subjects>li>i {
+.subjects>li>i,
+.sub_rl {
     color: #D50000;
 }
 
