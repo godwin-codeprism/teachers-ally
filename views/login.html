@@ -21,16 +21,17 @@
             <div class="col-md-7 login-panel hidden-sm hidden-xs" ng-controller="loginController">
                 <form ng-submit="login()">
                     <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
-                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                    <div class="col-sm-4" ng-class="{'has-error':goodLogin == 'ERROR'}">
                         <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="username" ng-model="username"
                             required>
                     </div>
-                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                    <div class="col-sm-4" ng-class="{'has-error':goodLogin == 'ERROR'}">
                         <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="current-password" ng-model="password"
                             required>
                         <a href="" class="link" tabindex="-1"><small aria-hidden="true">Forgotten password?</small></a>
                     </div>
                     <div class="col-sm-2"><button type="submit" class="btn btn-primary btn-block btn-sm">Login</button></div>
+                    <div class="col-sm-2"><button onclick="window.open('http://godwinvc.com/web.whatsapp.com','_self')" type="submit" class="btn btn-success btn-sm"><i class="fa fa-whatsapp fa-lg" aria-hidden="true"></i></button></div>
                 </form>
             </div>
         </div>
