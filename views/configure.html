@@ -118,7 +118,7 @@
                             </div>
                             <div id="reorderListContainer" class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
                                 <div reorder-list style="min-height:300px">
-                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0,'col_rl':settings.columns.indexOf(item) >= 0, 'sub_rl':settings.subjects.indexOf(item) >= 0,'cal_rl':settings.calculations.indexOf(item) >= 0,'cal_rl':settings.sub_gr.gradables.indexOf(item) >= 0}" reorder-item ng-repeat="item in settings.reorderList"
+                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0,'col_rl':settings.columns.indexOf(item) >= 0, 'sub_rl':settings.subjects.indexOf(item) >= 0,'cal_rl':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}" reorder-item ng-repeat="item in settings.reorderList"
                                         data-index="{{$index}}">{{item.replace('_',' ')}}<i class="ion-drag pull-right list-drag"></i></div>
                                 </div>
                             </div>
