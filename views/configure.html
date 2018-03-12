@@ -3,7 +3,9 @@
         <div class="content"></div>
     </div>
     <div class="container-fluid remove-padding controls-ribbion-btn-container">
-        <button class="btn btn-default btn-back" data-toggle="tooltip" data-placement="right" title="Click to go back" ng-click="backButton()"><i class="fa fa-angle-left"></i></button>
+        <button class="btn btn-default btn-back" data-toggle="tooltip" data-placement="right" title="Click to go back" ng-click="backButton()">
+            <i class="fa fa-angle-left"></i>
+        </button>
     </div>
 </div>
 <div class="ui-classroom" ng-class="{'blur-in':invokedPopup == true,'blur-out':invokedPopup == false}">
@@ -18,14 +20,15 @@
                             <div class="config-card-title">
                                 <h3 class="text-primary">Columns</h3>
                                 <small class="text-primary">
-                                        <span>Add required column titles which are NOT subjects.</span>
-                                        <span>eg: Roll no., Student name etc.</span>
-                                    </small>
+                                    <span>Add required column titles which are NOT subjects.</span>
+                                    <span>eg: Roll no., Student name etc.</span>
+                                </small>
                             </div>
                             <div class="container-fulid">
                                 <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
                                     <ul class="config-card-list columns">
-                                        <li ng-repeat="column in settings.columns"><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
+                                        <li ng-repeat="column in settings.columns">
+                                            <i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
                                             <p contenteditable="true" watch-changes placeholder="Column name" data-type="column" data-index="{{$index}}">{{column}}</p>
                                         </li>
                                     </ul>
@@ -41,14 +44,15 @@
                             <div class="config-card-title">
                                 <h3 class="text-primary">Subject Columns</h3>
                                 <small class="text-primary">
-                                     <span>Add Subjects as column titles.</span>
-                                     <span>eg: English, Science, etc.</span>
-                                 </small>
+                                    <span>Add Subjects as column titles.</span>
+                                    <span>eg: English, Science, etc.</span>
+                                </small>
                             </div>
                             <div class="container-fulid">
                                 <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
                                     <ul class="config-card-list subjects">
-                                        <li ng-repeat="subject in settings.subjects"><i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
+                                        <li ng-repeat="subject in settings.subjects">
+                                            <i class="fa fa-dot-circle-o exams-bullet" aria-hidden="true"> </i>
                                             <p contenteditable="true" watch-changes placeholder="Subject" data-type="subject" data-index="{{$index}}">{{subject}}</p>
                                         </li>
                                     </ul>
@@ -64,9 +68,9 @@
                             <div class="config-card-title">
                                 <h3 class="text-primary">Calculations</h3>
                                 <small class="text-primary">
-                                     <span>Select the calcualtion you need in your marks list</span>
-                                     <span>from the options below.</span>
-                                 </small>
+                                    <span>Select the calculation you need in your marks list</span>
+                                    <span>from the options below.</span>
+                                </small>
                             </div>
                             <div class="container-fluid">
                                 <div class="col-sm-12 col-md-12 col-lg-12 config-card-list-container" ng-scrollbars>
@@ -74,28 +78,36 @@
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label class="ios7-switch"><input type="checkbox" checked value="Student_Totals" ng-model="Student_Totals" ng-checked="Student_Totals" ng-change="checkboxStateChange('Student_Totals')"><span></span>Student Totals</label>
+                                                    <label class="ios7-switch">
+                                                        <input type="checkbox" checked value="Student_Totals" ng-model="Student_Totals" ng-checked="Student_Totals" ng-change="checkboxStateChange('Student_Totals')">
+                                                        <span></span>Student Totals</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label class="ios7-switch"><input type="checkbox" value="Subject_Grading" ng-model="Subject_Grading" ng-checked="Subject_Grading" ng-change="checkboxStateChange('Subject_Grading')"><span></span>Subject Grading</label>
+                                                    <label class="ios7-switch">
+                                                        <input type="checkbox" value="Subject_Grading" ng-model="Subject_Grading" ng-checked="Subject_Grading" ng-change="checkboxStateChange('Subject_Grading')">
+                                                        <span></span>Subject Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label class="ios7-switch"><input type="checkbox" value="Overall_Grading" ng-model="Overall_Grading" ng-checked="Overall_Grading" ng-change="checkboxStateChange('Overall_Grading')"><span></span>Overall Grading</label>
+                                                    <label class="ios7-switch">
+                                                        <input type="checkbox" value="Overall_Grading" ng-model="Overall_Grading" ng-checked="Overall_Grading" ng-change="checkboxStateChange('Overall_Grading')">
+                                                        <span></span>Overall Grading</label>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-group">
                                                 <div class="checkbox">
-                                                    <label class="ios7-switch"><input type="checkbox" value="Ranks" ng-model="Ranks" ng-checked="Ranks" ng-change="checkboxStateChange('Ranks')"><span></span>Ranks</label>
+                                                    <label class="ios7-switch">
+                                                        <input type="checkbox" value="Ranks" ng-model="Ranks" ng-checked="Ranks" ng-change="checkboxStateChange('Ranks')">
+                                                        <span></span>Ranks</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -111,15 +123,17 @@
                             <div class="config-card-title">
                                 <h3 class="text-primary">Reorder Columns</h3>
                                 <small class="text-primary">
-                                        <span>Arrange your coulmns as per your preference</span>
-                                        <span>by dragging them in assending order</span>
-                                        <!--<small ng-repeat="item in settings.reorderList">{{item}}, </small>-->
+                                    <span>Arrange your columns as per your preference</span>
+                                    <span>by dragging them in ascending order</span>
+                                    <!--<small ng-repeat="item in settings.reorderList">{{item}}, </small>-->
                                 </small>
                             </div>
                             <div id="reorderListContainer" class="container-fluid config-card-list-container" ng-scrollbars ng-scrollbars-update="updateScrollbar">
                                 <div reorder-list style="min-height:300px">
-                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0,'col_rl':settings.columns.indexOf(item) >= 0, 'sub_rl':settings.subjects.indexOf(item) >= 0,'cal_rl':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}" reorder-item ng-repeat="item in settings.reorderList"
-                                        data-index="{{$index}}">{{item.replace('_',' ')}}<i class="ion-drag pull-right list-drag"></i></div>
+                                    <div class="reorder-item noselect transition" ng-class="{'reorder-item-empty':item == 0,'col_rl':settings.columns.indexOf(item) >= 0, 'sub_rl':settings.subjects.indexOf(item) >= 0,'cal_rl':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"
+                                        reorder-item ng-repeat="item in settings.reorderList" data-index="{{$index}}">{{item.replace('_',' ')}}
+                                        <i class="ion-drag pull-right list-drag"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -129,29 +143,35 @@
                             <div class="config-card-title">
                                 <br>
                                 <h3 class="text-primary text-center">Table Preview</h3>
-                                <small class="text-primary"><span></span></small>
+                                <small class="text-primary">
+                                    <span></span>
+                                </small>
                             </div>
                             <div class="container-fluid remove-padding">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-preview-container remove-padding" ng-scrollbars ng-scrollbars-config="tableScroll">
                                     <table class="table-preview">
-                                        <tr>
-                                            <th ng-repeat="item in settings.reorderList">{{item.replace('_',' ')}}</th>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="item in settings.reorderList"></td>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="item in settings.reorderList"></td>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="item in settings.reorderList"></td>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="item in settings.reorderList"></td>
-                                        </tr>
-                                        <tr>
-                                            <td ng-repeat="item in settings.reorderList"></td>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th ng-repeat="item in settings.reorderList" ng-class="{'col_th':settings.columns.indexOf(item) >= 0,'subs_th':settings.subjects.indexOf(item) >= 0,'calc_th':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}">{{item.replace('_',' ')}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td ng-repeat="item in settings.reorderList" ng-class="{'col_td':settings.columns.indexOf(item) >= 0,'subs_td':settings.subjects.indexOf(item) >= 0,'calc_td':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td ng-repeat="item in settings.reorderList" ng-class="{'col_td':settings.columns.indexOf(item) >= 0,'subs_td':settings.subjects.indexOf(item) >= 0,'calc_td':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td ng-repeat="item in settings.reorderList" ng-class="{'col_td':settings.columns.indexOf(item) >= 0,'subs_td':settings.subjects.indexOf(item) >= 0,'calc_td':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td ng-repeat="item in settings.reorderList" ng-class="{'col_td':settings.columns.indexOf(item) >= 0,'subs_td':settings.subjects.indexOf(item) >= 0,'calc_td':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td ng-repeat="item in settings.reorderList" ng-class="{'col_td':settings.columns.indexOf(item) >= 0,'subs_td':settings.subjects.indexOf(item) >= 0,'calc_td':settings.calculations.indexOf(item) >= 0 ||  settings.sub_gr.gradables.indexOf(item) >= 0}"></td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

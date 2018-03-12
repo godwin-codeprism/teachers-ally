@@ -60,7 +60,7 @@ angular.module('teachersAlly')
                 templateUrl: './views/classroom.html',
                 controller: "classroomController"
             }).state('classroom.classes', {
-                url: "",
+                url: "/classes",
                 templateUrl: './views/classes.html',
                 controller: "classesController"
             }).state('classroom.exams', {

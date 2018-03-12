@@ -17,21 +17,20 @@
                     </div>
                 </div>
             </div>
-            <!-- login from in navbar for Large Devices -->
+            <!-- login from in nav bar for Large Devices -->
             <div class="col-md-7 login-panel hidden-sm hidden-xs" ng-controller="loginController">
                 <form ng-submit="login()">
                     <div class="col-sm-12 text-danger text-capitalize" ng-show="goodLogin == 'ERROR'">Incorrect username/password. Try again</div>
-                    <div class="col-sm-4" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
                         <input type="text" name="username" placeholder="Username" class="form-control" autocomplete="username" ng-model="username"
                             required>
                     </div>
-                    <div class="col-sm-4" ng-class="{'has-error':goodLogin == 'ERROR'}">
+                    <div class="col-sm-5" ng-class="{'has-error':goodLogin == 'ERROR'}">
                         <input type="password" name="password" placeholder="Password" class="form-control" autocomplete="current-password" ng-model="password"
                             required>
                         <a href="" class="link" tabindex="-1"><small aria-hidden="true">Forgotten password?</small></a>
                     </div>
                     <div class="col-sm-2"><button type="submit" class="btn btn-primary btn-block btn-sm">Login</button></div>
-                    <div class="col-sm-2"><button onclick="window.open('http://godwinvc.com/web.whatsapp.com','_self')" type="submit" class="btn btn-success btn-sm"><i class="fa fa-whatsapp fa-lg" aria-hidden="true"></i></button></div>
                 </form>
             </div>
         </div>
@@ -121,8 +120,8 @@
                                                         <input type="text" class="form-control" name="username" placeholder="Pick a username" ng-model="username" ng-change="validateUsername()"
                                                             min-length="3" value="" autocomplete="username" required>
                                                         <span ng-show="signupform.username.$dirty && signupform.username.$invalid"><small class="text-danger">&nbsp; Please pick a username</small></span>
-                                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try someting else</small></span>
-                                                        <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special Charecters in username</small></span>
+                                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try something else</small></span>
+                                                        <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special Characters in username</small></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group text-left" ng-class="{'has-error':emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))}">
@@ -145,9 +144,9 @@
                                                         <input type="password" class="form-control" name="pwd" placeholder="Create Password" autocomplete="new-password" ng-model="password"
                                                             ng-change="validatePassword()" required>
                                                         <small ng-class="{'text-danger': validPassword == 4}" ng-hide="validPassword < 4 && validPassword > 0">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
-                                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain atleast one number</small></span>
-                                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain atleast one alphabet</small></span>
-                                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain atleast 7 letters and numbers combined</small></span>
+                                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain at least one number</small></span>
+                                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain at least one alphabet</small></span>
+                                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain at least 7 letters and numbers combined</small></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -188,8 +187,8 @@
                                         <input type="text" class="form-control" name="username" placeholder="Pick a username" ng-model="username" ng-change="validateUsername()"
                                             min-length="3" value="" autocomplete="username" required>
                                         <span ng-show="signupform.username.$dirty && signupform.username.$invalid"><small class="text-danger">&nbsp; Please pick a username</small></span>
-                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try someting else</small></span>
-                                        <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special Charecters in username</small></span>
+                                        <span ng-show="isUnique == '1'"><small class="text-danger">&nbsp; Sorry, username already taken. Try something else</small></span>
+                                        <span ng-show="validUsername == false"><small class="text-danger">&nbsp; Please avoid Spaces and Special characters in username</small></span>
                                     </div>
                                 </div>
                                 <div class="form-group text-left" ng-class="{'has-error':emailBlured == true && ((validEmail == false && signupform.email.$dirty) || (signupform.email.$invalid && signupform.email.$dirty))}">
@@ -212,9 +211,9 @@
                                         <input type="password" class="form-control" name="pwd" placeholder="Create Password" autocomplete="new-password" ng-model="password"
                                             ng-change="validatePassword()" required>
                                         <small ng-class="{'text-danger': validPassword == 4}" ng-hide="validPassword < 4 && validPassword > 0">&nbsp; Use at least one letter, one numeral, and seven characters.</small>
-                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain atleast one number</small></span>
-                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain atleast one alphabet</small></span>
-                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain atleast 7 letters and numbers combined</small></span>
+                                        <span ng-show="validPassword == 1"><small class="text-danger">&nbsp; Password must contain at least one number</small></span>
+                                        <span ng-show="validPassword == 2"><small class="text-danger">&nbsp; Password must contain at least one alphabet</small></span>
+                                        <span ng-show="validPassword == 3"><small class="text-danger">&nbsp; Password must contain at least 7 letters and numbers combined</small></span>
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -1,194 +1,231 @@
 .config-container-outter,
 .config-container {
-    min-height: 500px;
-    width: 100%;
-    background-color: #e6ecfa;
+  min-height: 500px;
+  width: 100%;
+  background-color: #e6ecfa;
 }
 
 .config-card {
-    min-height: 380px;
-    min-width: 300px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    margin-bottom: 15px;
-    box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1), 2px 3px 7px rgba(0, 76, 255, 0.2);
-    position: relative;
+  min-height: 380px;
+  min-width: 300px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1),
+    2px 3px 7px rgba(0, 76, 255, 0.2);
+  position: relative;
 }
 
 .config-card-title {
-    height: 80px;
-    width: 100%;
-    background-color: white;
-    border-bottom: 1px solid #eee;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    padding: 8px;
+  height: 80px;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 8px;
 }
 
-.config-card-title>h3 {
-    margin: 0px;
-    margin-bottom: 12px;
+.config-card-title > h3 {
+  margin: 0px;
+  margin-bottom: 12px;
 }
 
-.config-card-title>small {
-    color: #6ba0fd;
-    font-size: 12px;
-    font-style: italic;
-    line-height: 3px;
+.config-card-title > small {
+  color: #6ba0fd;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 3px;
 }
 
-.config-card-title>small>span {
-    display: block;
-    margin-bottom: 12px;
+.config-card-title > small > span {
+  display: block;
+  margin-bottom: 12px;
 }
 
 .config-card-add-btn {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 50%;
-    box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1), 2px 3px 7px rgba(0, 76, 255, 0.2);
-    font-size: large;
-    z-index: 1;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 0 rgba(110, 122, 185, 0.1),
+    2px 3px 7px rgba(0, 76, 255, 0.2);
+  font-size: large;
+  z-index: 1;
 }
 
 .config-card-list-container {
-    height: 300px;
+  height: 300px;
 }
 
 .config-card-list {
-    padding: 0px;
-    list-style: none;
+  padding: 0px;
+  list-style: none;
 }
 
-.config-card-list>li {
-    width: 98%;
-    height: 50px;
-    position: relative;
-    background-color: white;
-    box-shadow: 3px 3px 5px #c9c9c9;
-    border-radius: 2px;
-    border: 1px solid #eee;
-    margin: auto;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    padding: 0% 2%;
+.config-card-list > li {
+  width: 98%;
+  height: 50px;
+  position: relative;
+  background-color: white;
+  box-shadow: 3px 3px 5px #c9c9c9;
+  border-radius: 2px;
+  border: 1px solid #eee;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0% 2%;
 }
 
-.config-card-list>li>p {
-    margin: 0px;
-    width: 100%;
-    padding: 2px 0px;
+.config-card-list > li > p {
+  margin: 0px;
+  width: 100%;
+  padding: 2px 0px;
 }
 
-.columns>li,
+.columns > li,
 .col_rl {
-    background-color: #FCF8F3;
-    border: 1px solid #FCF1E4;
-    box-shadow: 0px 2px 5px #FFD8AC;
+  background-color: #fcf8f3;
+  border: 1px solid #fcf1e4;
+  box-shadow: 0px 2px 5px #ffd8ac;
 }
 
-.subjects>li,
+.subjects > li,
 .sub_rl {
-    background-color: #FFF0F3;
-    border: 1px solid #FFE5EA;
-    box-shadow: 0px 2px 5px #FDDDE3;
+  background-color: #fff0f3;
+  border: 1px solid #ffe5ea;
+  box-shadow: 0px 2px 5px #fddde3;
 }
 
-.calculations>li,
+.calculations > li,
 .cal_rl {
-    background-color: #F3F4FD;
-    border: 1px solid #E6EAFF;
-    box-shadow: 0px 2px 5px #D6DEFD;
-    color: #304FFE;
+  background-color: #f3f4fd;
+  border: 1px solid #e6eaff;
+  box-shadow: 0px 2px 5px #d6defd;
+  color: #304ffe;
 }
 
-.config-card-list>li>p,
-.config-card-list>li>i {
-    color: #454545;
+.config-card-list > li > p,
+.config-card-list > li > i {
+  color: #454545;
 }
 
-.columns>li>p,
-.columns>li>i,
+.columns > li > p,
+.columns > li > i,
 .col_rl {
-    color: #E65100;
+  color: #e65100;
 }
 
-.subjects>li>p,
-.subjects>li>i,
+.subjects > li > p,
+.subjects > li > i,
 .sub_rl {
-    color: #D50000;
+  color: #d50000;
 }
 
 .config-card-list .checkbox {
-    position: absolute;
-    width: 100%;
-    top: 28%;
-    margin: 0px;
+  position: absolute;
+  width: 100%;
+  top: 28%;
+  margin: 0px;
 }
 
 .config-card-list .checkbox label {
-    width: 100%;
+  width: 100%;
 }
 
 .reorder-item {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    padding: 0px 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    visibility: hidden;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  visibility: hidden;
 }
 
 .reorder-item-grabbing {
-    background-color: #ddd;
-    color: #222;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 20px;
-    border-radius: 4px;
-    background-color: white;
-    z-index: 501;
-    visibility: visible;
+  background-color: #ddd;
+  color: #222;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 20px;
+  border-radius: 4px;
+  background-color: white;
+  z-index: 501;
+  visibility: visible;
 }
 
 .reorder-item-move {
-    height: 50px !important;
+  height: 50px !important;
 }
 
 [reorder-list] {
-    position: relative;
+  position: relative;
 }
 
 .list-drag {
-    font-size: large;
-    width: 30px;
-    text-align: center;
+  font-size: large;
+  width: 30px;
+  text-align: center;
 }
 
 .transition {
-    transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
+  transition: all 0.2s cubic-bezier(0.333, 0, 0, 1);
 }
 
 .table-preview-container {
-    height: 320px;
-    padding: 10px;
+  height: 320px;
+  padding: 10px;
 }
 
 .table-preview th {
-    min-width: 100px;
-    max-width: 200px;
-    padding: 0px 5px;
-    text-align: center;
-    background-color: rgb(255, 45, 85);
-    border: 1px solid whitesmoke;
-    color: white;
-    font-weight: 300;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 0px 5px;
+  text-align: center;
+  border: 1px inset rgba(0, 0, 0, 0.35);
+  color: white;
+  font-weight: 300;
 }
-
+.table-preview th.col_th {
+  background-color: #ff6600;
+  color: #fcf8f3;
+}
+.table-preview th.subs_th {
+  background-color: #ed3636;
+  color: #fff0f3;
+}
+.table-preview th.calc_th {
+  background-color: #3f51b5;
+  color: #f3f4fd;
+}
 .table-preview td {
-    height: 40px;
-    border: 1px solid #E8E8E8;
+  height: 40px;
+  border: 1px inset rgba(204, 204, 204, 0.26);
+  box-sizing: border-box;
+}
+.table-preview tr:nth-child(even) td.col_td {
+  color: #ff6600;
+  background-color: #fcf8f3;
+}
+.table-preview tr:nth-child(even) td.subs_td {
+  color: #ed3636;
+  background-color: #fff0f3;
+}
+.table-preview tr:nth-child(even) td.calc_td {
+  color: #3f51b5;
+  background-color: #f3f4fd;
+}
+.table-preview tr:nth-child(odd) td.col_td {
+  color: #ff6600;
+  background-color: #fbf4eb;
+}
+.table-preview tr:nth-child(odd) td.subs_td {
+  color: #ed3636;
+  background-color: #ffe7eb;
+}
+.table-preview tr:nth-child(odd) td.calc_td {
+  color: #3f51b5;
+  background-color: #ebedff;
 }
